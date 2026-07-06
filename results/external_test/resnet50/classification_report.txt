@@ -1,0 +1,11 @@
+label,precision,recall,f1,support
+invoice,0.500000,0.600000,0.545455,5
+cv,0.285714,0.800000,0.421053,5
+contract,0.000000,0.000000,0.000000,5
+email,0.000000,0.000000,0.000000,5
+scientific,0.000000,0.000000,0.000000,5
+
+accuracy,0.280000
+macro_precision,0.157143
+macro_recall,0.280000
+macro_f1,0.193301
