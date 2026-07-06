@@ -1,2 +1,17 @@
 python-docx
 tqdm
+streamlit
+torch
+torchvision
+transformers
+pillow
+pymupdf
+pytesseract
+pandas
+numpy
+scikit-learn
+matplotlib
+opencv-python-headless
+sentencepiece
+protobuf
+accelerate
