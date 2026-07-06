@@ -1,0 +1,41 @@
+{
+  "accuracy": 0.9933333333333333,
+  "macro_precision": 0.9935483870967742,
+  "macro_recall": 0.9933333333333334,
+  "macro_f1": 0.9933314809669354,
+  "per_class": {
+    "invoice": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 30
+    },
+    "cv": {
+      "precision": 1.0,
+      "recall": 0.9666666666666667,
+      "f1": 0.983050847457627,
+      "support": 30
+    },
+    "contract": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 30
+    },
+    "email": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 30
+    },
+    "scientific": {
+      "precision": 0.967741935483871,
+      "recall": 1.0,
+      "f1": 0.9836065573770492,
+      "support": 30
+    }
+  },
+  "loss": 0.04100456970433394,
+  "prediction_time_seconds": 1.8373582000058377,
+  "seconds_per_document": 0.012249054666705585
+}
