@@ -1,0 +1,27 @@
+@'
+venv/
+__pycache__/
+*.pyc
+
+data/
+results/
+runs/
+logs/
+.cache/
+
+models/
+
+*.zip
+*.tar.gz
+*.7z
+*.rar
+
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+
+.env
+.DS_Store
+'@ | Set-Content .gitignore
