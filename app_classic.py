@@ -36,8 +36,6 @@ LAYOUT_RESULTS_DIR = PROJECT_ROOT / "results" / "layoutlmv3"
 EXTERNAL_RESULTS_DIR = PROJECT_ROOT / "results" / "external_test"
 FINAL_COMPARISON_PATH = PROJECT_ROOT / "results" / "final_comparison.csv"
 FINAL_COMPARISON_CHART_PATH = PROJECT_ROOT / "results" / "final_comparison.png"
-FINAL_COMPARISON_MD_PATH = PROJECT_ROOT / "results" / "final_comparison.md"
-FINAL_COMPARISON_SUMMARY_PATH = PROJECT_ROOT / "results" / "final_comparison_summary.txt"
 
 RESULT_DIRS = {
     "ResNet50": RESNET_RESULTS_DIR,
@@ -63,214 +61,6 @@ MODEL_OPTIONS = [
     "Usporedi ResNet50 i XLM-RoBERTa",
     "Usporedi sva 3 modela",
 ]
-
-
-def inject_custom_css():
-    st.markdown(
-        """
-<style>
-    .block-container {
-        padding-top: 2rem;
-        padding-bottom: 3rem;
-    }
-    .app-header {
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        padding: 1.35rem 1.5rem;
-        margin-bottom: 1.25rem;
-        background: #ffffff;
-    }
-    .app-header h1 {
-        margin: 0 0 0.25rem 0;
-        font-size: 2.2rem;
-        line-height: 1.1;
-        letter-spacing: 0;
-    }
-    .app-header .subtitle {
-        color: #374151;
-        font-size: 1.02rem;
-        margin: 0.1rem 0 0.75rem 0;
-        font-weight: 600;
-    }
-    .app-header .description {
-        color: #4b5563;
-        margin: 0;
-        max-width: 980px;
-    }
-    .section-card {
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        padding: 1.1rem 1.25rem;
-        background: #ffffff;
-        margin: 0.75rem 0 1.25rem 0;
-    }
-    .step-label {
-        color: #111827;
-        font-size: 0.95rem;
-        font-weight: 700;
-        margin: 0.35rem 0 0.2rem 0;
-    }
-    .prediction-card {
-        border: 1px solid #d1d5db;
-        border-radius: 8px;
-        padding: 1rem 1.15rem;
-        background: #f9fafb;
-        margin: 0.6rem 0 0.85rem 0;
-    }
-    .prediction-label {
-        color: #6b7280;
-        font-size: 0.82rem;
-        text-transform: uppercase;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        margin-bottom: 0.35rem;
-    }
-    .prediction-badge {
-        display: inline-block;
-        color: #ffffff;
-        background: #1f2937;
-        border-radius: 8px;
-        padding: 0.42rem 0.72rem;
-        font-size: 1.35rem;
-        font-weight: 800;
-        letter-spacing: 0;
-    }
-    .soft-note {
-        border: 1px solid #bfdbfe;
-        border-radius: 8px;
-        padding: 0.8rem 0.9rem;
-        background: #eff6ff;
-        color: #1f2937;
-        margin: 0.6rem 0 1rem 0;
-    }
-    .warning-box {
-        border: 1px solid #f59e0b;
-        border-radius: 8px;
-        padding: 0.8rem 0.9rem;
-        background: #fffbeb;
-        color: #78350f;
-        margin: 0.6rem 0 1rem 0;
-    }
-    .status-correct {
-        color: #166534;
-        font-weight: 700;
-    }
-    .status-wrong {
-        color: #991b1b;
-        font-weight: 700;
-    }
-    div[data-testid="stMetric"] {
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        padding: 0.75rem 0.9rem;
-        background: #ffffff;
-    }
-</style>
-""",
-        unsafe_allow_html=True,
-    )
-
-
-def relative_path(path):
-    path = Path(path)
-    try:
-        return str(path.relative_to(PROJECT_ROOT))
-    except ValueError:
-        return str(path)
-
-
-def render_sidebar():
-    st.sidebar.title("Document AI Classifier")
-    st.sidebar.caption("Završni rad: klasifikacija dokumenata u pet kategorija.")
-    st.sidebar.markdown("**Klase dokumenta**")
-    st.sidebar.markdown(
-        """
-- **invoice** - računi i fakture
-- **cv** - životopisi
-- **contract** - ugovori
-- **email** - email dokumenti
-- **scientific** - znanstveni radovi
-"""
-    )
-    st.sidebar.markdown("**Modeli**")
-    st.sidebar.markdown(
-        """
-- **ResNet50** = vizualni model
-- **XLM-RoBERTa** = tekstualni model
-- **LayoutLMv3** = tekst + layout + slika
-"""
-    )
-    toggle = getattr(st.sidebar, "toggle", st.sidebar.checkbox)
-    classic_view = toggle("Classic view", value=False)
-    st.sidebar.info("Aplikacija služi za demonstraciju završnog rada.")
-    return classic_view
-
-
-def render_app_header():
-    st.markdown(
-        """
-<div class="app-header">
-    <h1>Document AI Classifier</h1>
-    <p class="subtitle">Klasifikacija dokumenata pomoću ResNet50, XLM-RoBERTa i LayoutLMv3</p>
-    <p class="description">
-        Aplikacija demonstrira tri pristupa klasifikaciji dokumenata: vizualni, tekstualni i multimodalni.
-        Može se učitati jedan dokument za predikciju i pregledati evaluacija modela na internom i vanjskom testnom skupu.
-        Prikazi su prilagođeni jasnoj prezentaciji rezultata završnog rada.
-    </p>
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
-
-def show_missing_file_warning(path, command=None):
-    st.markdown(
-        f"""
-<div class="warning-box">
-    <strong>Nedostaje datoteka:</strong><br>
-    <code>{relative_path(path)}</code>
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-    if command:
-        st.caption("Komanda za generiranje:")
-        st.code(command, language="powershell")
-
-
-def show_user_friendly_error(error):
-    message = str(error)
-    missing_markers = ["No such file", "not found", "does not exist", "Nedostaje"]
-    if isinstance(error, FileNotFoundError) or any(marker.lower() in message.lower() for marker in missing_markers):
-        st.warning("Model ili potrebna datoteka trenutno nisu dostupni. Provjeri da postoje spremljeni modeli i rezultati.")
-    else:
-        st.error("Dokument nije moguće obraditi. Provjeri format dokumenta ili pokušaj s drugim primjerom.")
-    with st.expander("Tehnički detalji", expanded=False):
-        st.code(message)
-
-
-def show_prediction_result(title, result, probability_df):
-    st.subheader(title)
-    st.markdown(
-        f"""
-<div class="prediction-card">
-    <div class="prediction-label">Predviđena klasa</div>
-    <div class="prediction-badge">{result["predicted_class"]}</div>
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-    col_confidence, col_time = st.columns(2)
-    col_confidence.metric("Confidence", f"{result['confidence'] * 100:.2f}%")
-    col_time.metric("Vrijeme predikcije", f"{result['prediction_time_seconds']:.4f} s")
-    show_probability_outputs(probability_df)
-
-
-def prediction_container(use_border=True):
-    try:
-        return st.container(border=use_border)
-    except TypeError:
-        return st.container()
 
 
 @st.cache_resource
@@ -336,7 +126,7 @@ def probability_dict_from_ranked(probabilities):
 
 
 def show_probability_outputs(probability_df):
-    st.dataframe(probability_df, hide_index=True, width="stretch")
+    st.dataframe(probability_df, hide_index=True, use_container_width=True)
     chart_df = probability_df.set_index("klasa")[["vjerojatnost"]]
     st.bar_chart(chart_df)
 
@@ -344,12 +134,18 @@ def show_probability_outputs(probability_df):
 def show_resnet_prediction(temp_path):
     model, class_names, device, _ = get_resnet_model()
     preview = load_resnet_document_image(temp_path)
-    st.image(preview, caption="Prva stranica", width="stretch")
+    st.image(preview, caption="Prva stranica", use_container_width=True)
 
     if st.button("Klasificiraj dokument", type="primary"):
         result = predict_resnet_file(temp_path, model=model, class_names=class_names, device=device)
         probability_df = resnet_probability_frame(result["probabilities"])
-        show_prediction_result("ResNet50 predikcija", result, probability_df)
+
+        st.subheader("ResNet50 predikcija")
+        col_class, col_confidence, col_time = st.columns(3)
+        col_class.metric("Klasa", result["predicted_class"])
+        col_confidence.metric("Sigurnost", f"{result['confidence'] * 100:.2f}%")
+        col_time.metric("Vrijeme", f"{result['prediction_time_seconds']:.4f} s")
+        show_probability_outputs(probability_df)
 
 
 def show_text_prediction(temp_path):
@@ -368,13 +164,19 @@ def show_text_prediction(temp_path):
             device=device,
         )
         probability_df = text_probability_frame(result["probabilities"])
-        show_prediction_result("XLM-RoBERTa predikcija", result, probability_df)
+
+        st.subheader("XLM-RoBERTa predikcija")
+        col_class, col_confidence, col_time = st.columns(3)
+        col_class.metric("Klasa", result["predicted_class"])
+        col_confidence.metric("Sigurnost", f"{result['confidence'] * 100:.2f}%")
+        col_time.metric("Vrijeme", f"{result['prediction_time_seconds']:.4f} s")
+        show_probability_outputs(probability_df)
 
 
 def show_layoutlm_prediction(temp_path):
     model, processor, class_names, _, device = get_layoutlm_model()
     image, words, boxes, ocr_text = load_image_and_ocr(temp_path)
-    st.image(image, caption="Prva stranica", width="stretch")
+    st.image(image, caption="Prva stranica", use_container_width=True)
 
     with st.expander("Preview OCR teksta", expanded=False):
         st.text(ocr_text[:1000])
@@ -390,7 +192,13 @@ def show_layoutlm_prediction(temp_path):
             device=device,
         )
         probability_df = ranked_probability_frame(result["probabilities"])
-        show_prediction_result("LayoutLMv3 predikcija", result, probability_df)
+
+        st.subheader("LayoutLMv3 predikcija")
+        col_class, col_confidence, col_time = st.columns(3)
+        col_class.metric("Klasa", result["predicted_class"])
+        col_confidence.metric("Sigurnost", f"{result['confidence'] * 100:.2f}%")
+        col_time.metric("Vrijeme", f"{result['prediction_time_seconds']:.4f} s")
+        show_probability_outputs(probability_df)
 
 
 def show_comparison(temp_path):
@@ -398,7 +206,7 @@ def show_comparison(temp_path):
     text_model, tokenizer, text_classes, _, text_device = get_text_model()
 
     preview = load_resnet_document_image(temp_path)
-    st.image(preview, caption="Prva stranica za ResNet50", width="stretch")
+    st.image(preview, caption="Prva stranica za ResNet50", use_container_width=True)
 
     extracted_text = extract_text_from_file(temp_path)
     with st.expander("Preview izdvojenog teksta za XLM-RoBERTa", expanded=False):
@@ -445,12 +253,10 @@ def show_comparison(temp_path):
                 for label in labels
             ]
         )
-        st.dataframe(comparison_df, hide_index=True, width="stretch")
+        st.dataframe(comparison_df, hide_index=True, use_container_width=True)
 
         if resnet_result["predicted_class"] != text_result["predicted_class"]:
-            st.warning("Modeli se ne slažu u predikciji.")
-        else:
-            st.success("Oba modela predviđaju istu klasu za ovaj dokument.")
+            st.info("Modeli se ne slažu u predikciji.")
 
 
 def show_all_models_comparison(temp_path):
@@ -459,7 +265,7 @@ def show_all_models_comparison(temp_path):
     layout_model, layout_processor, layout_classes, _, layout_device = get_layoutlm_model()
 
     image, words, boxes, ocr_text = load_image_and_ocr(temp_path)
-    st.image(image, caption="Prva stranica", width="stretch")
+    st.image(image, caption="Prva stranica", use_container_width=True)
 
     extracted_text = extract_text_from_file(temp_path)
     with st.expander("Preview izdvojenog teksta", expanded=False):
@@ -514,7 +320,7 @@ def show_all_models_comparison(temp_path):
             ]
         )
         st.subheader("Sažetak predikcije")
-        st.dataframe(summary_df, hide_index=True, width="stretch")
+        st.dataframe(summary_df, hide_index=True, use_container_width=True)
 
         resnet_probs = resnet_result["probabilities"]
         text_probs = probability_dict_from_ranked(text_result["probabilities"])
@@ -532,7 +338,7 @@ def show_all_models_comparison(temp_path):
             ]
         )
         st.subheader("Vjerojatnosti po klasama")
-        st.dataframe(comparison_df, hide_index=True, width="stretch")
+        st.dataframe(comparison_df, hide_index=True, use_container_width=True)
 
         chart_df = pd.DataFrame(
             [
@@ -638,7 +444,7 @@ def internal_metrics_table():
 
 
 def show_internal_test_tab():
-    st.dataframe(internal_metrics_table(), hide_index=True, width="stretch")
+    st.dataframe(internal_metrics_table(), hide_index=True, use_container_width=True)
 
     selected_model = st.selectbox("Detalji modela", list(RESULT_DIRS), key="internal_model")
     results_dir = RESULT_DIRS[selected_model]
@@ -657,7 +463,7 @@ def show_internal_test_tab():
 
     metrics = load_metrics(results_dir)
     if metrics is None:
-        show_missing_file_warning(results_dir / "test_metrics.json")
+        st.warning(f"Nedostaje {results_dir / 'test_metrics.json'}")
         return
 
     show_metric_cards(metrics)
@@ -675,21 +481,21 @@ def show_internal_test_tab():
                     "Support": int(safe_float(values.get("support", 0))),
                 }
             )
-        st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
+        st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
 
     report_path = results_dir / "classification_report.txt"
     if report_path.exists():
         with st.expander("Classification report", expanded=False):
             st.text(report_path.read_text(encoding="utf-8"))
     else:
-        show_missing_file_warning(report_path)
+        st.warning(f"Nedostaje {report_path}")
 
 
 def show_external_test_tab():
     comparison_path = EXTERNAL_RESULTS_DIR / "comparison_metrics.csv"
     df = load_csv(comparison_path)
     if df is None:
-        show_missing_file_warning(comparison_path, "python src\\evaluate_external_test.py")
+        st.warning(f"Nedostaje {comparison_path}")
         return
 
     for column in [
@@ -718,16 +524,7 @@ def show_external_test_tab():
             "Oznaka": ["Najbolji vanjski macro F1" if index == best_index else "" for index in df.index],
         }
     )
-
-    if best_index is not None:
-        best_row = df.loc[best_index]
-        col_model, col_acc, col_f1, col_docs = st.columns(4)
-        col_model.metric("Najbolji vanjski model", str(best_row.get("model", "")))
-        col_acc.metric("Accuracy", format_percent(best_row.get("accuracy", 0.0)))
-        col_f1.metric("Macro F1", format_percent(best_row.get("macro_f1", 0.0)))
-        col_docs.metric("Obrađeno dokumenata", int(safe_float(best_row.get("documents_processed", 0))))
-
-    st.dataframe(display_df, hide_index=True, width="stretch")
+    st.dataframe(display_df, hide_index=True, use_container_width=True)
 
     chart_df = df.set_index("model")[["accuracy", "macro_f1"]] * 100
     chart_df = chart_df.rename(columns={"accuracy": "Accuracy", "macro_f1": "Macro F1"})
@@ -754,15 +551,12 @@ def show_confusion_matrix_from_dir(results_dir, model_name, test_name):
     csv_path = results_dir / "confusion_matrix.csv"
 
     if png_path.exists():
-        st.caption("Confusion matrix pokazuje koje klase model najčešće zamjenjuje.")
-        left, center, right = st.columns([1, 3, 1])
-        with center:
-            st.image(str(png_path), caption=f"{model_name} - {test_name}", width="stretch")
-    if csv_path.exists():
+        st.image(str(png_path), caption=f"{model_name} - {test_name}", use_container_width=True)
+    elif csv_path.exists():
         matrix_df = confusion_csv_as_frame(csv_path)
-        st.dataframe(matrix_df, width="stretch")
-    if not png_path.exists() and not csv_path.exists():
-        show_missing_file_warning(results_dir / "confusion_matrix.png")
+        st.dataframe(matrix_df.style.background_gradient(cmap="Blues"), use_container_width=True)
+    else:
+        st.warning(f"Nedostaje confusion matrix PNG/CSV u {results_dir}")
 
 
 def show_confusion_matrices_tab():
@@ -776,7 +570,7 @@ def show_external_predictions_tab():
     predictions_path = EXTERNAL_RESULTS_DIR / "all_predictions.csv"
     df = load_csv(predictions_path)
     if df is None:
-        show_missing_file_warning(predictions_path, "python src\\evaluate_external_test.py")
+        st.warning(f"Nedostaje {predictions_path}")
         return
 
     for column in ["confidence", "prediction_time_seconds"]:
@@ -787,21 +581,7 @@ def show_external_predictions_tab():
     df["Dokument"] = df["document_path"].astype(str)
     df["Stvarna klasa"] = df["true_label"].astype(str)
     df["Predviđena klasa"] = df["predicted_label"].fillna("").astype(str)
-    df["processing_status"] = df["status"].fillna("").astype(str)
-    df["is_processed"] = df["processing_status"].str.lower().eq("success")
-    df["is_correct"] = df["is_processed"] & (df["Stvarna klasa"] == df["Predviđena klasa"])
-    df["Točnost"] = "Nije obrađeno"
-    df.loc[df["is_processed"] & df["is_correct"], "Točnost"] = "Točno"
-    df.loc[df["is_processed"] & ~df["is_correct"], "Točnost"] = "Pogrešno"
-    df["Greška"] = ""
-    wrong_mask = df["is_processed"] & ~df["is_correct"]
-    df.loc[wrong_mask, "Greška"] = (
-        df.loc[wrong_mask, "Stvarna klasa"] + " → " + df.loc[wrong_mask, "Predviđena klasa"]
-    )
-
-    st.caption(
-        "Status obrade govori je li dokument tehnički obrađen. Točnost govori je li predviđena klasa jednaka stvarnoj klasi."
-    )
+    df["Status"] = df["status"].fillna("").astype(str)
 
     model_options = ["Svi", *sorted(df["Model"].dropna().unique())]
     label_options = ["Sve", *sorted(df["Stvarna klasa"].dropna().unique())]
@@ -816,9 +596,9 @@ def show_external_predictions_tab():
     if selected_label != "Sve":
         filtered = filtered[filtered["Stvarna klasa"] == selected_label]
     if only_success:
-        filtered = filtered[filtered["processing_status"] == "success"]
+        filtered = filtered[filtered["Status"] == "success"]
     if only_wrong:
-        filtered = filtered[filtered["Točnost"] == "Pogrešno"]
+        filtered = filtered[filtered["Stvarna klasa"] != filtered["Predviđena klasa"]]
 
     display_df = pd.DataFrame(
         {
@@ -826,18 +606,16 @@ def show_external_predictions_tab():
             "Dokument": filtered["Dokument"],
             "Stvarna klasa": filtered["Stvarna klasa"],
             "Predviđena klasa": filtered["Predviđena klasa"],
-            "Točnost": filtered["Točnost"],
-            "Greška": filtered["Greška"],
             "Confidence": filtered["confidence"].map(
                 lambda value: "" if pd.isna(value) else format_percent(value)
             ),
             "Vrijeme predikcije": filtered["prediction_time_seconds"].map(
                 lambda value: "" if pd.isna(value) else format_seconds(value, digits=4)
             ),
-            "Status obrade": filtered["processing_status"],
+            "Status": filtered["Status"],
         }
     )
-    st.dataframe(display_df, hide_index=True, width="stretch")
+    st.dataframe(display_df, hide_index=True, use_container_width=True)
 
 
 def final_comparison_summary(df):
@@ -857,20 +635,9 @@ def final_comparison_summary(df):
 
 
 def show_final_comparison_tab():
-    st.subheader("Završna usporedba modela")
-    st.markdown(
-        """
-<div class="soft-note">
-    Ova sekcija uspoređuje interne rezultate s vanjskim testom i pokazuje koliko se performanse mijenjaju
-    kada modeli dobiju dokumente iz drugih izvora.
-</div>
-""",
-        unsafe_allow_html=True,
-    )
-
     df = load_csv(FINAL_COMPARISON_PATH)
     if df is None:
-        show_missing_file_warning(FINAL_COMPARISON_PATH, "python scripts\\create_final_comparison.py")
+        st.warning("Prvo pokrenite: python scripts/create_final_comparison.py")
         return
 
     numeric_columns = [
@@ -919,7 +686,7 @@ def show_final_comparison_tab():
             "Oznake": tags,
         }
     )
-    st.dataframe(display_df, hide_index=True, width="stretch")
+    st.dataframe(display_df, hide_index=True, use_container_width=True)
 
     chart_df = df.set_index("model")[["internal_macro_f1", "external_macro_f1"]] * 100
     chart_df = chart_df.rename(
@@ -931,24 +698,10 @@ def show_final_comparison_tab():
     st.bar_chart(chart_df)
 
     if FINAL_COMPARISON_CHART_PATH.exists():
-        st.caption("Graf uspoređuje accuracy i macro F1 na internom i vanjskom testu.")
-        left, center, right = st.columns([1, 3, 1])
-        with center:
-            st.image(str(FINAL_COMPARISON_CHART_PATH), width="stretch")
-    else:
-        show_missing_file_warning(FINAL_COMPARISON_CHART_PATH, "python scripts\\create_final_comparison.py")
+        with st.expander("Graf accuracy i macro F1", expanded=False):
+            st.image(str(FINAL_COMPARISON_CHART_PATH), use_container_width=True)
 
-    if FINAL_COMPARISON_MD_PATH.exists():
-        with st.expander("Markdown tablica završne usporedbe", expanded=False):
-            st.markdown(FINAL_COMPARISON_MD_PATH.read_text(encoding="utf-8"))
-    else:
-        show_missing_file_warning(FINAL_COMPARISON_MD_PATH, "python scripts\\create_final_comparison.py")
-
-    if FINAL_COMPARISON_SUMMARY_PATH.exists():
-        summary_text = FINAL_COMPARISON_SUMMARY_PATH.read_text(encoding="utf-8").strip()
-    else:
-        summary_text = final_comparison_summary(df)
-    st.info(summary_text)
+    st.write(final_comparison_summary(df))
     st.markdown(
         """
 - Interni test koristi 150 dokumenata iz istih izvora kao skup za treniranje.
@@ -994,91 +747,45 @@ def show_results_dashboard():
     )
 
 
-def run_prediction_ui(modern=False):
-    container = prediction_container(use_border=True) if modern else st.container()
-
-    with container:
-        if modern:
-            st.subheader("Predikcija jednog dokumenta")
-            st.write(
-                "Učitaj dokument, odaberi model i usporedi vjerojatnosti po klasama bez mijenjanja spremljenih modela."
-            )
-            model_column, upload_column = st.columns([1, 1])
-            with model_column:
-                st.markdown('<div class="step-label">1. Odaberi model</div>', unsafe_allow_html=True)
-                selected_mode = st.selectbox("Model", MODEL_OPTIONS, label_visibility="collapsed")
-        else:
-            st.header("Predikcija jednog dokumenta")
-            st.write(
-                "Ovdje se učitava jedan dokument i prikazuje što svaki model predviđa za taj konkretni dokument."
-            )
-            selected_mode = st.selectbox("Model", MODEL_OPTIONS)
-
-        image_document_types = ["pdf", "png", "jpg", "jpeg"]
-        text_document_types = ["pdf", "png", "jpg", "jpeg", "txt", "html", "htm", "docx"]
-        upload_types = text_document_types if selected_mode == MODEL_OPTIONS[1] else image_document_types
-
-        if modern:
-            with upload_column:
-                st.markdown('<div class="step-label">2. Uploadaj dokument</div>', unsafe_allow_html=True)
-                upload_label = "PDF, PNG, JPG ili JPEG"
-                if selected_mode == MODEL_OPTIONS[1]:
-                    upload_label = "PDF, PNG, JPG, JPEG, TXT, HTML ili DOCX"
-                uploaded_file = st.file_uploader(
-                    upload_label,
-                    type=upload_types,
-                    accept_multiple_files=False,
-                )
-        else:
-            uploaded_file = st.file_uploader(
-                "Dokument",
-                type=upload_types,
-                accept_multiple_files=False,
-            )
-
-        if uploaded_file is not None:
-            if modern:
-                st.markdown('<div class="step-label">3. Pokreni predikciju</div>', unsafe_allow_html=True)
-            temp_path = save_uploaded_file(uploaded_file)
-            try:
-                if selected_mode == MODEL_OPTIONS[0]:
-                    show_resnet_prediction(temp_path)
-                elif selected_mode == MODEL_OPTIONS[1]:
-                    show_text_prediction(temp_path)
-                elif selected_mode == MODEL_OPTIONS[2]:
-                    show_layoutlm_prediction(temp_path)
-                elif selected_mode == MODEL_OPTIONS[3]:
-                    show_comparison(temp_path)
-                else:
-                    show_all_models_comparison(temp_path)
-            except Exception as error:
-                show_user_friendly_error(error)
-            finally:
-                temp_path.unlink(missing_ok=True)
-
-
-def render_classic_view():
-    st.title("Document AI Classifier")
-    run_prediction_ui(modern=False)
-    st.divider()
-    show_results_dashboard()
-
-
-def render_modern_view():
-    render_app_header()
-    run_prediction_ui(modern=True)
-    st.divider()
-    show_results_dashboard()
-
-
 def main():
     st.set_page_config(page_title="Document AI Classifier", layout="wide")
-    classic_view = render_sidebar()
-    if classic_view:
-        render_classic_view()
-    else:
-        inject_custom_css()
-        render_modern_view()
+    st.title("Document AI Classifier")
+
+    st.header("Predikcija jednog dokumenta")
+    st.write(
+        "Ovdje se učitava jedan dokument i prikazuje što svaki model predviđa za taj konkretni dokument."
+    )
+
+    selected_mode = st.selectbox("Model", MODEL_OPTIONS)
+    image_document_types = ["pdf", "png", "jpg", "jpeg"]
+    text_document_types = ["pdf", "png", "jpg", "jpeg", "txt", "html", "htm", "docx"]
+    upload_types = text_document_types if selected_mode == MODEL_OPTIONS[1] else image_document_types
+    uploaded_file = st.file_uploader(
+        "Dokument",
+        type=upload_types,
+        accept_multiple_files=False,
+    )
+
+    if uploaded_file is not None:
+        temp_path = save_uploaded_file(uploaded_file)
+        try:
+            if selected_mode == MODEL_OPTIONS[0]:
+                show_resnet_prediction(temp_path)
+            elif selected_mode == MODEL_OPTIONS[1]:
+                show_text_prediction(temp_path)
+            elif selected_mode == MODEL_OPTIONS[2]:
+                show_layoutlm_prediction(temp_path)
+            elif selected_mode == MODEL_OPTIONS[3]:
+                show_comparison(temp_path)
+            else:
+                show_all_models_comparison(temp_path)
+        except Exception as error:
+            st.error(str(error))
+        finally:
+            temp_path.unlink(missing_ok=True)
+
+    st.divider()
+    show_results_dashboard()
 
 
 if __name__ == "__main__":

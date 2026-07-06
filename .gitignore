@@ -8,8 +8,12 @@ results/
 runs/
 logs/
 .cache/
+.hf_cache/
 
 models/
+resnet50/
+xlm_roberta/
+layoutlmv3/
 
 *.zip
 *.tar.gz
@@ -21,7 +25,9 @@ models/
 *.bin
 *.safetensors
 *.ckpt
+*.pkl
+*.joblib
 
 .env
 .DS_Store
-'@ | Set-Content .gitignore
+'@ | Set-Content .gitignorey
