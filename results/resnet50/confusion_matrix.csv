@@ -1,0 +1,6 @@
+true\pred,invoice,cv,contract,email,scientific
+invoice,30,0,0,0,0
+cv,1,26,0,1,2
+contract,0,2,25,3,0
+email,0,0,3,27,0
+scientific,0,0,4,0,26
