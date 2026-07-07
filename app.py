@@ -28,6 +28,10 @@ from src.predict_layoutlm import (  # noqa: E402
     load_layoutlm_model,
     predict_layoutlm,
 )
+from src.model_downloader import (  # noqa: E402
+    ensure_model_available,
+    is_model_available,
+)
 
 
 RESNET_RESULTS_DIR = PROJECT_ROOT / "results" / "resnet50"
@@ -61,6 +65,13 @@ MODEL_OPTIONS = [
     "Usporedi ResNet50 i XLM-RoBERTa",
     "Usporedi sva 3 modela",
 ]
+MODEL_KEYS_BY_OPTION = {
+    MODEL_OPTIONS[0]: ["resnet50"],
+    MODEL_OPTIONS[1]: ["xlm_roberta"],
+    MODEL_OPTIONS[2]: ["layoutlmv3"],
+    MODEL_OPTIONS[3]: ["resnet50", "xlm_roberta"],
+    MODEL_OPTIONS[4]: ["resnet50", "xlm_roberta", "layoutlmv3"],
+}
 
 
 @st.cache_resource
@@ -89,6 +100,34 @@ def save_uploaded_file(uploaded_file):
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as temp_file:
         temp_file.write(uploaded_file.getbuffer())
         return Path(temp_file.name)
+
+
+def show_model_status_sidebar():
+    st.sidebar.subheader("Status modela")
+    for model_key, model_label in PREDICTION_MODEL_LABELS.items():
+        status = "dostupno" if is_model_available(model_key) else "nedostaje"
+        st.sidebar.write(f"{model_label}: {status}")
+
+
+def ensure_models_for_prediction(model_keys):
+    for model_key in model_keys:
+        if is_model_available(model_key):
+            continue
+
+        model_label = PREDICTION_MODEL_LABELS.get(model_key, model_key)
+        with st.spinner("Preuzimam model..."):
+            available, message = ensure_model_available(model_key)
+
+        if available:
+            continue
+
+        if "Hugging Face repo ID" in message:
+            st.warning(message)
+        else:
+            st.error(f"{model_label}: {message}")
+        return False
+
+    return True
 
 
 def resnet_probability_frame(probabilities):
@@ -751,6 +790,7 @@ def main():
     st.set_page_config(page_title="Document AI Classifier", layout="wide")
     st.title("Document AI Classifier")
 
+    show_model_status_sidebar()
     st.header("Predikcija jednog dokumenta")
     st.write(
         "Ovdje se učitava jedan dokument i prikazuje što svaki model predviđa za taj konkretni dokument."
@@ -769,16 +809,18 @@ def main():
     if uploaded_file is not None:
         temp_path = save_uploaded_file(uploaded_file)
         try:
-            if selected_mode == MODEL_OPTIONS[0]:
-                show_resnet_prediction(temp_path)
-            elif selected_mode == MODEL_OPTIONS[1]:
-                show_text_prediction(temp_path)
-            elif selected_mode == MODEL_OPTIONS[2]:
-                show_layoutlm_prediction(temp_path)
-            elif selected_mode == MODEL_OPTIONS[3]:
-                show_comparison(temp_path)
-            else:
-                show_all_models_comparison(temp_path)
+            required_models = MODEL_KEYS_BY_OPTION.get(selected_mode, [])
+            if ensure_models_for_prediction(required_models):
+                if selected_mode == MODEL_OPTIONS[0]:
+                    show_resnet_prediction(temp_path)
+                elif selected_mode == MODEL_OPTIONS[1]:
+                    show_text_prediction(temp_path)
+                elif selected_mode == MODEL_OPTIONS[2]:
+                    show_layoutlm_prediction(temp_path)
+                elif selected_mode == MODEL_OPTIONS[3]:
+                    show_comparison(temp_path)
+                else:
+                    show_all_models_comparison(temp_path)
         except Exception as error:
             st.error(str(error))
         finally:

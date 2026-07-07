@@ -1,5 +1,6 @@
-@'
 venv/
+env/
+.venv/
 __pycache__/
 *.pyc
 
@@ -11,9 +12,6 @@ logs/
 .hf_cache/
 
 models/
-resnet50/
-xlm_roberta/
-layoutlmv3/
 
 *.zip
 *.tar.gz
@@ -30,4 +28,3 @@ layoutlmv3/
 
 .env
 .DS_Store
-'@ | Set-Content .gitignorey
