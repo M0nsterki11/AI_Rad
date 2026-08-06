@@ -57,6 +57,24 @@ PREDICTION_MODEL_LABELS = {
     "layoutlmv3": "LayoutLMv3",
 }
 CLASS_NAMES = ["invoice", "cv", "contract", "email", "scientific"]
+PREDICTION_CONFIDENCE_THRESHOLD = 0.50
+ALL_UPLOAD_TYPES = ["pdf", "png", "jpg", "jpeg", "txt", "html", "htm", "docx"]
+IMAGE_DOCUMENT_EXTENSIONS = {".pdf", ".png", ".jpg", ".jpeg"}
+TEXT_DOCUMENT_EXTENSIONS = {
+    ".pdf",
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".txt",
+    ".html",
+    ".htm",
+    ".docx",
+}
+MODEL_SUPPORTED_EXTENSIONS = {
+    "resnet50": IMAGE_DOCUMENT_EXTENSIONS,
+    "xlm_roberta": TEXT_DOCUMENT_EXTENSIONS,
+    "layoutlmv3": IMAGE_DOCUMENT_EXTENSIONS,
+}
 
 MODEL_OPTIONS = [
     "ResNet50 – vizualni model",
@@ -170,6 +188,62 @@ def show_probability_outputs(probability_df):
     st.bar_chart(chart_df)
 
 
+def is_recognized_prediction(result):
+    confidence = float(result.get("confidence", 0.0) or 0.0)
+    return confidence >= PREDICTION_CONFIDENCE_THRESHOLD
+
+
+def show_prediction_status(result):
+    recognized = is_recognized_prediction(result)
+    if recognized:
+        st.info(
+            "Prepoznato: True. Model je iznad minimalnog praga sigurnosti "
+            f"od {PREDICTION_CONFIDENCE_THRESHOLD * 100:.0f}%."
+        )
+    else:
+        st.error(
+            "FAIL - Prepoznato: False. Model nije dovoljno siguran za pouzdanu "
+            f"klasifikaciju (prag {PREDICTION_CONFIDENCE_THRESHOLD * 100:.0f}%)."
+        )
+    return recognized
+
+
+def display_class(result, recognized):
+    return result["predicted_class"] if recognized else "nepoznato"
+
+
+def split_compatible_models(model_keys, extension):
+    compatible = [
+        model_key
+        for model_key in model_keys
+        if extension in MODEL_SUPPORTED_EXTENSIONS.get(model_key, set())
+    ]
+    incompatible = [model_key for model_key in model_keys if model_key not in compatible]
+    return compatible, incompatible
+
+
+def show_incompatible_models(incompatible_model_keys, extension):
+    if not incompatible_model_keys:
+        return
+
+    status_df = pd.DataFrame(
+        [
+            {
+                "Model": PREDICTION_MODEL_LABELS.get(model_key, model_key),
+                "Status obrade": "FAIL",
+                "Prepoznato": False,
+                "Razlog": f"Model ne podržava {extension or 'ovu vrstu datoteke'} kao ulaz.",
+            }
+            for model_key in incompatible_model_keys
+        ]
+    )
+    st.warning(
+        "Dokument je učitan, ali ga svi odabrani modeli ne mogu obraditi. "
+        "Tekstualne datoteke izravno podržava XLM-RoBERTa."
+    )
+    st.dataframe(status_df, hide_index=True, use_container_width=True)
+
+
 def show_resnet_prediction(temp_path):
     model, class_names, device, _ = get_resnet_model()
     preview = load_resnet_document_image(temp_path)
@@ -178,10 +252,12 @@ def show_resnet_prediction(temp_path):
     if st.button("Klasificiraj dokument", type="primary"):
         result = predict_resnet_file(temp_path, model=model, class_names=class_names, device=device)
         probability_df = resnet_probability_frame(result["probabilities"])
+        recognized = show_prediction_status(result)
 
         st.subheader("ResNet50 predikcija")
-        col_class, col_confidence, col_time = st.columns(3)
-        col_class.metric("Klasa", result["predicted_class"])
+        col_status, col_class, col_confidence, col_time = st.columns(4)
+        col_status.metric("Prepoznato", str(recognized))
+        col_class.metric("Klasa", display_class(result, recognized))
         col_confidence.metric("Sigurnost", f"{result['confidence'] * 100:.2f}%")
         col_time.metric("Vrijeme", f"{result['prediction_time_seconds']:.4f} s")
         show_probability_outputs(probability_df)
@@ -203,10 +279,12 @@ def show_text_prediction(temp_path):
             device=device,
         )
         probability_df = text_probability_frame(result["probabilities"])
+        recognized = show_prediction_status(result)
 
         st.subheader("XLM-RoBERTa predikcija")
-        col_class, col_confidence, col_time = st.columns(3)
-        col_class.metric("Klasa", result["predicted_class"])
+        col_status, col_class, col_confidence, col_time = st.columns(4)
+        col_status.metric("Prepoznato", str(recognized))
+        col_class.metric("Klasa", display_class(result, recognized))
         col_confidence.metric("Sigurnost", f"{result['confidence'] * 100:.2f}%")
         col_time.metric("Vrijeme", f"{result['prediction_time_seconds']:.4f} s")
         show_probability_outputs(probability_df)
@@ -231,10 +309,12 @@ def show_layoutlm_prediction(temp_path):
             device=device,
         )
         probability_df = ranked_probability_frame(result["probabilities"])
+        recognized = show_prediction_status(result)
 
         st.subheader("LayoutLMv3 predikcija")
-        col_class, col_confidence, col_time = st.columns(3)
-        col_class.metric("Klasa", result["predicted_class"])
+        col_status, col_class, col_confidence, col_time = st.columns(4)
+        col_status.metric("Prepoznato", str(recognized))
+        col_class.metric("Klasa", display_class(result, recognized))
         col_confidence.metric("Sigurnost", f"{result['confidence'] * 100:.2f}%")
         col_time.metric("Vrijeme", f"{result['prediction_time_seconds']:.4f} s")
         show_probability_outputs(probability_df)
@@ -265,17 +345,21 @@ def show_comparison(temp_path):
             class_names=text_classes,
             device=text_device,
         )
+        resnet_recognized = is_recognized_prediction(resnet_result)
+        text_recognized = is_recognized_prediction(text_result)
 
         left, right = st.columns(2)
         with left:
             st.subheader("ResNet50")
-            st.metric("Predikcija", resnet_result["predicted_class"])
+            st.metric("Prepoznato", str(resnet_recognized))
+            st.metric("Predikcija", display_class(resnet_result, resnet_recognized))
             st.metric("Sigurnost", f"{resnet_result['confidence'] * 100:.2f}%")
             st.metric("Vrijeme", f"{resnet_result['prediction_time_seconds']:.4f} s")
 
         with right:
             st.subheader("XLM-RoBERTa")
-            st.metric("Predikcija", text_result["predicted_class"])
+            st.metric("Prepoznato", str(text_recognized))
+            st.metric("Predikcija", display_class(text_result, text_recognized))
             st.metric("Sigurnost", f"{text_result['confidence'] * 100:.2f}%")
             st.metric("Vrijeme", f"{text_result['prediction_time_seconds']:.4f} s")
 
@@ -294,7 +378,9 @@ def show_comparison(temp_path):
         )
         st.dataframe(comparison_df, hide_index=True, use_container_width=True)
 
-        if resnet_result["predicted_class"] != text_result["predicted_class"]:
+        if not (resnet_recognized and text_recognized):
+            st.warning("Najmanje jedan model nije dovoljno siguran: Prepoznato = False.")
+        elif resnet_result["predicted_class"] != text_result["predicted_class"]:
             st.info("Modeli se ne slažu u predikciji.")
 
 
@@ -335,24 +421,30 @@ def show_all_models_comparison(temp_path):
             class_names=layout_classes,
             device=layout_device,
         )
+        resnet_recognized = is_recognized_prediction(resnet_result)
+        text_recognized = is_recognized_prediction(text_result)
+        layout_recognized = is_recognized_prediction(layout_result)
 
         summary_df = pd.DataFrame(
             [
                 {
                     "Model": "ResNet50",
-                    "Predviđena klasa": resnet_result["predicted_class"],
+                    "Predviđena klasa": display_class(resnet_result, resnet_recognized),
+                    "Prepoznato": resnet_recognized,
                     "Sigurnost": f"{resnet_result['confidence'] * 100:.2f}%",
                     "Vrijeme predikcije": f"{resnet_result['prediction_time_seconds']:.4f} s",
                 },
                 {
                     "Model": "XLM-RoBERTa",
-                    "Predviđena klasa": text_result["predicted_class"],
+                    "Predviđena klasa": display_class(text_result, text_recognized),
+                    "Prepoznato": text_recognized,
                     "Sigurnost": f"{text_result['confidence'] * 100:.2f}%",
                     "Vrijeme predikcije": f"{text_result['prediction_time_seconds']:.4f} s",
                 },
                 {
                     "Model": "LayoutLMv3",
-                    "Predviđena klasa": layout_result["predicted_class"],
+                    "Predviđena klasa": display_class(layout_result, layout_recognized),
+                    "Prepoznato": layout_recognized,
                     "Sigurnost": f"{layout_result['confidence'] * 100:.2f}%",
                     "Vrijeme predikcije": f"{layout_result['prediction_time_seconds']:.4f} s",
                 },
@@ -392,15 +484,18 @@ def show_all_models_comparison(temp_path):
         ).set_index("Klasa")
         st.bar_chart(chart_df)
 
+        all_recognized = resnet_recognized and text_recognized and layout_recognized
         predicted_classes = {
-            resnet_result["predicted_class"],
-            text_result["predicted_class"],
-            layout_result["predicted_class"],
+            display_class(resnet_result, resnet_recognized),
+            display_class(text_result, text_recognized),
+            display_class(layout_result, layout_recognized),
         }
-        if len(predicted_classes) > 1:
+        if not all_recognized:
+            st.warning("Najmanje jedan model nije dovoljno siguran: Prepoznato = False.")
+        elif len(predicted_classes) > 1:
             st.warning("Modeli se ne slažu u predikciji za ovaj dokument.")
         else:
-            st.success("Sva tri modela predviđaju istu klasu za ovaj dokument.")
+            st.info("Sva tri modela predviđaju istu klasu za ovaj dokument.")
 
 
 def load_metrics(results_dir):
@@ -605,6 +700,19 @@ def show_confusion_matrices_tab():
     show_confusion_matrix_from_dir(results_dir, model_name, test_set)
 
 
+def external_prediction_error(row):
+    if not row["_processing_success"]:
+        message = row.get("error_message", "")
+        return "Nije obrađeno" if pd.isna(message) or not str(message).strip() else str(message)
+    if row["_is_correct"]:
+        return ""
+
+    predicted_label = row.get("predicted_label", "")
+    if pd.isna(predicted_label) or not str(predicted_label).strip():
+        predicted_label = "bez predikcije"
+    return f"{row['true_label']} → {predicted_label}"
+
+
 def show_external_predictions_tab():
     predictions_path = EXTERNAL_RESULTS_DIR / "all_predictions.csv"
     df = load_csv(predictions_path)
@@ -621,6 +729,12 @@ def show_external_predictions_tab():
     df["Stvarna klasa"] = df["true_label"].astype(str)
     df["Predviđena klasa"] = df["predicted_label"].fillna("").astype(str)
     df["Status"] = df["status"].fillna("").astype(str)
+    df["_processing_success"] = df["status"].eq("success")
+    df["_is_correct"] = (
+        df["_processing_success"]
+        & df["predicted_label"].fillna("").astype(str).eq(df["true_label"].astype(str))
+    )
+    df["_prediction_error"] = df.apply(external_prediction_error, axis=1)
 
     model_options = ["Svi", *sorted(df["Model"].dropna().unique())]
     label_options = ["Sve", *sorted(df["Stvarna klasa"].dropna().unique())]
@@ -635,9 +749,9 @@ def show_external_predictions_tab():
     if selected_label != "Sve":
         filtered = filtered[filtered["Stvarna klasa"] == selected_label]
     if only_success:
-        filtered = filtered[filtered["Status"] == "success"]
+        filtered = filtered[filtered["_processing_success"]]
     if only_wrong:
-        filtered = filtered[filtered["Stvarna klasa"] != filtered["Predviđena klasa"]]
+        filtered = filtered[~filtered["_is_correct"]]
 
     display_df = pd.DataFrame(
         {
@@ -645,13 +759,17 @@ def show_external_predictions_tab():
             "Dokument": filtered["Dokument"],
             "Stvarna klasa": filtered["Stvarna klasa"],
             "Predviđena klasa": filtered["Predviđena klasa"],
+            "Status obrade": filtered["_processing_success"].map(
+                {True: "Obrađeno", False: "FAIL"}
+            ),
+            "Točnost": filtered["_is_correct"],
+            "Greška": filtered["_prediction_error"],
             "Confidence": filtered["confidence"].map(
                 lambda value: "" if pd.isna(value) else format_percent(value)
             ),
             "Vrijeme predikcije": filtered["prediction_time_seconds"].map(
                 lambda value: "" if pd.isna(value) else format_seconds(value, digits=4)
             ),
-            "Status": filtered["Status"],
         }
     )
     st.dataframe(display_df, hide_index=True, use_container_width=True)
@@ -797,12 +915,9 @@ def main():
     )
 
     selected_mode = st.selectbox("Model", MODEL_OPTIONS)
-    image_document_types = ["pdf", "png", "jpg", "jpeg"]
-    text_document_types = ["pdf", "png", "jpg", "jpeg", "txt", "html", "htm", "docx"]
-    upload_types = text_document_types if selected_mode == MODEL_OPTIONS[1] else image_document_types
     uploaded_file = st.file_uploader(
         "Dokument",
-        type=upload_types,
+        type=ALL_UPLOAD_TYPES,
         accept_multiple_files=False,
     )
 
@@ -810,8 +925,23 @@ def main():
         temp_path = save_uploaded_file(uploaded_file)
         try:
             required_models = MODEL_KEYS_BY_OPTION.get(selected_mode, [])
-            if ensure_models_for_prediction(required_models):
-                if selected_mode == MODEL_OPTIONS[0]:
+            extension = Path(uploaded_file.name).suffix.lower()
+            compatible_models, incompatible_models = split_compatible_models(
+                required_models,
+                extension,
+            )
+            show_incompatible_models(incompatible_models, extension)
+
+            if not compatible_models:
+                st.error(
+                    "FAIL - Prepoznato: False. Odabrani model ne može obraditi "
+                    f"datoteku tipa {extension}. Za TXT odaberi XLM-RoBERTa model."
+                )
+            elif ensure_models_for_prediction(compatible_models):
+                if compatible_models != required_models:
+                    st.info("Predikcija će se pokrenuti samo za kompatibilni XLM-RoBERTa model.")
+                    show_text_prediction(temp_path)
+                elif selected_mode == MODEL_OPTIONS[0]:
                     show_resnet_prediction(temp_path)
                 elif selected_mode == MODEL_OPTIONS[1]:
                     show_text_prediction(temp_path)
@@ -822,7 +952,7 @@ def main():
                 else:
                     show_all_models_comparison(temp_path)
         except Exception as error:
-            st.error(str(error))
+            st.error(f"FAIL - Prepoznato: False. Dokument nije obrađen. Razlog: {error}")
         finally:
             temp_path.unlink(missing_ok=True)
 
