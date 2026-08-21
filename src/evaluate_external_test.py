@@ -30,6 +30,7 @@ EXTERNAL_RAW_DIR = PROJECT_ROOT / "data" / "external_test" / "raw"
 INTERNAL_RAW_DIR = PROJECT_ROOT / "data" / "raw"
 RESULTS_DIR = PROJECT_ROOT / "results" / "external_test"
 EXCLUDED_DUPLICATES_PATH = RESULTS_DIR / "excluded_duplicates.csv"
+TEST_NAME = "External Test"
 
 CLASS_NAMES = ["invoice", "cv", "contract", "email", "scientific"]
 SUPPORTED_EXTENSIONS = {".pdf", ".png", ".jpg", ".jpeg"}
@@ -43,12 +44,32 @@ MODEL_ORDER = [
 def parse_args():
     parser = argparse.ArgumentParser(description="Evaluate all trained models on external test documents.")
     parser.add_argument(
+        "--input-dir",
+        default="data/external_test/raw",
+        help="External test root containing one folder per class (relative to project root or absolute).",
+    )
+    parser.add_argument(
+        "--results-dir",
+        default="results/external_test",
+        help="Output folder for evaluation results (relative to project root or absolute).",
+    )
+    parser.add_argument(
+        "--test-name",
+        default="External Test",
+        help="Human-readable test name used in terminal output and confusion matrix titles.",
+    )
+    parser.add_argument(
         "--limit-per-class",
         type=int,
         default=None,
         help="Optional maximum number of external documents to evaluate per class.",
     )
     return parser.parse_args()
+
+
+def resolve_project_path(value):
+    path = Path(value)
+    return path.resolve() if path.is_absolute() else (PROJECT_ROOT / path).resolve()
 
 
 def project_relative(path):
@@ -409,7 +430,7 @@ def save_confusion_matrix_png(path, matrix, title):
             fill=fill,
         )
 
-    draw.text((left, 25), f"{title} External Test Confusion Matrix", font=title_font, fill="black")
+    draw.text((left, 25), f"{title} Confusion Matrix", font=title_font, fill="black")
     draw.text((left + cell * len(CLASS_NAMES) / 2 - 50, 70), "Predicted label", font=label_font, fill="black")
     draw.text((20, top + cell * len(CLASS_NAMES) / 2 - 10), "True label", font=label_font, fill="black")
 
@@ -462,7 +483,11 @@ def compute_and_save_model_results(model_key, model_name, records):
 
     matrix = confusion_matrix(y_true, y_pred)
     save_confusion_matrix_csv(model_dir / "confusion_matrix.csv", matrix)
-    save_confusion_matrix_png(model_dir / "confusion_matrix.png", matrix, model_name)
+    save_confusion_matrix_png(
+        model_dir / "confusion_matrix.png",
+        matrix,
+        f"{model_name} {TEST_NAME}",
+    )
 
     return metrics
 
@@ -518,7 +543,7 @@ def write_comparison_metrics(model_metrics):
 
 def print_comparison_table(model_metrics):
     print()
-    print("EXTERNAL TEST COMPARISON")
+    print(f"{TEST_NAME.upper()} COMPARISON")
     print("-" * 105)
     print(
         f"{'Model':<15} {'Accuracy':>10} {'Macro P':>10} {'Macro R':>10} "
@@ -554,7 +579,13 @@ def print_dataset_summary(documents, excluded):
 
 
 def main():
+    global EXTERNAL_RAW_DIR, RESULTS_DIR, EXCLUDED_DUPLICATES_PATH, TEST_NAME
+
     args = parse_args()
+    EXTERNAL_RAW_DIR = resolve_project_path(args.input_dir)
+    RESULTS_DIR = resolve_project_path(args.results_dir)
+    EXCLUDED_DUPLICATES_PATH = RESULTS_DIR / "excluded_duplicates.csv"
+    TEST_NAME = args.test_name.strip() or "External Test"
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
     all_external_docs = collect_external_documents()
