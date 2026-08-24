@@ -81,6 +81,3 @@ HF_TOKEN = "hf_..."
 
 Ako su repo-i public, `HF_TOKEN` nije potreban.
 
-## Kako deploy radi online
-
-GitHub sadrzi samo kod, requirements, skripte, README i male result fileove. Streamlit Cloud starta aplikaciju iz GitHuba. Kada korisnik odabere model i uploada dokument, aplikacija provjeri postoji li model lokalno. Ako model nedostaje, pokusa ga preuzeti s Hugging Face Huba, spremi ga u `models/` i tek tada ucita odabrani model za live predikciju.
