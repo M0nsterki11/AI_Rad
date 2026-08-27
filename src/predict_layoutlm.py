@@ -12,7 +12,10 @@ from transformers import AutoModelForSequenceClassification, AutoProcessor
 
 try:
     from .preprocess import (
+        OCR_EMPTY_TEXT_MESSAGE,
+        OCRProcessingError,
         TESSERACT_AVAILABLE,
+        TESSERACT_UNAVAILABLE_MESSAGE,
         clean_text,
         render_pdf_page,
         run_ocr_on_image,
@@ -22,7 +25,10 @@ except ImportError:
     if str(CURRENT_DIR) not in sys.path:
         sys.path.insert(0, str(CURRENT_DIR))
     from preprocess import (  # type: ignore
+        OCR_EMPTY_TEXT_MESSAGE,
+        OCRProcessingError,
         TESSERACT_AVAILABLE,
+        TESSERACT_UNAVAILABLE_MESSAGE,
         clean_text,
         render_pdf_page,
         run_ocr_on_image,
@@ -170,15 +176,16 @@ def load_document_image(path):
 
 def extract_ocr_from_image(image):
     if not TESSERACT_AVAILABLE:
-        raise RuntimeError(
-            "Tesseract OCR is not available. Install Tesseract or check preprocess.py configuration."
-        )
+        raise OCRProcessingError(TESSERACT_UNAVAILABLE_MESSAGE)
 
     text, payload = run_ocr_on_image(image.convert("RGB"), "unknown", page_index=0)
     words = payload.get("words", [])
     boxes = payload.get("boxes", [])
     words, boxes = clean_words_and_boxes(words, boxes)
-    return words, boxes, clean_text(text)
+    ocr_text = clean_text(text)
+    if not words or not ocr_text:
+        raise OCRProcessingError(OCR_EMPTY_TEXT_MESSAGE)
+    return words, boxes, ocr_text
 
 
 def load_image_and_ocr(path):

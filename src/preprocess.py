@@ -11,16 +11,42 @@ from tqdm import tqdm
 
 try:
     import pytesseract
-
-    TESSERACT_EXE = Path(r"C:\Program Files\Tesseract-OCR\tesseract.exe")
-    if TESSERACT_EXE.exists():
-        pytesseract.pytesseract.tesseract_cmd = str(TESSERACT_EXE)
-
-    TESSERACT_AVAILABLE = True
 except Exception:
     pytesseract = None
-    TESSERACT_EXE = Path(r"C:\Program Files\Tesseract-OCR\tesseract.exe")
-    TESSERACT_AVAILABLE = False
+
+
+WINDOWS_TESSERACT_EXE = Path(r"C:\Program Files\Tesseract-OCR\tesseract.exe")
+if pytesseract is not None and WINDOWS_TESSERACT_EXE.exists():
+    pytesseract.pytesseract.tesseract_cmd = str(WINDOWS_TESSERACT_EXE)
+
+TESSERACT_COMMAND = (
+    str(WINDOWS_TESSERACT_EXE) if WINDOWS_TESSERACT_EXE.exists() else "tesseract"
+)
+TESSERACT_UNAVAILABLE_MESSAGE = (
+    "Tesseract OCR nije dostupan. Provjeri packages.txt ili instalaciju Tesseracta."
+)
+OCR_EMPTY_TEXT_MESSAGE = (
+    "OCR nije uspio pročitati tekst iz dokumenta. Ako je dokument slika ili "
+    "skenirani PDF, potreban je Tesseract OCR."
+)
+
+
+class OCRProcessingError(RuntimeError):
+    """Jasna greška za probleme s OCR-om koje treba prikazati korisniku."""
+
+
+def is_tesseract_available():
+    if pytesseract is None:
+        return False
+
+    try:
+        pytesseract.get_tesseract_version()
+        return True
+    except Exception:
+        return False
+
+
+TESSERACT_AVAILABLE = is_tesseract_available()
 
 try:
     from docx import Document
@@ -108,13 +134,16 @@ def run_ocr_on_image(image: Image.Image, label: str, page_index: int = 0):
     payload = empty_ocr_payload(label)
 
     if not TESSERACT_AVAILABLE:
-        return "", payload
+        raise OCRProcessingError(TESSERACT_UNAVAILABLE_MESSAGE)
 
     try:
         image = image.convert("RGB")
         ocr_data = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT)
-    except Exception:
-        return "", payload
+    except Exception as error:
+        raise OCRProcessingError(
+            "Tesseract OCR nije uspio obraditi dokument. Provjeri packages.txt ili "
+            f"instalaciju Tesseracta. Detalji: {error}"
+        ) from error
 
     words_for_text = []
     for index, raw_word in enumerate(ocr_data.get("text", [])):
@@ -464,9 +493,8 @@ def main():
     args = parse_args()
     ensure_dirs()
 
-    print(f"Tesseract executable path: {TESSERACT_EXE}")
-    print(f"Tesseract executable exists: {TESSERACT_EXE.exists()}")
-    print(f"pytesseract available: {TESSERACT_AVAILABLE}")
+    print(f"Tesseract command: {TESSERACT_COMMAND}")
+    print(f"Tesseract available: {TESSERACT_AVAILABLE}")
     print()
 
     if args.retry_empty_only:

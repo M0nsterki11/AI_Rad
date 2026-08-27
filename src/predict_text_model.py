@@ -20,7 +20,10 @@ except Exception:
 try:
     from .preprocess import (
         MIN_TEXT_CHARS,
+        OCR_EMPTY_TEXT_MESSAGE,
+        OCRProcessingError,
         TESSERACT_AVAILABLE,
+        TESSERACT_UNAVAILABLE_MESSAGE,
         clean_text,
         render_pdf_page,
         run_ocr_on_image,
@@ -32,7 +35,10 @@ except ImportError:
         sys.path.insert(0, str(CURRENT_DIR))
     from preprocess import (  # type: ignore
         MIN_TEXT_CHARS,
+        OCR_EMPTY_TEXT_MESSAGE,
+        OCRProcessingError,
         TESSERACT_AVAILABLE,
+        TESSERACT_UNAVAILABLE_MESSAGE,
         clean_text,
         render_pdf_page,
         run_ocr_on_image,
@@ -103,20 +109,24 @@ def extract_text_from_pdf(path):
             page_text, _ = run_ocr_on_image(image, "unknown", page_index=page_index)
             if page_text:
                 page_texts.append(page_text)
-        return clean_text("\n".join(page_texts))
+        ocr_text = clean_text("\n".join(page_texts))
+        if len(ocr_text) < MIN_TEXT_CHARS:
+            raise OCRProcessingError(OCR_EMPTY_TEXT_MESSAGE)
+        return ocr_text
     finally:
         document.close()
 
 
 def extract_text_from_image(path):
     if not TESSERACT_AVAILABLE:
-        raise RuntimeError(
-            "Tesseract OCR is not available. Install Tesseract or check preprocess.py configuration."
-        )
+        raise OCRProcessingError(TESSERACT_UNAVAILABLE_MESSAGE)
 
     with Image.open(path) as image:
         text, _ = run_ocr_on_image(image.convert("RGB"), "unknown", page_index=0)
-    return clean_text(text)
+    text = clean_text(text)
+    if len(text) < MIN_TEXT_CHARS:
+        raise OCRProcessingError(OCR_EMPTY_TEXT_MESSAGE)
+    return text
 
 
 def extract_text_from_txt(path):

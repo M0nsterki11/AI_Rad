@@ -32,6 +32,7 @@ from src.model_downloader import (  # noqa: E402
     ensure_model_available,
     is_model_available,
 )
+from src.preprocess import OCRProcessingError  # noqa: E402
 
 
 RESNET_RESULTS_DIR = PROJECT_ROOT / "results" / "resnet50"
@@ -222,6 +223,15 @@ def split_compatible_models(model_keys, extension):
     return compatible, incompatible
 
 
+def incompatible_model_reason(model_key, extension):
+    if model_key == "resnet50" and extension in {".txt", ".docx"}:
+        return (
+            "ResNet50 je vizualni model i ne podržava TXT/DOCX bez pretvaranja "
+            "u sliku."
+        )
+    return f"Model ne podržava {extension or 'ovu vrstu datoteke'} kao ulaz."
+
+
 def show_incompatible_models(incompatible_model_keys, extension):
     if not incompatible_model_keys:
         return
@@ -232,15 +242,18 @@ def show_incompatible_models(incompatible_model_keys, extension):
                 "Model": PREDICTION_MODEL_LABELS.get(model_key, model_key),
                 "Status obrade": "FAIL",
                 "Prepoznato": False,
-                "Razlog": f"Model ne podržava {extension or 'ovu vrstu datoteke'} kao ulaz.",
+                "Razlog": incompatible_model_reason(model_key, extension),
             }
             for model_key in incompatible_model_keys
         ]
     )
-    st.warning(
-        "Dokument je učitan, ali ga svi odabrani modeli ne mogu obraditi. "
-        "Tekstualne datoteke izravno podržava XLM-RoBERTa."
-    )
+    if incompatible_model_keys == ["resnet50"] and extension in {".txt", ".docx"}:
+        st.warning(incompatible_model_reason("resnet50", extension))
+    else:
+        st.warning(
+            "Dokument je učitan, ali ga svi odabrani modeli ne mogu obraditi. "
+            "Tekstualne datoteke izravno podržava XLM-RoBERTa."
+        )
     st.dataframe(status_df, hide_index=True, use_container_width=True)
 
 
@@ -933,10 +946,15 @@ def main():
             show_incompatible_models(incompatible_models, extension)
 
             if not compatible_models:
-                st.error(
-                    "FAIL - Prepoznato: False. Odabrani model ne može obraditi "
-                    f"datoteku tipa {extension}. Za TXT odaberi XLM-RoBERTa model."
-                )
+                if not (
+                    required_models == ["resnet50"]
+                    and extension in {".txt", ".docx"}
+                ):
+                    st.error(
+                        "FAIL - Prepoznato: False. Odabrani model ne može obraditi "
+                        f"datoteku tipa {extension}. Za tekstualne dokumente odaberi "
+                        "XLM-RoBERTa model."
+                    )
             elif ensure_models_for_prediction(compatible_models):
                 if compatible_models != required_models:
                     st.info("Predikcija će se pokrenuti samo za kompatibilni XLM-RoBERTa model.")
@@ -951,6 +969,8 @@ def main():
                     show_comparison(temp_path)
                 else:
                     show_all_models_comparison(temp_path)
+        except OCRProcessingError as error:
+            st.warning(str(error))
         except Exception as error:
             st.error(f"FAIL - Prepoznato: False. Dokument nije obrađen. Razlog: {error}")
         finally:

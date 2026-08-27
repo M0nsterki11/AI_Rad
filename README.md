@@ -17,6 +17,14 @@ streamlit run app.py
 
 Ako `models/` folder postoji lokalno, aplikacija koristi lokalne modele i ne preuzima nista.
 
+## OCR na Streamlit Community Cloudu
+
+OCR za JPG/PNG slike i skenirane PDF dokumente zahtijeva stvarni Tesseract program,
+ne samo Python paket `pytesseract`. Streamlit Community Cloud instalira ga iz
+`packages.txt`, koji mora sadržavati `tesseract-ocr` (i po potrebi jezični paket
+`tesseract-ocr-eng`). Na Windowsu aplikacija automatski koristi
+`C:\Program Files\Tesseract-OCR\tesseract.exe` ako ta datoteka postoji.
+
 ## Ocekivana struktura modela
 
 ```text
@@ -80,4 +88,3 @@ HF_TOKEN = "hf_..."
 ```
 
 Ako su repo-i public, `HF_TOKEN` nije potreban.
-
