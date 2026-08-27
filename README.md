@@ -29,6 +29,14 @@ Automatska priprema DOCX-a za ResNet50 koristi LibreOffice u headless načinu ra
 Na Streamlit Community Cloudu `packages.txt` zato sadrži i `libreoffice`. Nakon
 promjene sistemskih paketa u Streamlit Cloudu treba pokrenuti **Clear cache and reboot**.
 
+## Live document adapter
+
+Live predikcija koristi centralni adapter iz `src/document_adapter.py`. Uploadani
+PDF, PNG, JPG, JPEG, TXT ili DOCX jednom se priprema u tekstualni, vizualni i
+OCR/layout input. ResNet50 zatim koristi sliku, XLM-RoBERTa tekst, a LayoutLMv3
+sliku s riječima i bounding boxovima. Ako jedan input nije moguće pripremiti,
+preskače se samo taj model, dok ostali nastavljaju s predikcijom.
+
 ## Ocekivana struktura modela
 
 ```text

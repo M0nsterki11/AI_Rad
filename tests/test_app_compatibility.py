@@ -1,30 +1,59 @@
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
 import app
 
 
 class AppCompatibilityTests(unittest.TestCase):
-    def test_resnet_accepts_docx_for_visual_conversion(self):
-        compatible, incompatible = app.split_compatible_models(["resnet50"], ".docx")
-        self.assertEqual(compatible, ["resnet50"])
-        self.assertEqual(incompatible, [])
+    def test_prepared_inputs_make_all_models_ready(self):
+        with tempfile.TemporaryDirectory() as temporary_dir:
+            root = Path(temporary_dir)
+            image_path = root / "image.png"
+            text_path = root / "text.txt"
+            ocr_path = root / "ocr.json"
+            image_path.write_bytes(b"image")
+            text_path.write_text("dovoljno teksta", encoding="utf-8")
+            ocr_path.write_text(
+                json.dumps({"words": ["tekst"], "boxes": [[0, 0, 10, 10]]}),
+                encoding="utf-8",
+            )
+            prepared = {
+                "image_path": image_path,
+                "text_path": text_path,
+                "ocr_path": ocr_path,
+                "errors": [],
+            }
 
-    def test_all_models_use_resnet_and_xlm_for_docx(self):
-        compatible, incompatible = app.split_compatible_models(
-            ["resnet50", "xlm_roberta", "layoutlmv3"],
-            ".docx",
-        )
-        self.assertEqual(compatible, ["resnet50", "xlm_roberta"])
-        self.assertEqual(incompatible, ["layoutlmv3"])
+            for model_key in ["resnet50", "xlm_roberta", "layoutlmv3"]:
+                ready, reason = app.prepared_model_status(prepared, model_key)
+                self.assertTrue(ready, reason)
 
-    def test_resnet_still_rejects_txt(self):
-        compatible, incompatible = app.split_compatible_models(["resnet50"], ".txt")
-        self.assertEqual(compatible, [])
-        self.assertEqual(incompatible, ["resnet50"])
-        self.assertEqual(
-            app.incompatible_model_reason("resnet50", ".txt"),
-            "ResNet50 je vizualni model i ne podržava TXT bez pretvaranja u sliku.",
-        )
+    def test_docx_without_visual_conversion_only_keeps_xlm_ready(self):
+        with tempfile.TemporaryDirectory() as temporary_dir:
+            text_path = Path(temporary_dir) / "text.txt"
+            text_path.write_text("DOCX tekst ostaje dostupan", encoding="utf-8")
+            prepared = {
+                "image_path": None,
+                "text_path": text_path,
+                "ocr_path": None,
+                "errors": [
+                    "Vizualni input nije pripremljen: LibreOffice nije dostupan."
+                ],
+            }
+
+            self.assertFalse(app.prepared_model_status(prepared, "resnet50")[0])
+            self.assertTrue(app.prepared_model_status(prepared, "xlm_roberta")[0])
+            self.assertFalse(app.prepared_model_status(prepared, "layoutlmv3")[0])
+            self.assertEqual(
+                app.run_prepared_model_prediction(prepared, "resnet50")["status"],
+                "Preskočeno",
+            )
+            self.assertEqual(
+                app.run_prepared_model_prediction(prepared, "layoutlmv3")["status"],
+                "Preskočeno",
+            )
 
 
 if __name__ == "__main__":

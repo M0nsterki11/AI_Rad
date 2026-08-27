@@ -1,12 +1,14 @@
 import json
 import sys
 import tempfile
+import traceback
 from contextlib import contextmanager
 from pathlib import Path
 
 import pandas as pd
 import streamlit as st
 import torch
+from PIL import Image
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -38,6 +40,7 @@ from src.document_conversion import (  # noqa: E402
     convert_docx_to_pdf,
     convert_pdf_first_page_to_image,
 )
+from src.document_adapter import prepare_document_for_models  # noqa: E402
 from src.preprocess import OCRProcessingError  # noqa: E402
 
 
@@ -69,23 +72,12 @@ DOCX_CONVERSION_WARNING = (
     "Automatska konverzija DOCX-a nije uspjela. DOCX nije moguće pretvoriti "
     "u sliku na ovom serveru. Spremite dokument kao PDF i pokušajte ponovno."
 )
-ALL_UPLOAD_TYPES = ["pdf", "png", "jpg", "jpeg", "txt", "html", "htm", "docx"]
-IMAGE_DOCUMENT_EXTENSIONS = {".pdf", ".png", ".jpg", ".jpeg"}
-RESNET_DOCUMENT_EXTENSIONS = IMAGE_DOCUMENT_EXTENSIONS | {".docx"}
-TEXT_DOCUMENT_EXTENSIONS = {
-    ".pdf",
-    ".png",
-    ".jpg",
-    ".jpeg",
-    ".txt",
-    ".html",
-    ".htm",
-    ".docx",
-}
+ALL_UPLOAD_TYPES = ["pdf", "png", "jpg", "jpeg", "txt", "docx"]
+ADAPTABLE_DOCUMENT_EXTENSIONS = {f".{extension}" for extension in ALL_UPLOAD_TYPES}
 MODEL_SUPPORTED_EXTENSIONS = {
-    "resnet50": RESNET_DOCUMENT_EXTENSIONS,
-    "xlm_roberta": TEXT_DOCUMENT_EXTENSIONS,
-    "layoutlmv3": IMAGE_DOCUMENT_EXTENSIONS,
+    "resnet50": ADAPTABLE_DOCUMENT_EXTENSIONS,
+    "xlm_roberta": ADAPTABLE_DOCUMENT_EXTENSIONS,
+    "layoutlmv3": ADAPTABLE_DOCUMENT_EXTENSIONS,
 }
 
 MODEL_OPTIONS = [
@@ -232,8 +224,8 @@ def show_prediction_status(result):
             f"od {PREDICTION_CONFIDENCE_THRESHOLD * 100:.0f}%."
         )
     else:
-        st.error(
-            "FAIL - Prepoznato: False. Model nije dovoljno siguran za pouzdanu "
+        st.warning(
+            "Predikcija je završena, ali model nije dovoljno siguran za pouzdanu "
             f"klasifikaciju (prag {PREDICTION_CONFIDENCE_THRESHOLD * 100:.0f}%)."
         )
     return recognized
@@ -267,7 +259,7 @@ def show_incompatible_models(incompatible_model_keys, extension):
         [
             {
                 "Model": PREDICTION_MODEL_LABELS.get(model_key, model_key),
-                "Status obrade": "FAIL",
+                "Status obrade": "Nepodržano / nije moguće pripremiti",
                 "Prepoznato": False,
                 "Razlog": incompatible_model_reason(model_key, extension),
             }
@@ -538,6 +530,283 @@ def show_all_models_comparison(temp_path, resnet_input_path=None):
             st.warning("Modeli se ne slažu u predikciji za ovaj dokument.")
         else:
             st.info("Sva tri modela predviđaju istu klasu za ovaj dokument.")
+
+
+def preparation_error_reason(prepared, categories):
+    matching = [
+        message
+        for message in prepared.get("errors", [])
+        if any(message.startswith(category) for category in categories)
+    ]
+    return " ".join(matching)
+
+
+def prepared_model_status(prepared, model_key):
+    image_path = prepared.get("image_path")
+    text_path = prepared.get("text_path")
+    ocr_path = prepared.get("ocr_path")
+
+    if model_key == "resnet50":
+        if image_path and Path(image_path).is_file():
+            return True, ""
+        reason = preparation_error_reason(prepared, ["Vizualni input"])
+        return False, reason or "Nije moguće pripremiti sliku za ResNet50."
+
+    if model_key == "xlm_roberta":
+        if text_path and Path(text_path).is_file():
+            return True, ""
+        reason = preparation_error_reason(prepared, ["Tekstualni input"])
+        return False, reason or "Nije moguće pripremiti tekst za XLM-RoBERTa."
+
+    if model_key == "layoutlmv3":
+        missing = []
+        if not image_path or not Path(image_path).is_file():
+            missing.append("slika")
+        if not text_path or not Path(text_path).is_file():
+            missing.append("tekst")
+        if not ocr_path or not Path(ocr_path).is_file():
+            missing.append("OCR/bounding boxovi")
+        if missing:
+            reason = preparation_error_reason(
+                prepared,
+                ["Vizualni input", "Tekstualni input", "OCR/layout input"],
+            )
+            fallback = f"Nije moguće pripremiti: {', '.join(missing)}."
+            return False, reason or fallback
+
+        try:
+            payload = json.loads(Path(ocr_path).read_text(encoding="utf-8"))
+            words = payload.get("words", [])
+            boxes = payload.get("boxes", [])
+            if not words or len(words) != len(boxes):
+                raise ValueError("OCR riječi i bounding boxovi nisu valjani.")
+        except Exception as error:
+            return False, f"OCR/layout input nije moguće učitati: {error}"
+        return True, ""
+
+    return False, f"Nepoznat model: {model_key}"
+
+
+def ensure_model_for_live_prediction(model_key):
+    if is_model_available(model_key):
+        return True, ""
+
+    model_label = PREDICTION_MODEL_LABELS.get(model_key, model_key)
+    with st.spinner(f"Preuzimam model {model_label}..."):
+        available, message = ensure_model_available(model_key)
+    return bool(available), str(message or "Model nije dostupan.")
+
+
+def skipped_outcome(model_key, reason):
+    return {
+        "model_key": model_key,
+        "model": PREDICTION_MODEL_LABELS.get(model_key, model_key),
+        "status": "Preskočeno",
+        "reason": reason,
+        "result": None,
+        "debug": "",
+    }
+
+
+def run_prepared_model_prediction(prepared, model_key):
+    ready, reason = prepared_model_status(prepared, model_key)
+    if not ready:
+        return skipped_outcome(model_key, reason)
+
+    available, message = ensure_model_for_live_prediction(model_key)
+    if not available:
+        return skipped_outcome(model_key, message)
+
+    try:
+        if model_key == "resnet50":
+            model, class_names, device, _ = get_resnet_model()
+            result = predict_resnet_file(
+                prepared["image_path"],
+                model=model,
+                class_names=class_names,
+                device=device,
+            )
+        elif model_key == "xlm_roberta":
+            text = Path(prepared["text_path"]).read_text(encoding="utf-8", errors="ignore")
+            model, tokenizer, class_names, _, device = get_text_model()
+            result = predict_text(
+                text,
+                model=model,
+                tokenizer=tokenizer,
+                class_names=class_names,
+                device=device,
+            )
+        elif model_key == "layoutlmv3":
+            payload = json.loads(Path(prepared["ocr_path"]).read_text(encoding="utf-8"))
+            with Image.open(prepared["image_path"]) as source_image:
+                image = source_image.convert("RGB")
+            model, processor, class_names, _, device = get_layoutlm_model()
+            result = predict_layoutlm(
+                image,
+                payload.get("words", []),
+                payload.get("boxes", []),
+                model=model,
+                processor=processor,
+                class_names=class_names,
+                device=device,
+            )
+        else:
+            return skipped_outcome(model_key, f"Nepoznat model: {model_key}")
+    except Exception as error:
+        return {
+            "model_key": model_key,
+            "model": PREDICTION_MODEL_LABELS.get(model_key, model_key),
+            "status": "FAIL",
+            "reason": f"Predikcija nije uspjela: {error}",
+            "result": None,
+            "debug": traceback.format_exc(),
+        }
+
+    return {
+        "model_key": model_key,
+        "model": PREDICTION_MODEL_LABELS.get(model_key, model_key),
+        "status": "Uspješno",
+        "reason": "",
+        "result": result,
+        "debug": "",
+    }
+
+
+def outcome_probability_dict(outcome):
+    result = outcome.get("result") or {}
+    probabilities = result.get("probabilities", {})
+    if isinstance(probabilities, dict):
+        return {label: safe_float(value) for label, value in probabilities.items()}
+    return {
+        row.get("class"): safe_float(row.get("probability"))
+        for row in probabilities
+        if row.get("class")
+    }
+
+
+def show_prepared_document_preview(prepared, model_keys):
+    suffix = prepared["suffix"]
+    if suffix == ".docx":
+        st.info(
+            "DOCX se automatski pretvara u tekst za XLM-RoBERTa i u PDF/sliku "
+            "za vizualne modele."
+        )
+    elif suffix == ".txt":
+        st.info(
+            "TXT se direktno koristi za XLM-RoBERTa, a za vizualne modele se "
+            "renderira u sliku."
+        )
+
+    image_path = prepared.get("image_path")
+    if image_path and Path(image_path).is_file():
+        st.image(str(image_path), caption="Pripremljeni vizualni input", use_container_width=True)
+
+    text_path = prepared.get("text_path")
+    if text_path and Path(text_path).is_file():
+        text = Path(text_path).read_text(encoding="utf-8", errors="ignore")
+        with st.expander("Preview pripremljenog teksta", expanded=False):
+            st.text(text[:1500])
+
+    preparation_rows = []
+    for model_key in model_keys:
+        ready, reason = prepared_model_status(prepared, model_key)
+        preparation_rows.append(
+            {
+                "Model": PREDICTION_MODEL_LABELS.get(model_key, model_key),
+                "Status pripreme": "Spremno" if ready else "Nepodržano / nije moguće pripremiti",
+                "Razlog": reason,
+            }
+        )
+    st.dataframe(pd.DataFrame(preparation_rows), hide_index=True, use_container_width=True)
+
+    if prepared.get("errors"):
+        with st.expander("Detalji pripreme dokumenta", expanded=False):
+            for message in prepared["errors"]:
+                st.write(f"- {message}")
+
+
+def show_live_prediction_results(outcomes):
+    summary_rows = []
+    for outcome in outcomes:
+        result = outcome.get("result") or {}
+        recognized = (
+            is_recognized_prediction(result)
+            if outcome["status"] == "Uspješno"
+            else None
+        )
+        summary_rows.append(
+            {
+                "Model": outcome["model"],
+                "Status": outcome["status"],
+                "Predikcija": result.get("predicted_class", "—"),
+                "Prepoznato": recognized if recognized is not None else "—",
+                "Sigurnost": (
+                    f"{safe_float(result.get('confidence')) * 100:.2f}%"
+                    if result
+                    else "—"
+                ),
+                "Vrijeme": (
+                    f"{safe_float(result.get('prediction_time_seconds')):.4f} s"
+                    if result
+                    else "—"
+                ),
+                "Razlog": outcome.get("reason", ""),
+            }
+        )
+
+    st.subheader("Rezultati live predikcije")
+    st.dataframe(pd.DataFrame(summary_rows), hide_index=True, use_container_width=True)
+
+    successful = [outcome for outcome in outcomes if outcome["status"] == "Uspješno"]
+    for outcome in outcomes:
+        if outcome["status"] == "Preskočeno":
+            st.warning(f"{outcome['model']}: Preskočeno — {outcome['reason']}")
+        elif outcome["status"] == "FAIL":
+            st.error(f"{outcome['model']}: FAIL — predikcija nije uspjela.")
+
+    if successful:
+        probability_rows = []
+        probability_maps = {
+            outcome["model"]: outcome_probability_dict(outcome)
+            for outcome in successful
+        }
+        for label in CLASS_NAMES:
+            row = {"Klasa": label}
+            row.update(
+                {
+                    model_label: probabilities.get(label, 0.0)
+                    for model_label, probabilities in probability_maps.items()
+                }
+            )
+            probability_rows.append(row)
+
+        probability_df = pd.DataFrame(probability_rows).set_index("Klasa")
+        st.subheader("Usporedba vjerojatnosti")
+        st.dataframe(
+            (probability_df * 100).map(lambda value: f"{value:.2f}%"),
+            use_container_width=True,
+        )
+        st.bar_chart(probability_df * 100)
+
+    failed_debug = [outcome for outcome in outcomes if outcome.get("debug")]
+    if failed_debug:
+        with st.expander("Debug detalji", expanded=False):
+            for outcome in failed_debug:
+                st.subheader(outcome["model"])
+                st.code(outcome["debug"], language="text")
+
+
+def show_live_prediction(prepared, model_keys):
+    show_prepared_document_preview(prepared, model_keys)
+    if not st.button("Klasificiraj dokument", type="primary"):
+        return
+
+    outcomes = []
+    for model_key in model_keys:
+        model_label = PREDICTION_MODEL_LABELS.get(model_key, model_key)
+        with st.spinner(f"Pokrećem {model_label}..."):
+            outcomes.append(run_prepared_model_prediction(prepared, model_key))
+    show_live_prediction_results(outcomes)
 
 
 def load_metrics(results_dir):
@@ -964,64 +1233,23 @@ def main():
     )
 
     if uploaded_file is not None:
-        temp_path = save_uploaded_file(uploaded_file)
-        try:
-            required_models = MODEL_KEYS_BY_OPTION.get(selected_mode, [])
-            extension = Path(uploaded_file.name).suffix.lower()
-            compatible_models, incompatible_models = split_compatible_models(
-                required_models,
-                extension,
-            )
-            show_incompatible_models(incompatible_models, extension)
-
-            if not compatible_models:
-                if not (
-                    required_models == ["resnet50"]
-                    and extension == ".txt"
-                ):
-                    st.error(
-                        "FAIL - Prepoznato: False. Odabrani model ne može obraditi "
-                        f"datoteku tipa {extension}. Za tekstualne dokumente odaberi "
-                        "XLM-RoBERTa model."
+        required_models = MODEL_KEYS_BY_OPTION.get(selected_mode, [])
+        with tempfile.TemporaryDirectory(prefix="document_adapter_") as temporary_dir:
+            try:
+                with st.spinner("Pripremam dokument za odabrane modele..."):
+                    prepared = prepare_document_for_models(
+                        uploaded_file,
+                        Path(temporary_dir),
                     )
-            elif ensure_models_for_prediction(compatible_models):
-                if compatible_models != required_models:
-                    compatible_labels = [
-                        PREDICTION_MODEL_LABELS[model_key]
-                        for model_key in compatible_models
-                    ]
-                    st.info(
-                        "Predikcija će se pokrenuti samo za kompatibilne modele: "
-                        f"{', '.join(compatible_labels)}."
-                    )
-
-                with prepare_resnet_input(
-                    temp_path,
-                    compatible_models,
-                ) as resnet_input_path:
-                    if compatible_models == ["resnet50"]:
-                        show_resnet_prediction(resnet_input_path)
-                    elif compatible_models == ["xlm_roberta"]:
-                        show_text_prediction(temp_path)
-                    elif compatible_models == ["layoutlmv3"]:
-                        show_layoutlm_prediction(temp_path)
-                    elif compatible_models == ["resnet50", "xlm_roberta"]:
-                        show_comparison(temp_path, resnet_input_path=resnet_input_path)
-                    elif compatible_models == ["resnet50", "xlm_roberta", "layoutlmv3"]:
-                        show_all_models_comparison(
-                            temp_path,
-                            resnet_input_path=resnet_input_path,
-                        )
-                    else:
-                        st.error("Odabrana kombinacija modela nije podržana.")
-        except DocumentConversionError:
-            st.warning(DOCX_CONVERSION_WARNING)
-        except OCRProcessingError as error:
-            st.warning(str(error))
-        except Exception as error:
-            st.error(f"FAIL - Prepoznato: False. Dokument nije obrađen. Razlog: {error}")
-        finally:
-            temp_path.unlink(missing_ok=True)
+            except Exception:
+                st.warning(
+                    "Dokument nije moguće pripremiti za predikciju. Provjerite format "
+                    "i sadržaj dokumenta."
+                )
+                with st.expander("Debug detalji", expanded=False):
+                    st.code(traceback.format_exc(), language="text")
+            else:
+                show_live_prediction(prepared, required_models)
 
     st.divider()
     show_results_dashboard()
