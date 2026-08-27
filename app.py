@@ -1,6 +1,7 @@
 import json
 import sys
 import tempfile
+from contextlib import contextmanager
 from pathlib import Path
 
 import pandas as pd
@@ -32,6 +33,11 @@ from src.model_downloader import (  # noqa: E402
     ensure_model_available,
     is_model_available,
 )
+from src.document_conversion import (  # noqa: E402
+    DocumentConversionError,
+    convert_docx_to_pdf,
+    convert_pdf_first_page_to_image,
+)
 from src.preprocess import OCRProcessingError  # noqa: E402
 
 
@@ -59,8 +65,13 @@ PREDICTION_MODEL_LABELS = {
 }
 CLASS_NAMES = ["invoice", "cv", "contract", "email", "scientific"]
 PREDICTION_CONFIDENCE_THRESHOLD = 0.50
+DOCX_CONVERSION_WARNING = (
+    "Automatska konverzija DOCX-a nije uspjela. DOCX nije moguće pretvoriti "
+    "u sliku na ovom serveru. Spremite dokument kao PDF i pokušajte ponovno."
+)
 ALL_UPLOAD_TYPES = ["pdf", "png", "jpg", "jpeg", "txt", "html", "htm", "docx"]
 IMAGE_DOCUMENT_EXTENSIONS = {".pdf", ".png", ".jpg", ".jpeg"}
+RESNET_DOCUMENT_EXTENSIONS = IMAGE_DOCUMENT_EXTENSIONS | {".docx"}
 TEXT_DOCUMENT_EXTENSIONS = {
     ".pdf",
     ".png",
@@ -72,7 +83,7 @@ TEXT_DOCUMENT_EXTENSIONS = {
     ".docx",
 }
 MODEL_SUPPORTED_EXTENSIONS = {
-    "resnet50": IMAGE_DOCUMENT_EXTENSIONS,
+    "resnet50": RESNET_DOCUMENT_EXTENSIONS,
     "xlm_roberta": TEXT_DOCUMENT_EXTENSIONS,
     "layoutlmv3": IMAGE_DOCUMENT_EXTENSIONS,
 }
@@ -119,6 +130,25 @@ def save_uploaded_file(uploaded_file):
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as temp_file:
         temp_file.write(uploaded_file.getbuffer())
         return Path(temp_file.name)
+
+
+@contextmanager
+def prepare_resnet_input(document_path, model_keys):
+    document_path = Path(document_path)
+    if "resnet50" not in model_keys or document_path.suffix.lower() != ".docx":
+        yield document_path
+        return
+
+    st.info(
+        "ResNet50 je vizualni model. DOCX se automatski pokušava pretvoriti "
+        "u PDF/sliku prije predikcije."
+    )
+    with tempfile.TemporaryDirectory(prefix="resnet_docx_") as temporary_dir:
+        output_dir = Path(temporary_dir)
+        with st.spinner("Pretvaram DOCX u sliku za vizualni model..."):
+            pdf_path = convert_docx_to_pdf(document_path, output_dir)
+            image_path = convert_pdf_first_page_to_image(pdf_path, output_dir)
+        yield image_path
 
 
 def show_model_status_sidebar():
@@ -224,11 +254,8 @@ def split_compatible_models(model_keys, extension):
 
 
 def incompatible_model_reason(model_key, extension):
-    if model_key == "resnet50" and extension in {".txt", ".docx"}:
-        return (
-            "ResNet50 je vizualni model i ne podržava TXT/DOCX bez pretvaranja "
-            "u sliku."
-        )
+    if model_key == "resnet50" and extension == ".txt":
+        return "ResNet50 je vizualni model i ne podržava TXT bez pretvaranja u sliku."
     return f"Model ne podržava {extension or 'ovu vrstu datoteke'} kao ulaz."
 
 
@@ -247,7 +274,7 @@ def show_incompatible_models(incompatible_model_keys, extension):
             for model_key in incompatible_model_keys
         ]
     )
-    if incompatible_model_keys == ["resnet50"] and extension in {".txt", ".docx"}:
+    if incompatible_model_keys == ["resnet50"] and extension == ".txt":
         st.warning(incompatible_model_reason("resnet50", extension))
     else:
         st.warning(
@@ -333,11 +360,12 @@ def show_layoutlm_prediction(temp_path):
         show_probability_outputs(probability_df)
 
 
-def show_comparison(temp_path):
+def show_comparison(temp_path, resnet_input_path=None):
+    resnet_input_path = Path(resnet_input_path or temp_path)
     resnet_model, resnet_classes, resnet_device, _ = get_resnet_model()
     text_model, tokenizer, text_classes, _, text_device = get_text_model()
 
-    preview = load_resnet_document_image(temp_path)
+    preview = load_resnet_document_image(resnet_input_path)
     st.image(preview, caption="Prva stranica za ResNet50", use_container_width=True)
 
     extracted_text = extract_text_from_file(temp_path)
@@ -346,7 +374,7 @@ def show_comparison(temp_path):
 
     if st.button("Klasificiraj dokument", type="primary"):
         resnet_result = predict_resnet_file(
-            temp_path,
+            resnet_input_path,
             model=resnet_model,
             class_names=resnet_classes,
             device=resnet_device,
@@ -397,7 +425,8 @@ def show_comparison(temp_path):
             st.info("Modeli se ne slažu u predikciji.")
 
 
-def show_all_models_comparison(temp_path):
+def show_all_models_comparison(temp_path, resnet_input_path=None):
+    resnet_input_path = Path(resnet_input_path or temp_path)
     resnet_model, resnet_classes, resnet_device, _ = get_resnet_model()
     text_model, tokenizer, text_classes, _, text_device = get_text_model()
     layout_model, layout_processor, layout_classes, _, layout_device = get_layoutlm_model()
@@ -413,7 +442,7 @@ def show_all_models_comparison(temp_path):
 
     if st.button("Klasificiraj dokument", type="primary"):
         resnet_result = predict_resnet_file(
-            temp_path,
+            resnet_input_path,
             model=resnet_model,
             class_names=resnet_classes,
             device=resnet_device,
@@ -948,7 +977,7 @@ def main():
             if not compatible_models:
                 if not (
                     required_models == ["resnet50"]
-                    and extension in {".txt", ".docx"}
+                    and extension == ".txt"
                 ):
                     st.error(
                         "FAIL - Prepoznato: False. Odabrani model ne može obraditi "
@@ -957,18 +986,36 @@ def main():
                     )
             elif ensure_models_for_prediction(compatible_models):
                 if compatible_models != required_models:
-                    st.info("Predikcija će se pokrenuti samo za kompatibilni XLM-RoBERTa model.")
-                    show_text_prediction(temp_path)
-                elif selected_mode == MODEL_OPTIONS[0]:
-                    show_resnet_prediction(temp_path)
-                elif selected_mode == MODEL_OPTIONS[1]:
-                    show_text_prediction(temp_path)
-                elif selected_mode == MODEL_OPTIONS[2]:
-                    show_layoutlm_prediction(temp_path)
-                elif selected_mode == MODEL_OPTIONS[3]:
-                    show_comparison(temp_path)
-                else:
-                    show_all_models_comparison(temp_path)
+                    compatible_labels = [
+                        PREDICTION_MODEL_LABELS[model_key]
+                        for model_key in compatible_models
+                    ]
+                    st.info(
+                        "Predikcija će se pokrenuti samo za kompatibilne modele: "
+                        f"{', '.join(compatible_labels)}."
+                    )
+
+                with prepare_resnet_input(
+                    temp_path,
+                    compatible_models,
+                ) as resnet_input_path:
+                    if compatible_models == ["resnet50"]:
+                        show_resnet_prediction(resnet_input_path)
+                    elif compatible_models == ["xlm_roberta"]:
+                        show_text_prediction(temp_path)
+                    elif compatible_models == ["layoutlmv3"]:
+                        show_layoutlm_prediction(temp_path)
+                    elif compatible_models == ["resnet50", "xlm_roberta"]:
+                        show_comparison(temp_path, resnet_input_path=resnet_input_path)
+                    elif compatible_models == ["resnet50", "xlm_roberta", "layoutlmv3"]:
+                        show_all_models_comparison(
+                            temp_path,
+                            resnet_input_path=resnet_input_path,
+                        )
+                    else:
+                        st.error("Odabrana kombinacija modela nije podržana.")
+        except DocumentConversionError:
+            st.warning(DOCX_CONVERSION_WARNING)
         except OCRProcessingError as error:
             st.warning(str(error))
         except Exception as error:

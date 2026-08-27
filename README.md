@@ -25,6 +25,10 @@ ne samo Python paket `pytesseract`. Streamlit Community Cloud instalira ga iz
 `tesseract-ocr-eng`). Na Windowsu aplikacija automatski koristi
 `C:\Program Files\Tesseract-OCR\tesseract.exe` ako ta datoteka postoji.
 
+Automatska priprema DOCX-a za ResNet50 koristi LibreOffice u headless načinu rada.
+Na Streamlit Community Cloudu `packages.txt` zato sadrži i `libreoffice`. Nakon
+promjene sistemskih paketa u Streamlit Cloudu treba pokrenuti **Clear cache and reboot**.
+
 ## Ocekivana struktura modela
 
 ```text
