@@ -17,3 +17,5 @@ sentencepiece
 protobuf
 accelerate
 huggingface_hub
+datasets
+requests
