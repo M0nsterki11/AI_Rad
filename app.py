@@ -1191,7 +1191,6 @@ def show_results_dashboard():
         [
             "Interni test",
             "Vanjski test",
-            "Interni vs. vanjski test",
             "Confusion matrice",
             "Pojedinačne predikcije vanjskog testa",
         ]
@@ -1201,10 +1200,8 @@ def show_results_dashboard():
     with tabs[1]:
         show_external_test_tab()
     with tabs[2]:
-        show_final_comparison_tab()
-    with tabs[3]:
         show_confusion_matrices_tab()
-    with tabs[4]:
+    with tabs[3]:
         show_external_predictions_tab()
 
     st.info(

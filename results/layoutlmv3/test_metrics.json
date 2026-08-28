@@ -1,41 +1,41 @@
 {
-  "accuracy": 1.0,
-  "macro_precision": 1.0,
-  "macro_recall": 1.0,
-  "macro_f1": 1.0,
+  "accuracy": 0.9857142857142858,
+  "macro_precision": 0.9857131465026203,
+  "macro_recall": 0.9858407079646018,
+  "macro_f1": 0.9856649408288451,
   "per_class": {
     "invoice": {
-      "precision": 1.0,
+      "precision": 0.9642857142857143,
       "recall": 1.0,
-      "f1": 1.0,
-      "support": 30
+      "f1": 0.9818181818181818,
+      "support": 108
     },
     "cv": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0,
-      "support": 30
+      "precision": 0.990909090909091,
+      "recall": 0.9646017699115044,
+      "f1": 0.9775784753363229,
+      "support": 113
     },
     "contract": {
-      "precision": 1.0,
+      "precision": 0.9912280701754386,
       "recall": 1.0,
-      "f1": 1.0,
-      "support": 30
+      "f1": 0.9955947136563876,
+      "support": 113
     },
     "email": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0,
-      "support": 30
+      "precision": 0.9910714285714286,
+      "recall": 0.9823008849557522,
+      "f1": 0.9866666666666667,
+      "support": 113
     },
     "scientific": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0,
-      "support": 30
+      "precision": 0.9910714285714286,
+      "recall": 0.9823008849557522,
+      "f1": 0.9866666666666667,
+      "support": 113
     }
   },
-  "loss": 0.003313611348470052,
-  "prediction_time_seconds": 7.88671750001231,
-  "seconds_per_document": 0.052578116666748734
+  "loss": 0.10480656708989824,
+  "prediction_time_seconds": 14.003303499994217,
+  "seconds_per_document": 0.02500589910713253
 }
