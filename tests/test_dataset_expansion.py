@@ -98,6 +98,46 @@ class DatasetExpansionTests(unittest.TestCase):
             self.assertEqual(record.image_width, 640)
             self.assertEqual(record.image_height, 900)
 
+    def test_shared_layout_with_different_text_is_not_a_visual_duplicate(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            first_image = root / "first.png"
+            second_image = root / "second.png"
+            first_text = root / "first.txt"
+            second_text = root / "second.txt"
+            base = Image.new("RGB", (640, 900), "white")
+            base.save(first_image)
+            changed = base.copy()
+            changed.putpixel((10, 10), (245, 245, 245))
+            changed.save(second_image)
+            first_text.write_text(
+                "Invoice for office equipment with payment and tax details.",
+                encoding="utf-8",
+            )
+            second_text.write_text(
+                "Curriculum vitae describing education, projects, languages and skills.",
+                encoding="utf-8",
+            )
+            index = FingerprintIndex()
+            original = build_fingerprint_record(
+                key="first",
+                raw_path=first_image,
+                image_path=first_image,
+                text_path=first_text,
+                label="invoice",
+                source="fixture",
+            )
+            candidate = build_fingerprint_record(
+                key="second",
+                raw_path=second_image,
+                image_path=second_image,
+                text_path=second_text,
+                label="cv",
+                source="fixture",
+            )
+            index.add(original)
+            self.assertIsNone(index.find_duplicate(candidate))
+
     def test_augmentation_stays_with_parent_in_group_aware_split(self):
         rows = []
         for label in CLASS_NAMES:
@@ -135,6 +175,32 @@ class DatasetExpansionTests(unittest.TestCase):
         for child, parent in parents.items():
             self.assertEqual(split_by_id[child], split_by_id[parent])
         self.assertEqual(sum(len(items) for items in splits.values()), len(rows))
+
+    def test_group_aware_split_uses_75_15_10_ratio(self):
+        rows = []
+        for label in CLASS_NAMES:
+            for index in range(100):
+                document_id = f"{label}_{index:04d}"
+                rows.append(
+                    {
+                        "id": document_id,
+                        "label": label,
+                        "raw_path": f"data/raw/{label}/{document_id}.pdf",
+                        "image_path": f"data/processed/images/{document_id}.png",
+                        "text_path": f"data/processed/texts/{document_id}.txt",
+                        "ocr_path": f"data/processed/ocr/{document_id}.json",
+                    }
+                )
+
+        splits = group_aware_stratified_split(rows, {}, seed=42)
+
+        expected_counts = {"train": 75, "validation": 15, "test": 10}
+        for split_name, expected_count in expected_counts.items():
+            for label in CLASS_NAMES:
+                actual_count = sum(
+                    row["label"] == label for row in splits[split_name]
+                )
+                self.assertEqual(actual_count, expected_count)
 
     def test_external_test_paths_are_rejected(self):
         with tempfile.TemporaryDirectory() as directory:

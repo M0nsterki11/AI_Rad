@@ -2,7 +2,7 @@
 
 Dry-run mode is project read-only. A real run downloads candidates, rejects
 duplicates, preprocesses only accepted additions, appends metadata, and creates
-group-aware 70/15/15 splits.
+group-aware 75/15/10 splits.
 """
 
 from __future__ import annotations
@@ -93,6 +93,8 @@ SOURCE_FIELDS = (
     "source_url_or_dataset",
     "download_date",
     "original_id",
+    "language",
+    "is_synthetic",
     "is_augmented",
     "augmentation_type",
     "duplicate_check_status",
@@ -1676,6 +1678,8 @@ def source_row_for_document(document: AcceptedDocument) -> dict[str, str]:
         "source_url_or_dataset": document.source_locator,
         "download_date": datetime.now(timezone.utc).date().isoformat(),
         "original_id": document.original_id,
+        "language": "",
+        "is_synthetic": "False",
         "is_augmented": str(document.is_augmented),
         "augmentation_type": document.augmentation_type,
         "duplicate_check_status": "passed",
@@ -1968,7 +1972,11 @@ def commit_files(
 def read_existing_source_rows() -> list[dict[str, str]]:
     if not SOURCE_TRACKING_PATH.exists():
         return []
-    return read_csv_rows(SOURCE_TRACKING_PATH, SOURCE_FIELDS)
+    with SOURCE_TRACKING_PATH.open("r", encoding="utf-8-sig", newline="") as handle:
+        return [
+            {field: str(row.get(field, "") or "") for field in SOURCE_FIELDS}
+            for row in csv.DictReader(handle)
+        ]
 
 
 def augmentation_parent_map(source_rows: Iterable[Mapping[str, str]]) -> dict[str, str]:

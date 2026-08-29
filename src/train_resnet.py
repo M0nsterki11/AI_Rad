@@ -148,7 +148,7 @@ def stratified_split(rows):
         if len(label_rows) < 3:
             raise ValueError(f"Class {label} has fewer than 3 rows, cannot split.")
 
-        train_count = int(len(label_rows) * 0.70)
+        train_count = int(len(label_rows) * 0.75)
         val_count = int(len(label_rows) * 0.15)
 
         train_count = max(1, train_count)

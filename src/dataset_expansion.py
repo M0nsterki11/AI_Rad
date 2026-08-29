@@ -313,9 +313,20 @@ class FingerprintIndex:
                 if visual_score < self.image_threshold:
                     continue
                 content_score = jaccard_similarity(candidate.text_tokens, existing.text_tokens)
-                if visual_score < 0.985 and candidate.text_tokens and existing.text_tokens and content_score < 0.70:
-                    continue
-                return DuplicateMatch("near_identical_first_page", existing.path, visual_score)
+                if candidate.text_tokens and existing.text_tokens:
+                    # Document templates often have almost identical pHashes even
+                    # when their actual text differs. Treat the visual match as a
+                    # duplicate only when textual content confirms it.
+                    if content_score < 0.82:
+                        continue
+                    score = min(visual_score, content_score)
+                else:
+                    # Image-only files have no textual evidence, so require an
+                    # extremely close visual match before rejecting them.
+                    if visual_score < 0.985:
+                        continue
+                    score = visual_score
+                return DuplicateMatch("near_identical_first_page", existing.path, score)
 
         if candidate.text_simhash is not None:
             for existing in self.with_text:
@@ -445,7 +456,7 @@ def group_aware_stratified_split(
     *,
     seed: int = 42,
 ) -> dict[str, list[dict[str, str]]]:
-    """Create 70/15/15 label-stratified splits while preserving related groups."""
+    """Create 75/15/10 label-stratified splits while preserving related groups."""
     output = {"train": [], "validation": [], "test": []}
     rng = random.Random(seed)
 
@@ -465,7 +476,7 @@ def group_aware_stratified_split(
 
         total = len(label_rows)
         targets = {
-            "train": int(total * 0.70),
+            "train": int(total * 0.75),
             "validation": int(total * 0.15),
         }
         targets["test"] = total - targets["train"] - targets["validation"]
