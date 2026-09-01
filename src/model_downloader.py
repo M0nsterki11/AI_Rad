@@ -63,7 +63,7 @@ def download_resnet50():
             snapshot_dir,
         ]
     )
-    target_dir = get_project_root() / "models" / "resnet50"
+    target_dir = get_project_root() / "models" / "resnet50_multipage"
     target_dir.mkdir(parents=True, exist_ok=True)
 
     label_mapping = _find_file(source_dir, "label_mapping.json")
@@ -86,7 +86,7 @@ def download_xlm_roberta():
             snapshot_dir,
         ]
     )
-    target_parent = get_project_root() / "models" / "xlm_roberta"
+    target_parent = get_project_root() / "models" / "xlm_roberta_multipage"
     target_model_dir = target_parent / "best_model"
     target_parent.mkdir(parents=True, exist_ok=True)
 
@@ -117,7 +117,7 @@ def download_layoutlmv3():
         ]
     )
     model_dir = _find_transformers_model_dir(source_dir) or source_dir
-    target_model_dir = get_project_root() / "models" / "layoutlmv3" / "best_model"
+    target_model_dir = get_project_root() / "models" / "layoutlmv3_multipage" / "best_model"
     _copy_directory_contents(model_dir, target_model_dir)
 
     label_mapping = _find_file(source_dir, "label_mapping.json")
@@ -126,7 +126,7 @@ def download_layoutlmv3():
 
     parent_label_mapping = _find_file(snapshot_dir, "label_mapping.json")
     if parent_label_mapping:
-        parent_dir = get_project_root() / "models" / "layoutlmv3"
+        parent_dir = get_project_root() / "models" / "layoutlmv3_multipage"
         parent_dir.mkdir(parents=True, exist_ok=True)
         shutil.copy2(parent_label_mapping, parent_dir / "label_mapping.json")
 
@@ -153,35 +153,48 @@ def get_model_status():
 
 
 def _is_resnet50_available(root):
-    model_dir = root / "models" / "resnet50"
-    return (
+    candidates = [
+        root / "models" / "resnet50_multipage",
+        root / "models" / "resnet50",
+    ]
+    return any(
         (model_dir / "label_mapping.json").exists()
         and (model_dir / "best_model.pth").exists()
+        for model_dir in candidates
     )
 
 
 def _is_xlm_roberta_available(root):
-    model_dir = root / "models" / "xlm_roberta" / "best_model"
-    parent_dir = root / "models" / "xlm_roberta"
-    has_mapping = (parent_dir / "label_mapping.json").exists() or (
-        model_dir / "label_mapping.json"
-    ).exists()
-    return (
-        model_dir.exists()
-        and (model_dir / "config.json").exists()
-        and _has_transformers_weight(model_dir)
-        and _has_tokenizer_file(model_dir)
-        and has_mapping
-    )
+    candidates = [
+        root / "models" / "xlm_roberta_multipage" / "best_model",
+        root / "models" / "xlm_roberta" / "best_model",
+    ]
+    for model_dir in candidates:
+        has_mapping = (model_dir / "label_mapping.json").exists() or (
+            model_dir.parent / "label_mapping.json"
+        ).exists()
+        if (
+            model_dir.exists()
+            and (model_dir / "config.json").exists()
+            and _has_transformers_weight(model_dir)
+            and _has_tokenizer_file(model_dir)
+            and has_mapping
+        ):
+            return True
+    return False
 
 
 def _is_layoutlmv3_available(root):
-    model_dir = root / "models" / "layoutlmv3" / "best_model"
-    return (
+    candidates = [
+        root / "models" / "layoutlmv3_multipage" / "best_model",
+        root / "models" / "layoutlmv3" / "best_model",
+    ]
+    return any(
         model_dir.exists()
         and (model_dir / "config.json").exists()
         and _has_transformers_weight(model_dir)
         and _has_tokenizer_file(model_dir)
+        for model_dir in candidates
     )
 
 

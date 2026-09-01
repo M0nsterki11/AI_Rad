@@ -9,8 +9,8 @@ from PIL import Image, ImageDraw, ImageFont
 from .document_conversion import (
     DocumentConversionError,
     convert_docx_to_pdf,
-    convert_pdf_first_page_to_image,
 )
+from .multipage_preprocess import prepare_inference_file_artifacts
 from .preprocess import MIN_TEXT_CHARS, OCRProcessingError, clean_text, render_pdf_page, run_ocr_on_image
 
 
@@ -216,11 +216,19 @@ def _extract_pdf_embedded_text(pdf_path):
         document.close()
 
 
-def _ocr_pdf_text(pdf_path, first_page_text=""):
-    texts = [clean_text(first_page_text)] if clean_text(first_page_text) else []
+def _ocr_pdf_text(pdf_path, prepared_artifacts=None):
+    prepared_by_page = {
+        int(artifact.page_index): artifact for artifact in (prepared_artifacts or [])
+    }
+    texts = []
     document = fitz.open(str(pdf_path))
     try:
-        for page_index in range(1, document.page_count):
+        for page_index in range(document.page_count):
+            if page_index in prepared_by_page:
+                text = clean_text(" ".join(prepared_by_page[page_index].words))
+                if text:
+                    texts.append(text)
+                continue
             image = render_pdf_page(document.load_page(page_index))
             page_text, _ = run_ocr_on_image(image, "unknown", page_index=page_index)
             if page_text:
@@ -230,15 +238,69 @@ def _ocr_pdf_text(pdf_path, first_page_text=""):
     return clean_text("\n".join(texts))
 
 
+def _store_page_artifacts(result, total_pages, selected_indices, artifacts):
+    result["total_pages"] = int(total_pages)
+    result["selected_page_indices"] = [int(index) for index in selected_indices]
+    page_artifacts = []
+    layout_page_artifacts = []
+    for artifact in artifacts:
+        if not artifact.image_path.is_file():
+            continue
+        page_payload = {
+            "page_index": int(artifact.page_index),
+            "total_pages": int(artifact.total_pages),
+            "image_path": artifact.image_path,
+            "ocr_path": artifact.ocr_path,
+            "words": list(artifact.words),
+            "boxes": list(artifact.boxes),
+            "extraction_method": artifact.extraction_method,
+            "layout_status": artifact.layout_status,
+            "failure_reason": artifact.failure_reason,
+        }
+        page_artifacts.append(page_payload)
+        if artifact.is_layout_valid and artifact.ocr_path.is_file():
+            layout_page_artifacts.append(page_payload)
+
+    result["page_artifacts"] = page_artifacts
+    result["layout_page_artifacts"] = layout_page_artifacts
+    result["analyzed_page_indices"] = [page["page_index"] for page in page_artifacts]
+    result["layout_page_indices"] = [page["page_index"] for page in layout_page_artifacts]
+    if page_artifacts:
+        result["image_path"] = page_artifacts[0]["image_path"]
+    if layout_page_artifacts:
+        result["ocr_path"] = layout_page_artifacts[0]["ocr_path"]
+
+
+def _prepare_shared_pages(result, temp_dir, document_path=None):
+    source_path = Path(document_path or result["original_path"])
+    total_pages, selected_indices, artifacts = prepare_inference_file_artifacts(
+        source_path,
+        Path(temp_dir) / "multipage",
+        source_image_path=result.get("image_path"),
+        source_ocr_path=result.get("ocr_path"),
+    )
+    _store_page_artifacts(result, total_pages, selected_indices, artifacts)
+    invalid_layout_pages = [artifact for artifact in artifacts if not artifact.is_layout_valid]
+    if invalid_layout_pages:
+        page_numbers = ", ".join(str(artifact.page_index + 1) for artifact in invalid_layout_pages)
+        _add_error(
+            result["errors"],
+            "OCR/layout input nije pripremljen",
+            f"Preskocene stranice bez valjanog OCR-a: {page_numbers}.",
+        )
+    return artifacts
+
+
 def _prepare_pdf(result, temp_dir):
     errors = result["errors"]
     pdf_path = result["original_path"]
     result["pdf_path"] = pdf_path
 
+    artifacts = []
     try:
-        result["image_path"] = convert_pdf_first_page_to_image(pdf_path, temp_dir)
-    except DocumentConversionError as error:
-        _add_error(errors, "Vizualni input nije pripremljen", str(error))
+        artifacts = _prepare_shared_pages(result, temp_dir, pdf_path)
+    except Exception as error:
+        _add_error(errors, "Vizualni/OCR input nije pripremljen", str(error))
 
     try:
         embedded_text = _extract_pdf_embedded_text(pdf_path)
@@ -246,19 +308,10 @@ def _prepare_pdf(result, temp_dir):
         embedded_text = ""
         _add_error(errors, "Tekstualni input nije pripremljen", f"PDF tekst nije čitljiv: {error}")
 
-    ocr_text = ""
-    if result["image_path"] is not None:
-        result["ocr_path"], ocr_text = _prepare_layout_payload(
-            result["image_path"],
-            embedded_text,
-            temp_dir / "document_ocr.json",
-            errors,
-        )
-
     final_text = embedded_text
     if len(final_text) < MIN_TEXT_CHARS:
         try:
-            final_text = _ocr_pdf_text(pdf_path, first_page_text=ocr_text)
+            final_text = _ocr_pdf_text(pdf_path, prepared_artifacts=artifacts)
         except OCRProcessingError as error:
             _add_error(errors, "Tekstualni input nije pripremljen", str(error))
 
@@ -268,12 +321,6 @@ def _prepare_pdf(result, temp_dir):
         errors,
         "PDF",
     )
-
-    if result["ocr_path"] is None and result["image_path"] and result["text_path"]:
-        payload = _synthetic_layout_payload(final_text, result["image_path"])
-        if payload.get("words"):
-            result["ocr_path"] = _write_ocr_payload(payload, temp_dir / "document_ocr.json")
-
 
 def _prepare_image(result, temp_dir):
     errors = result["errors"]
@@ -319,7 +366,6 @@ def _prepare_docx(result, temp_dir):
 
     try:
         result["pdf_path"] = convert_docx_to_pdf(result["original_path"], temp_dir)
-        result["image_path"] = convert_pdf_first_page_to_image(result["pdf_path"], temp_dir)
     except DocumentConversionError as error:
         _add_error(
             errors,
@@ -327,13 +373,6 @@ def _prepare_docx(result, temp_dir):
             f"Nije moguće pretvoriti DOCX u sliku: {error}",
         )
         return
-
-    result["ocr_path"], _ = _prepare_layout_payload(
-        result["image_path"],
-        text,
-        temp_dir / "document_ocr.json",
-        errors,
-    )
 
 
 def _prepare_txt(result, temp_dir):
@@ -376,6 +415,12 @@ def prepare_document_for_models(uploaded_file, temp_dir) -> dict:
         "image_path": None,
         "text_path": None,
         "ocr_path": None,
+        "total_pages": 0,
+        "selected_page_indices": [],
+        "analyzed_page_indices": [],
+        "layout_page_indices": [],
+        "page_artifacts": [],
+        "layout_page_artifacts": [],
         "errors": [],
     }
 
@@ -387,5 +432,19 @@ def prepare_document_for_models(uploaded_file, temp_dir) -> dict:
         _prepare_docx(result, temp_dir)
     elif suffix == ".txt":
         _prepare_txt(result, temp_dir)
+
+    if suffix != ".pdf" and (result.get("image_path") or result.get("pdf_path")):
+        legacy_image_path = result.get("image_path")
+        shared_source = result.get("pdf_path") or result["original_path"]
+        try:
+            _prepare_shared_pages(result, temp_dir, shared_source)
+            if suffix in IMAGE_SUFFIXES:
+                result["image_path"] = legacy_image_path
+        except Exception as error:
+            _add_error(
+                result["errors"],
+                "Multi-page input nije pripremljen",
+                str(error),
+            )
 
     return result

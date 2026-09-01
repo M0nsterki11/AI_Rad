@@ -1,23 +1,23 @@
+# Python environments and caches
 venv/
 env/
 .venv/
 __pycache__/
+**/__pycache__/
+**pycache**/
 *.pyc
+.pytest_cache/
 
+# Local datasets, model weights, and backups
 data/
-results/
-runs/
-logs/
-.cache/
-.hf_cache/
-
 models/
+backup*/
+backup_*/
+models_before*/
+results_before*/
+raw_zips/
 
-*.zip
-*.tar.gz
-*.7z
-*.rar
-
+# Large model and serialized artifact formats
 *.pt
 *.pth
 *.bin
@@ -26,5 +26,73 @@ models/
 *.pkl
 *.joblib
 
+# Runtime caches and local configuration
+.cache/
+.hf_cache/
+.matplotlib/
 .env
 .DS_Store
+runs/
+logs/
+
+# Archives
+*.zip
+*.tar.gz
+*.7z
+*.rar
+
+# Ignore generated results by default. Only the small files used by the UI are
+# allowlisted below; any other result can still be staged with git add -f.
+results/*
+
+!results/resnet50_multipage/
+results/resnet50_multipage/*
+!results/resnet50_multipage/test_metrics.json
+!results/resnet50_multipage/classification_report.txt
+!results/resnet50_multipage/confusion_matrix.csv
+!results/resnet50_multipage/confusion_matrix.png
+
+!results/xlm_roberta_multipage/
+results/xlm_roberta_multipage/*
+!results/xlm_roberta_multipage/test_metrics.json
+!results/xlm_roberta_multipage/classification_report.txt
+!results/xlm_roberta_multipage/confusion_matrix.csv
+!results/xlm_roberta_multipage/confusion_matrix.png
+
+!results/layoutlmv3_multipage/
+results/layoutlmv3_multipage/*
+!results/layoutlmv3_multipage/test_metrics.json
+!results/layoutlmv3_multipage/classification_report.txt
+!results/layoutlmv3_multipage/confusion_matrix.csv
+!results/layoutlmv3_multipage/confusion_matrix.png
+
+!results/external_test/
+results/external_test/*
+!results/external_test/comparison_metrics.csv
+!results/external_test/all_predictions.csv
+
+!results/external_test/resnet50/
+results/external_test/resnet50/*
+!results/external_test/resnet50/test_metrics.json
+!results/external_test/resnet50/classification_report.txt
+!results/external_test/resnet50/confusion_matrix.csv
+!results/external_test/resnet50/confusion_matrix.png
+
+!results/external_test/xlm_roberta/
+results/external_test/xlm_roberta/*
+!results/external_test/xlm_roberta/test_metrics.json
+!results/external_test/xlm_roberta/classification_report.txt
+!results/external_test/xlm_roberta/confusion_matrix.csv
+!results/external_test/xlm_roberta/confusion_matrix.png
+
+!results/external_test/layoutlmv3/
+results/external_test/layoutlmv3/*
+!results/external_test/layoutlmv3/test_metrics.json
+!results/external_test/layoutlmv3/classification_report.txt
+!results/external_test/layoutlmv3/confusion_matrix.csv
+!results/external_test/layoutlmv3/confusion_matrix.png
+
+!results/final_comparison.csv
+!results/final_comparison.md
+!results/final_comparison.png
+!results/final_comparison_summary.txt

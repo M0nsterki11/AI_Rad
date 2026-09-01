@@ -1,107 +1,141 @@
+from __future__ import annotations
+
 import argparse
 import csv
-import inspect
 import json
 import random
 import time
+from collections import defaultdict
 from pathlib import Path
 
-try:
-    import torch
-    from torch.utils.data import DataLoader, Dataset
-except ImportError as error:
-    raise SystemExit(
-        "Missing required library torch. Install project requirements before running this script."
-    ) from error
+import torch
+from PIL import Image
+from sklearn.metrics import classification_report, confusion_matrix
+from torch.utils.data import DataLoader, Dataset
+from transformers import AutoModelForSequenceClassification, AutoProcessor
 
 try:
-    from PIL import Image, ImageDraw, ImageFont
-except ImportError as error:
-    raise SystemExit(
-        "Missing required library Pillow. Install it with: python -m pip install pillow"
-    ) from error
-
-try:
-    from transformers import AutoModelForSequenceClassification, AutoProcessor
-except ImportError as error:
-    raise SystemExit(
-        "Missing required library transformers. Install it with: python -m pip install transformers"
-    ) from error
+    from .multipage import normalize_boxes_to_1000
+    from .multipage_training import (
+        aggregate_evaluation,
+        append_batch_logits,
+        load_multipage_training_rows,
+        make_document_balanced_sampler,
+        save_aggregation_config,
+        split_document_counts,
+    )
+except ImportError:
+    from multipage import normalize_boxes_to_1000  # type: ignore
+    from multipage_training import (  # type: ignore
+        aggregate_evaluation,
+        append_batch_logits,
+        load_multipage_training_rows,
+        make_document_balanced_sampler,
+        save_aggregation_config,
+        split_document_counts,
+    )
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = PROJECT_ROOT / "data"
-SPLITS_DIR = DATA_DIR / "splits"
-MODEL_DIR = PROJECT_ROOT / "models" / "layoutlmv3"
-RESULTS_DIR = PROJECT_ROOT / "results" / "layoutlmv3"
+MODEL_DIR = PROJECT_ROOT / "models" / "layoutlmv3_multipage"
+RESULTS_DIR = PROJECT_ROOT / "results" / "layoutlmv3_multipage"
 MODEL_NAME = "microsoft/layoutlmv3-base"
+CLASS_NAMES = ["invoice", "cv", "contract", "email", "scientific"]
+LABEL_TO_INDEX = {label: index for index, label in enumerate(CLASS_NAMES)}
 RANDOM_SEED = 42
-
-DEFAULT_CLASS_NAMES = ["invoice", "cv", "contract", "email", "scientific"]
-RESNET_LABEL_MAPPING_PATH = PROJECT_ROOT / "models" / "resnet50" / "label_mapping.json"
-LABEL_MAPPING_PATH = MODEL_DIR / "label_mapping.json"
 MODEL_INPUT_KEYS = {
     "input_ids",
     "attention_mask",
     "bbox",
     "pixel_values",
     "token_type_ids",
-    "labels",
 }
 
 
-class LayoutLMv3DocumentDataset(Dataset):
-    def __init__(self, rows, processor, max_length, label_to_index):
+def resolve_project_path(value):
+    path = Path(str(value))
+    return path if path.is_absolute() else PROJECT_ROOT / path
+
+
+def load_page_payload(row):
+    document_id = str(row["document_id"])
+    page_index = int(row["page_index"])
+    image_path = resolve_project_path(row["image_path"])
+    ocr_path = resolve_project_path(row["ocr_path"])
+    if not image_path.is_file():
+        raise FileNotFoundError(f"Missing page image for {document_id}: {image_path}")
+    if not ocr_path.is_file():
+        raise FileNotFoundError(f"Missing page OCR for {document_id}: {ocr_path}")
+    with Image.open(image_path) as source:
+        image = source.convert("RGB")
+    try:
+        ocr = json.loads(ocr_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        raise ValueError(f"Invalid OCR JSON for {document_id}: {ocr_path}") from error
+
+    json_document_id = str(ocr.get("document_id", document_id))
+    json_page_index = int(ocr.get("page_index", page_index))
+    if json_document_id != document_id or json_page_index != page_index:
+        raise ValueError(
+            f"Page/OCR alignment mismatch for {document_id} page {page_index}: {ocr_path}"
+        )
+    words = ocr.get("words")
+    boxes = ocr.get("boxes")
+    if not isinstance(words, list) or not isinstance(boxes, list):
+        raise ValueError(f"OCR must contain words and boxes lists: {ocr_path}")
+    if len(words) != len(boxes):
+        raise ValueError(
+            f"OCR words/boxes mismatch for {document_id} page {page_index}: "
+            f"{len(words)} != {len(boxes)}"
+        )
+    clean_words = []
+    clean_boxes = []
+    for word, box in zip(words, boxes):
+        text = str(word).strip()
+        if text:
+            clean_words.append(text)
+            clean_boxes.append(box)
+    if not clean_words:
+        raise ValueError(f"Empty OCR for {document_id} page {page_index}: {ocr_path}")
+    normalized_boxes = normalize_boxes_to_1000(clean_boxes, image.width, image.height)
+    return image, clean_words, normalized_boxes
+
+
+class DocumentPageDataset(Dataset):
+    def __init__(self, rows, processor, max_length):
         self.rows = rows
         self.processor = processor
         self.max_length = max_length
-        self.label_to_index = label_to_index
 
     def __len__(self):
         return len(self.rows)
 
     def __getitem__(self, index):
         row = self.rows[index]
-        row_id = row["id"]
-        image_path = resolve_project_path(row["image_path"])
-        ocr_path = resolve_project_path(row["ocr_path"])
-
-        try:
-            with Image.open(image_path) as image:
-                image = image.convert("RGB")
-        except FileNotFoundError as error:
-            raise FileNotFoundError(f"Missing image for {row_id}: {image_path}") from error
-        except Exception as error:
-            raise RuntimeError(f"Could not open image for {row_id}: {image_path}") from error
-
-        words, boxes = load_and_normalize_ocr(row_id, ocr_path, image)
-
+        image, words, boxes = load_page_payload(row)
         encoding = self.processor(
-            image,
-            words,
+            images=image,
+            text=words,
             boxes=boxes,
             truncation=True,
             padding="max_length",
             max_length=self.max_length,
             return_tensors="pt",
         )
-
-        item = {}
-        for key, value in encoding.items():
-            if torch.is_tensor(value):
-                item[key] = value.squeeze(0)
-            else:
-                item[key] = value
-
-        item["labels"] = torch.tensor(self.label_to_index[row["label"]], dtype=torch.long)
-        item["id"] = row_id
-        item["image_path"] = row["image_path"]
-        item["ocr_path"] = row["ocr_path"]
+        item = {
+            key: value.squeeze(0) if torch.is_tensor(value) else value
+            for key, value in encoding.items()
+        }
+        item["labels"] = torch.tensor(
+            LABEL_TO_INDEX[str(row["label"])], dtype=torch.long
+        )
+        item["document_id"] = str(row["document_id"])
+        item["page_index"] = int(row["page_index"])
         return item
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Train LayoutLMv3 document classifier.")
+    parser = argparse.ArgumentParser(description="Train multi-page LayoutLMv3 classifier.")
     parser.add_argument("--epochs", type=int, default=4)
     parser.add_argument("--batch-size", type=int, default=2)
     parser.add_argument("--learning-rate", type=float, default=2e-5)
@@ -109,670 +143,299 @@ def parse_args():
     parser.add_argument("--gradient-accumulation-steps", type=int, default=4)
     parser.add_argument("--num-workers", type=int, default=0)
     parser.add_argument("--smoke-test", action="store_true")
+    parser.add_argument("--preflight-only", action="store_true")
     return parser.parse_args()
 
 
 def set_seed(seed):
     random.seed(seed)
     torch.manual_seed(seed)
-    if torch.cuda.is_available():
-        torch.cuda.manual_seed_all(seed)
+    torch.cuda.manual_seed_all(seed)
 
 
-def resolve_project_path(value):
-    path = Path(str(value))
-    if path.is_absolute():
-        return path
-    return PROJECT_ROOT / path
-
-
-def save_label_mapping(path, class_names, label_to_index):
-    index_to_label = {str(index): label for label, index in label_to_index.items()}
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        json.dumps(
-            {
-                "class_names": class_names,
-                "label_to_index": label_to_index,
-                "index_to_label": index_to_label,
-            },
-            indent=2,
-            ensure_ascii=False,
-        ),
-        encoding="utf-8",
-    )
-
-
-def load_label_mapping():
-    if RESNET_LABEL_MAPPING_PATH.exists():
-        mapping = json.loads(RESNET_LABEL_MAPPING_PATH.read_text(encoding="utf-8"))
-        class_names = mapping.get("class_names") or DEFAULT_CLASS_NAMES
-        label_to_index = mapping.get("label_to_index") or {
-            label: index for index, label in enumerate(class_names)
-        }
-    else:
-        class_names = DEFAULT_CLASS_NAMES
-        label_to_index = {label: index for index, label in enumerate(class_names)}
-
-    if class_names != DEFAULT_CLASS_NAMES:
-        raise ValueError(f"Unexpected class order from label mapping: {class_names}")
-
-    expected = {label: index for index, label in enumerate(DEFAULT_CLASS_NAMES)}
-    if label_to_index != expected:
-        raise ValueError(f"Unexpected label_to_index mapping: {label_to_index}")
-
-    save_label_mapping(LABEL_MAPPING_PATH, class_names, label_to_index)
-    return class_names, label_to_index
-
-
-def read_split(split_name):
-    path = SPLITS_DIR / f"{split_name}.csv"
-    if not path.exists():
-        raise FileNotFoundError(f"Missing split CSV file: {path}")
-
-    with path.open("r", encoding="utf-8-sig", newline="") as file:
-        reader = csv.DictReader(file)
-        rows = list(reader)
-        fieldnames = set(reader.fieldnames or [])
-
-    required = {"id", "label", "image_path", "ocr_path"}
-    missing = required.difference(fieldnames)
-    if missing:
-        raise ValueError(f"{path} is missing required columns: {', '.join(sorted(missing))}")
-
-    return rows
-
-
-def validate_and_prepare_splits(label_to_index):
-    rows_by_split = {}
-
-    for split_name in ("train", "validation", "test"):
-        rows = read_split(split_name)
-        prepared_rows = []
-        missing_images = []
-        missing_ocr = []
-        invalid_labels = []
-
+def validate_page_rows(rows_by_split):
+    for rows in rows_by_split.values():
         for row in rows:
-            row_id = str(row.get("id", "")).strip()
-            label = str(row.get("label", "")).strip()
-            image_path = str(row.get("image_path", "")).strip()
-            ocr_path = str(row.get("ocr_path", "")).strip()
-
-            if label not in label_to_index:
-                invalid_labels.append((row_id, label))
-                continue
-
-            if not image_path or not resolve_project_path(image_path).exists():
-                missing_images.append((row_id, image_path or "(empty image_path)"))
-                continue
-
-            if not ocr_path or not resolve_project_path(ocr_path).exists():
-                missing_ocr.append((row_id, ocr_path or "(empty ocr_path)"))
-                continue
-
-            row["id"] = row_id
-            row["label"] = label
-            row["image_path"] = image_path
-            row["ocr_path"] = ocr_path
-            prepared_rows.append(row)
-
-        if invalid_labels:
-            examples = "\n".join(f"  {row_id}: {label}" for row_id, label in invalid_labels[:20])
-            raise ValueError(f"{split_name}.csv has invalid labels:\n{examples}")
-        if missing_images:
-            examples = "\n".join(f"  {row_id}: {path}" for row_id, path in missing_images[:20])
-            raise FileNotFoundError(f"{split_name}.csv has missing images:\n{examples}")
-        if missing_ocr:
-            examples = "\n".join(f"  {row_id}: {path}" for row_id, path in missing_ocr[:20])
-            raise FileNotFoundError(f"{split_name}.csv has missing OCR JSON files:\n{examples}")
-
-        rows_by_split[split_name] = prepared_rows
-        counts = {label: 0 for label in DEFAULT_CLASS_NAMES}
-        for row in prepared_rows:
-            counts[row["label"]] += 1
-        print(f"{split_name}: {len(prepared_rows)} rows | {counts}")
-
-    return rows_by_split
+            image, words, boxes = load_page_payload(row)
+            if len(words) != len(boxes):
+                raise ValueError(f"Invalid aligned page artifact: {row['document_id']}")
+            image.close()
 
 
-def limit_for_smoke_test(rows_by_split, max_per_class=5):
-    rng = random.Random(RANDOM_SEED)
-    limited = {}
-
-    for split_name, rows in rows_by_split.items():
-        split_rows = []
-        for label in DEFAULT_CLASS_NAMES:
-            label_rows = [row for row in rows if row["label"] == label]
-            rng.shuffle(label_rows)
-            split_rows.extend(label_rows[:max_per_class])
-        rng.shuffle(split_rows)
-        limited[split_name] = split_rows
-
-    return limited
-
-
-def get_image_dimension(ocr_data, key, fallback):
-    value = ocr_data.get(key, fallback)
-    try:
-        value = int(float(value))
-    except (TypeError, ValueError):
-        value = int(fallback)
-    return value if value > 0 else int(fallback)
-
-
-def clamp_0_1000(value):
-    return max(0, min(1000, int(round(value))))
-
-
-def normalize_box(row_id, raw_box, image_width, image_height):
-    if (
-        not isinstance(raw_box, list)
-        or len(raw_box) != 4
-        or not all(isinstance(value, (int, float)) for value in raw_box)
-    ):
-        raise ValueError(f"Invalid box shape for {row_id}: {raw_box}")
-
-    x1, y1, x2, y2 = [float(value) for value in raw_box]
-    if x2 < x1 or y2 < y1:
-        raise ValueError(f"Invalid raw box coordinates for {row_id}: {raw_box}")
-
-    normalized = [
-        clamp_0_1000(1000 * x1 / image_width),
-        clamp_0_1000(1000 * y1 / image_height),
-        clamp_0_1000(1000 * x2 / image_width),
-        clamp_0_1000(1000 * y2 / image_height),
-    ]
-
-    nx1, ny1, nx2, ny2 = normalized
-    if not (0 <= nx1 <= nx2 <= 1000 and 0 <= ny1 <= ny2 <= 1000):
-        raise ValueError(f"Invalid normalized box for {row_id}: {normalized}")
-
-    return normalized
-
-
-def load_and_normalize_ocr(row_id, ocr_path, image):
-    if not ocr_path.exists():
-        raise FileNotFoundError(f"Missing OCR JSON for {row_id}: {ocr_path}")
-
-    try:
-        with ocr_path.open("r", encoding="utf-8") as file:
-            ocr_data = json.load(file)
-    except json.JSONDecodeError as error:
-        raise ValueError(f"Could not parse OCR JSON for {row_id}: {ocr_path}") from error
-
-    words = ocr_data.get("words")
-    boxes = ocr_data.get("boxes")
-
-    if not isinstance(words, list) or not isinstance(boxes, list):
-        raise ValueError(f"OCR JSON for {row_id} must contain list fields 'words' and 'boxes'.")
-    if len(words) != len(boxes):
-        raise ValueError(
-            f"OCR words/boxes length mismatch for {row_id}: {len(words)} words, {len(boxes)} boxes"
-        )
-    if not words:
-        raise ValueError(f"OCR word list is empty for {row_id}: {ocr_path}")
-
-    image_width = get_image_dimension(ocr_data, "image_width", image.width)
-    image_height = get_image_dimension(ocr_data, "image_height", image.height)
-
-    clean_words = []
-    normalized_boxes = []
-    for word, box in zip(words, boxes):
-        text = str(word).strip()
-        if not text:
-            continue
-        clean_words.append(text)
-        normalized_boxes.append(normalize_box(row_id, box, image_width, image_height))
-
-    if not clean_words:
-        raise ValueError(f"OCR word list is empty after cleaning for {row_id}: {ocr_path}")
-    if len(clean_words) != len(normalized_boxes):
-        raise ValueError(f"Cleaned OCR words/boxes mismatch for {row_id}: {ocr_path}")
-
-    return clean_words, normalized_boxes
-
-
-def make_loaders(rows_by_split, processor, batch_size, max_length, label_to_index, num_workers):
+def make_loaders(rows_by_split, processor, batch_size, max_length, num_workers):
     pin_memory = torch.cuda.is_available()
     return {
-        split_name: DataLoader(
-            LayoutLMv3DocumentDataset(rows, processor, max_length, label_to_index),
+        "train": DataLoader(
+            DocumentPageDataset(rows_by_split["train"], processor, max_length),
             batch_size=batch_size,
-            shuffle=(split_name == "train"),
+            sampler=make_document_balanced_sampler(rows_by_split["train"]),
             num_workers=num_workers,
             pin_memory=pin_memory,
-        )
-        for split_name, rows in rows_by_split.items()
+        ),
+        "validation": DataLoader(
+            DocumentPageDataset(rows_by_split["validation"], processor, max_length),
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=num_workers,
+            pin_memory=pin_memory,
+        ),
+        "test": DataLoader(
+            DocumentPageDataset(rows_by_split["test"], processor, max_length),
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=num_workers,
+            pin_memory=pin_memory,
+        ),
     }
 
 
-def model_input_keys(model):
-    forward_keys = set(inspect.signature(model.forward).parameters)
-    return MODEL_INPUT_KEYS.intersection(forward_keys.union({"labels"}))
-
-
-def batch_to_model_inputs(batch, device, allowed_keys):
-    return {
+def split_batch(batch, device):
+    document_ids = batch.pop("document_id")
+    batch.pop("page_index")
+    labels = batch.pop("labels").to(device, non_blocking=True)
+    inputs = {
         key: value.to(device, non_blocking=True)
         for key, value in batch.items()
-        if key in allowed_keys and torch.is_tensor(value)
+        if key in MODEL_INPUT_KEYS and torch.is_tensor(value)
     }
+    return inputs, labels, document_ids
 
 
-def move_labels_to_device(batch, device):
-    return batch["labels"].to(device, non_blocking=True)
-
-
-def classification_metrics(y_true, y_pred, class_names):
-    per_class = {}
-    precisions = []
-    recalls = []
-    f1_scores = []
-
-    for index, label in enumerate(class_names):
-        tp = sum(1 for true, pred in zip(y_true, y_pred) if true == index and pred == index)
-        fp = sum(1 for true, pred in zip(y_true, y_pred) if true != index and pred == index)
-        fn = sum(1 for true, pred in zip(y_true, y_pred) if true == index and pred != index)
-        support = sum(1 for true in y_true if true == index)
-
-        precision = tp / (tp + fp) if tp + fp else 0.0
-        recall = tp / (tp + fn) if tp + fn else 0.0
-        f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
-
-        per_class[label] = {
-            "precision": precision,
-            "recall": recall,
-            "f1": f1,
-            "support": support,
-        }
-        precisions.append(precision)
-        recalls.append(recall)
-        f1_scores.append(f1)
-
-    accuracy = sum(1 for true, pred in zip(y_true, y_pred) if true == pred) / len(y_true) if y_true else 0.0
-    return {
-        "accuracy": accuracy,
-        "macro_precision": sum(precisions) / len(precisions),
-        "macro_recall": sum(recalls) / len(recalls),
-        "macro_f1": sum(f1_scores) / len(f1_scores),
-        "per_class": per_class,
-    }
-
-
-def train_one_epoch(
-    model,
-    loader,
-    optimizer,
-    scaler,
-    device,
-    allowed_input_keys,
-    gradient_accumulation_steps,
-    use_amp,
-    class_names,
-):
+def train_one_epoch(model, loader, optimizer, scaler, device, accumulation_steps):
     model.train()
-    optimizer.zero_grad(set_to_none=True)
-
     total_loss = 0.0
-    total = 0
-    y_true = []
-    y_pred = []
-
+    item_count = 0
+    logits_by_document = defaultdict(list)
+    labels_by_document = {}
+    optimizer.zero_grad(set_to_none=True)
+    use_amp = device.type == "cuda"
     for step, batch in enumerate(loader, start=1):
-        labels = move_labels_to_device(batch, device)
-        model_inputs = batch_to_model_inputs(batch, device, allowed_input_keys)
-
-        with torch.cuda.amp.autocast(enabled=use_amp):
-            outputs = model(**model_inputs)
-            loss = outputs.loss
-            loss_for_backward = loss / gradient_accumulation_steps
-
-        scaler.scale(loss_for_backward).backward()
-
-        should_step = step % gradient_accumulation_steps == 0 or step == len(loader)
-        if should_step:
-            scaler.unscale_(optimizer)
-            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+        model_inputs, labels, document_ids = split_batch(batch, device)
+        with torch.autocast(device_type=device.type, enabled=use_amp):
+            outputs = model(**model_inputs, labels=labels)
+            backward_loss = outputs.loss / accumulation_steps
+        scaler.scale(backward_loss).backward()
+        if step % accumulation_steps == 0 or step == len(loader):
             scaler.step(optimizer)
             scaler.update()
             optimizer.zero_grad(set_to_none=True)
-
-        predictions = outputs.logits.detach().argmax(dim=1)
         batch_size = labels.size(0)
-        total_loss += loss.detach().item() * batch_size
-        total += batch_size
-        y_true.extend(labels.cpu().tolist())
-        y_pred.extend(predictions.cpu().tolist())
-
-    metrics = classification_metrics(y_true, y_pred, class_names)
-    metrics["loss"] = total_loss / total if total else 0.0
+        total_loss += float(outputs.loss.item()) * batch_size
+        item_count += batch_size
+        append_batch_logits(
+            logits_by_document, labels_by_document, document_ids, labels, outputs.logits
+        )
+    metrics, _ = aggregate_evaluation(
+        logits_by_document, labels_by_document, class_count=len(CLASS_NAMES)
+    )
+    metrics["loss"] = total_loss / item_count if item_count else 0.0
     return metrics
 
 
-def evaluate(
-    model,
-    loader,
-    device,
-    allowed_input_keys,
-    class_names,
-    use_amp,
-    measure_prediction_time=False,
-):
+@torch.no_grad()
+def collect_evaluation(model, loader, device, measure_prediction_time=False):
     model.eval()
+    use_amp = device.type == "cuda"
     total_loss = 0.0
-    total = 0
-    y_true = []
-    y_pred = []
-    confidences = []
-    ids = []
-    image_paths = []
-    ocr_paths = []
-    prediction_time = 0.0
-
-    with torch.no_grad():
-        for batch in loader:
-            labels = move_labels_to_device(batch, device)
-            model_inputs = batch_to_model_inputs(batch, device, allowed_input_keys)
-
-            if measure_prediction_time and device.type == "cuda":
-                torch.cuda.synchronize()
-            start = time.perf_counter()
-            with torch.cuda.amp.autocast(enabled=use_amp):
-                outputs = model(**model_inputs)
-            if measure_prediction_time and device.type == "cuda":
-                torch.cuda.synchronize()
-            end = time.perf_counter()
-
-            if measure_prediction_time:
-                prediction_time += end - start
-
-            probabilities = torch.softmax(outputs.logits, dim=1)
-            confidence_values, predictions = probabilities.max(dim=1)
-            batch_size = labels.size(0)
-
-            total_loss += outputs.loss.detach().item() * batch_size
-            total += batch_size
-            y_true.extend(labels.cpu().tolist())
-            y_pred.extend(predictions.cpu().tolist())
-            confidences.extend(confidence_values.cpu().tolist())
-            ids.extend(batch["id"])
-            image_paths.extend(batch["image_path"])
-            ocr_paths.extend(batch["ocr_path"])
-
-    metrics = classification_metrics(y_true, y_pred, class_names)
-    metrics["loss"] = total_loss / total if total else 0.0
-    metrics["prediction_time_seconds"] = prediction_time
-    metrics["seconds_per_document"] = prediction_time / total if total else 0.0
-    metrics["y_true"] = y_true
-    metrics["y_pred"] = y_pred
-    metrics["confidences"] = confidences
-    metrics["ids"] = ids
-    metrics["image_paths"] = image_paths
-    metrics["ocr_paths"] = ocr_paths
-    return metrics
-
-
-def classification_report_text(metrics, class_names):
-    lines = ["label,precision,recall,f1,support"]
-    for label in class_names:
-        row = metrics["per_class"][label]
-        lines.append(
-            f"{label},{row['precision']:.6f},{row['recall']:.6f},{row['f1']:.6f},{row['support']}"
+    item_count = 0
+    elapsed = 0.0
+    logits_by_document = defaultdict(list)
+    labels_by_document = {}
+    for batch in loader:
+        model_inputs, labels, document_ids = split_batch(batch, device)
+        if measure_prediction_time and use_amp:
+            torch.cuda.synchronize()
+        start = time.perf_counter()
+        with torch.autocast(device_type=device.type, enabled=use_amp):
+            outputs = model(**model_inputs, labels=labels)
+        if measure_prediction_time and use_amp:
+            torch.cuda.synchronize()
+        if measure_prediction_time:
+            elapsed += time.perf_counter() - start
+        batch_size = labels.size(0)
+        total_loss += float(outputs.loss.item()) * batch_size
+        item_count += batch_size
+        append_batch_logits(
+            logits_by_document, labels_by_document, document_ids, labels, outputs.logits
         )
-    lines.append("")
-    lines.append(f"accuracy,{metrics['accuracy']:.6f}")
-    lines.append(f"macro_precision,{metrics['macro_precision']:.6f}")
-    lines.append(f"macro_recall,{metrics['macro_recall']:.6f}")
-    lines.append(f"macro_f1,{metrics['macro_f1']:.6f}")
-    return "\n".join(lines)
-
-
-def confusion_matrix(y_true, y_pred, class_names):
-    size = len(class_names)
-    matrix = [[0 for _ in range(size)] for _ in range(size)]
-    for true, pred in zip(y_true, y_pred):
-        matrix[true][pred] += 1
-    return matrix
-
-
-def save_confusion_matrix_csv(path, matrix, class_names):
-    with path.open("w", encoding="utf-8", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow(["true\\pred", *class_names])
-        for label, row in zip(class_names, matrix):
-            writer.writerow([label, *row])
-
-
-def save_confusion_matrix_png(path, matrix, class_names):
-    values = [value for row in matrix for value in row]
-    max_value = max(values) if values else 1
-    cell = 86
-    left = 150
-    top = 110
-    width = left + cell * len(class_names) + 40
-    height = top + cell * len(class_names) + 80
-
-    image = Image.new("RGB", (width, height), "white")
-    draw = ImageDraw.Draw(image)
-
-    try:
-        title_font = ImageFont.truetype("arial.ttf", 24)
-        label_font = ImageFont.truetype("arial.ttf", 16)
-        cell_font = ImageFont.truetype("arial.ttf", 20)
-    except OSError:
-        title_font = ImageFont.load_default()
-        label_font = ImageFont.load_default()
-        cell_font = ImageFont.load_default()
-
-    def text_center(box, text, font, fill="black"):
-        x1, y1, x2, y2 = box
-        bbox = draw.textbbox((0, 0), text, font=font)
-        text_width = bbox[2] - bbox[0]
-        text_height = bbox[3] - bbox[1]
-        draw.text(
-            (x1 + (x2 - x1 - text_width) / 2, y1 + (y2 - y1 - text_height) / 2),
-            text,
-            font=font,
-            fill=fill,
-        )
-
-    draw.text((left, 25), "LayoutLMv3 Confusion Matrix", font=title_font, fill="black")
-    draw.text(
-        (left + cell * len(class_names) / 2 - 50, 70),
-        "Predicted label",
-        font=label_font,
-        fill="black",
-    )
-    draw.text((20, top + cell * len(class_names) / 2 - 10), "True label", font=label_font, fill="black")
-
-    for column, label in enumerate(class_names):
-        text_center((left + column * cell, top - 38, left + (column + 1) * cell, top), label, label_font)
-
-    for row_index, label in enumerate(class_names):
-        y1 = top + row_index * cell
-        y2 = y1 + cell
-        text_center((0, y1, left - 8, y2), label, label_font)
-
-        for column_index, value in enumerate(matrix[row_index]):
-            x1 = left + column_index * cell
-            x2 = x1 + cell
-            intensity = value / max_value if max_value else 0
-            shade = int(255 - 170 * intensity)
-            color = (shade, shade + int(35 * (1 - intensity)), 255)
-            draw.rectangle((x1, y1, x2, y2), fill=color, outline=(80, 100, 130))
-            fill = "white" if intensity > 0.65 else "black"
-            text_center((x1, y1, x2, y2), str(value), cell_font, fill=fill)
-
-    image.save(path)
-
-
-def save_training_history(path, rows):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    fieldnames = [
-        "epoch",
-        "train_loss",
-        "train_accuracy",
-        "validation_loss",
-        "validation_accuracy",
-        "validation_macro_precision",
-        "validation_macro_recall",
-        "validation_macro_f1",
-    ]
-    with path.open("w", encoding="utf-8", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
-
-
-def save_test_results(results_dir, metrics, class_names):
-    results_dir.mkdir(parents=True, exist_ok=True)
-
-    serializable_metrics = {
-        key: value
-        for key, value in metrics.items()
-        if key not in {"y_true", "y_pred", "ids", "confidences", "image_paths", "ocr_paths"}
+    return {
+        "loss": total_loss / item_count if item_count else 0.0,
+        "items": item_count,
+        "elapsed": elapsed,
+        "logits_by_document": dict(logits_by_document),
+        "labels_by_document": labels_by_document,
     }
+
+
+def aggregate_raw(raw, *, method=None, select_on_validation=False):
+    metrics, comparisons = aggregate_evaluation(
+        raw["logits_by_document"],
+        raw["labels_by_document"],
+        class_count=len(CLASS_NAMES),
+        method=method,
+        select_on_validation=select_on_validation,
+    )
+    metrics["loss"] = raw["loss"]
+    metrics["pages_evaluated"] = raw["items"]
+    metrics["prediction_time_seconds"] = raw["elapsed"]
+    document_count = int(metrics["documents_evaluated"])
+    metrics["seconds_per_document"] = raw["elapsed"] / document_count if document_count else 0.0
+    return metrics, comparisons
+
+
+def target_paths(smoke_test):
+    model_dir = MODEL_DIR / ("smoke_test_best_model" if smoke_test else "best_model")
+    results_dir = RESULTS_DIR / "smoke_test" if smoke_test else RESULTS_DIR
+    return model_dir, results_dir
+
+
+def save_best_model(model, processor, model_dir, metrics, comparisons):
+    model_dir.mkdir(parents=True, exist_ok=True)
+    model.save_pretrained(model_dir)
+    processor.save_pretrained(model_dir)
+    mapping = {
+        "class_names": CLASS_NAMES,
+        "label_to_index": LABEL_TO_INDEX,
+        "index_to_label": {str(index): label for index, label in enumerate(CLASS_NAMES)},
+    }
+    (model_dir / "label_mapping.json").write_text(
+        json.dumps(mapping, indent=2), encoding="utf-8"
+    )
+    save_aggregation_config(
+        model_dir / "aggregation_config.json",
+        method=str(metrics["aggregation_method"]),
+        top_k=int(metrics["aggregation_top_k"]),
+        validation_comparisons=comparisons,
+    )
+
+
+def save_confusion_png(path, matrix):
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    figure, axis = plt.subplots(figsize=(7, 6))
+    image = axis.imshow(matrix, cmap="Blues")
+    figure.colorbar(image, ax=axis)
+    axis.set_xticks(range(len(CLASS_NAMES)), CLASS_NAMES, rotation=35, ha="right")
+    axis.set_yticks(range(len(CLASS_NAMES)), CLASS_NAMES)
+    axis.set_xlabel("Predicted")
+    axis.set_ylabel("True")
+    for row_index, row in enumerate(matrix):
+        for column_index, value in enumerate(row):
+            axis.text(column_index, row_index, str(value), ha="center", va="center")
+    figure.tight_layout()
+    figure.savefig(path, dpi=160)
+    plt.close(figure)
+
+
+def save_test_results(results_dir, metrics, raw):
+    results_dir.mkdir(parents=True, exist_ok=True)
+    ignored = {"y_true", "y_pred", "document_ids", "probabilities", "per_class"}
+    serializable = {key: value for key, value in metrics.items() if key not in ignored}
     (results_dir / "test_metrics.json").write_text(
-        json.dumps(serializable_metrics, indent=2, ensure_ascii=False),
-        encoding="utf-8",
+        json.dumps(serializable, indent=2), encoding="utf-8"
     )
-    (results_dir / "classification_report.txt").write_text(
-        classification_report_text(metrics, class_names) + "\n",
-        encoding="utf-8",
+    y_true = metrics["y_true"]
+    y_pred = metrics["y_pred"]
+    report = classification_report(
+        y_true,
+        y_pred,
+        labels=list(range(len(CLASS_NAMES))),
+        target_names=CLASS_NAMES,
+        digits=6,
+        zero_division=0,
     )
-
-    matrix = confusion_matrix(metrics["y_true"], metrics["y_pred"], class_names)
-    save_confusion_matrix_csv(results_dir / "confusion_matrix.csv", matrix, class_names)
-    save_confusion_matrix_png(results_dir / "confusion_matrix.png", matrix, class_names)
-
-    with (results_dir / "test_predictions.csv").open("w", encoding="utf-8", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow(["id", "true_label", "predicted_label", "confidence", "image_path", "ocr_path"])
-        for row_id, true, pred, confidence, image_path, ocr_path in zip(
-            metrics["ids"],
-            metrics["y_true"],
-            metrics["y_pred"],
-            metrics["confidences"],
-            metrics["image_paths"],
-            metrics["ocr_paths"],
-        ):
+    (results_dir / "classification_report.txt").write_text(report, encoding="utf-8")
+    matrix = confusion_matrix(y_true, y_pred, labels=list(range(len(CLASS_NAMES))))
+    with (results_dir / "confusion_matrix.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(["true\\pred", *CLASS_NAMES])
+        for label, row in zip(CLASS_NAMES, matrix.tolist()):
+            writer.writerow([label, *row])
+    save_confusion_png(results_dir / "confusion_matrix.png", matrix)
+    with (results_dir / "test_predictions.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(
+            ["document_id", "true_label", "predicted_label", "confidence", "pages_analyzed"]
+        )
+        for document_id, true, pred in zip(metrics["document_ids"], y_true, y_pred):
+            probabilities = metrics["probabilities"][document_id]
             writer.writerow(
                 [
-                    row_id,
-                    class_names[true],
-                    class_names[pred],
-                    f"{confidence:.6f}",
-                    image_path,
-                    ocr_path,
+                    document_id,
+                    CLASS_NAMES[true],
+                    CLASS_NAMES[pred],
+                    probabilities[pred],
+                    len(raw["logits_by_document"][document_id]),
                 ]
             )
 
 
-def target_dirs(smoke_test):
-    if smoke_test:
-        return MODEL_DIR / "smoke_test_best_model", RESULTS_DIR / "smoke_test"
-    return MODEL_DIR / "best_model", RESULTS_DIR
-
-
-def print_first_batch_dimensions(loader):
-    batch = next(iter(loader))
-    print("First smoke-test batch dimensions:")
-    for key in ("input_ids", "attention_mask", "bbox", "pixel_values", "labels"):
-        value = batch.get(key)
-        if torch.is_tensor(value):
-            print(f"  {key}: {tuple(value.shape)}")
-        else:
-            print(f"  {key}: missing")
-
-
 def is_cuda_oom(error):
-    message = str(error).lower()
-    return "cuda" in message and "out of memory" in message
+    return isinstance(error, torch.cuda.OutOfMemoryError) or "out of memory" in str(error).lower()
 
 
-def raise_cuda_oom_hint(error):
-    raise RuntimeError(
-        "CUDA out-of-memory while training LayoutLMv3. "
-        "Ponovno pokušajte s --batch-size 1 i većim --gradient-accumulation-steps."
-    ) from error
-
-
-def load_pretrained_processor_and_model(class_names, label_to_index):
-    id2label = {index: label for index, label in enumerate(class_names)}
+def load_pretrained_assets():
+    processor_kwargs = {"apply_ocr": False}
+    model_kwargs = {
+        "num_labels": len(CLASS_NAMES),
+        "id2label": {index: label for index, label in enumerate(CLASS_NAMES)},
+        "label2id": LABEL_TO_INDEX,
+    }
     try:
-        processor = AutoProcessor.from_pretrained(MODEL_NAME, apply_ocr=False)
-        model = AutoModelForSequenceClassification.from_pretrained(
-            MODEL_NAME,
-            num_labels=len(class_names),
-            id2label=id2label,
-            label2id=label_to_index,
+        processor = AutoProcessor.from_pretrained(
+            MODEL_NAME, local_files_only=True, **processor_kwargs
         )
-    except (OSError, ImportError, ValueError) as error:
-        raise RuntimeError(
-            f"Could not load pretrained LayoutLMv3 model/processor '{MODEL_NAME}'. "
-            "Check internet access, local Hugging Face cache, and installed dependencies."
-        ) from error
+        model = AutoModelForSequenceClassification.from_pretrained(
+            MODEL_NAME, local_files_only=True, **model_kwargs
+        )
+    except (OSError, ValueError):
+        processor = AutoProcessor.from_pretrained(MODEL_NAME, **processor_kwargs)
+        model = AutoModelForSequenceClassification.from_pretrained(
+            MODEL_NAME, **model_kwargs
+        )
     return processor, model
 
 
 def main():
     args = parse_args()
-    if args.batch_size < 1:
-        raise ValueError("--batch-size must be at least 1")
-    if args.gradient_accumulation_steps < 1:
-        raise ValueError("--gradient-accumulation-steps must be at least 1")
-    if args.max_length < 1:
-        raise ValueError("--max-length must be at least 1")
-
-    set_seed(RANDOM_SEED)
-
+    if args.batch_size < 1 or args.gradient_accumulation_steps < 1:
+        raise ValueError("Batch size and gradient accumulation steps must be positive")
+    if args.max_length != 512:
+        raise ValueError("LayoutLMv3 multi-page artifacts use --max-length 512")
     if args.smoke_test:
         args.epochs = 1
-        print("Smoke test enabled: using up to 5 documents per class per split and 1 epoch.")
-
-    class_names, label_to_index = load_label_mapping()
-    rows_by_split = validate_and_prepare_splits(label_to_index)
-    if args.smoke_test:
-        rows_by_split = limit_for_smoke_test(rows_by_split, max_per_class=5)
+    set_seed(RANDOM_SEED)
+    documents, rows_by_split, artifact_path = load_multipage_training_rows(
+        "layout_page", smoke_test=args.smoke_test
+    )
+    validate_page_rows(rows_by_split)
+    print(f"Authoritative manifest validated: {len(documents)} documents")
+    print(f"Page manifest: {artifact_path}")
+    print(f"Document counts: {split_document_counts(rows_by_split)}")
+    print(f"Page counts: { {name: len(rows) for name, rows in rows_by_split.items()} }")
+    if args.preflight_only:
+        print("Preflight passed. Training was not started.")
+        return
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     use_amp = device.type == "cuda"
-    print(f"Device: {device}")
-    print(f"AMP enabled: {use_amp}")
-
-    processor, model = load_pretrained_processor_and_model(class_names, label_to_index)
-
+    print(f"Device: {device}; AMP: {use_amp}")
     try:
-        model.to(device)
-    except RuntimeError as error:
-        if is_cuda_oom(error):
-            raise_cuda_oom_hint(error)
-        raise
-
-    loaders = make_loaders(
-        rows_by_split,
-        processor,
-        args.batch_size,
-        args.max_length,
-        label_to_index,
-        args.num_workers,
-    )
-
-    if args.smoke_test:
-        print_first_batch_dimensions(loaders["train"])
-
-    optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
-    scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
-    allowed_input_keys = model_input_keys(model)
-
-    best_model_dir, results_dir = target_dirs(args.smoke_test)
-    best_val_f1 = -1.0
-    epochs_without_improvement = 0
-    training_history = []
-    patience = 2
-
-    try:
+        processor, model = load_pretrained_assets()
+        model = model.to(device)
+        loaders = make_loaders(
+            rows_by_split, processor, args.batch_size, args.max_length, args.num_workers
+        )
+        optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
+        scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
+        best_f1 = -1.0
+        stale_epochs = 0
+        patience = 2
+        history = []
+        model_dir, results_dir = target_paths(args.smoke_test)
         for epoch in range(1, args.epochs + 1):
             train_metrics = train_one_epoch(
                 model,
@@ -780,102 +443,70 @@ def main():
                 optimizer,
                 scaler,
                 device,
-                allowed_input_keys,
                 args.gradient_accumulation_steps,
-                use_amp,
-                class_names,
             )
-            val_metrics = evaluate(
-                model,
-                loaders["validation"],
-                device,
-                allowed_input_keys,
-                class_names,
-                use_amp,
+            validation_raw = collect_evaluation(model, loaders["validation"], device)
+            validation_metrics, comparisons = aggregate_raw(
+                validation_raw, select_on_validation=True
             )
-
-            history_row = {
-                "epoch": epoch,
-                "train_loss": train_metrics["loss"],
-                "train_accuracy": train_metrics["accuracy"],
-                "validation_loss": val_metrics["loss"],
-                "validation_accuracy": val_metrics["accuracy"],
-                "validation_macro_precision": val_metrics["macro_precision"],
-                "validation_macro_recall": val_metrics["macro_recall"],
-                "validation_macro_f1": val_metrics["macro_f1"],
-            }
-            training_history.append(history_row)
-
+            history.append(
+                {
+                    "epoch": epoch,
+                    "train_loss": train_metrics["loss"],
+                    "train_accuracy": train_metrics["accuracy"],
+                    "validation_loss": validation_metrics["loss"],
+                    "validation_accuracy": validation_metrics["accuracy"],
+                    "validation_macro_precision": validation_metrics["macro_precision"],
+                    "validation_macro_recall": validation_metrics["macro_recall"],
+                    "validation_macro_f1": validation_metrics["macro_f1"],
+                    "aggregation_method": validation_metrics["aggregation_method"],
+                }
+            )
             print(
-                f"Epoch {epoch}/{args.epochs} | "
-                f"train loss: {train_metrics['loss']:.4f} | "
-                f"train accuracy: {train_metrics['accuracy']:.4f} | "
-                f"validation loss: {val_metrics['loss']:.4f} | "
-                f"validation accuracy: {val_metrics['accuracy']:.4f} | "
-                f"validation macro precision: {val_metrics['macro_precision']:.4f} | "
-                f"validation macro recall: {val_metrics['macro_recall']:.4f} | "
-                f"validation macro F1: {val_metrics['macro_f1']:.4f}"
+                f"Epoch {epoch}/{args.epochs} | train loss {train_metrics['loss']:.4f} | "
+                f"train document accuracy {train_metrics['accuracy']:.4f} | "
+                f"validation loss {validation_metrics['loss']:.4f} | "
+                f"validation accuracy {validation_metrics['accuracy']:.4f} | "
+                f"precision {validation_metrics['macro_precision']:.4f} | "
+                f"recall {validation_metrics['macro_recall']:.4f} | "
+                f"macro F1 {validation_metrics['macro_f1']:.4f} | "
+                f"aggregation {validation_metrics['aggregation_method']}"
             )
-
-            if val_metrics["macro_f1"] > best_val_f1:
-                best_val_f1 = val_metrics["macro_f1"]
-                epochs_without_improvement = 0
-                best_model_dir.mkdir(parents=True, exist_ok=True)
-                model.save_pretrained(best_model_dir)
-                processor.save_pretrained(best_model_dir)
-                save_label_mapping(best_model_dir / "label_mapping.json", class_names, label_to_index)
-                print(f"Saved best model to: {best_model_dir}")
+            if float(validation_metrics["macro_f1"]) > best_f1:
+                best_f1 = float(validation_metrics["macro_f1"])
+                stale_epochs = 0
+                save_best_model(model, processor, model_dir, validation_metrics, comparisons)
             else:
-                epochs_without_improvement += 1
-                if epochs_without_improvement >= patience:
-                    print(f"Early stopping triggered after {patience} epochs without improvement.")
+                stale_epochs += 1
+                if stale_epochs >= patience:
+                    print(f"Early stopping after {epoch} epochs.")
                     break
 
-    except RuntimeError as error:
-        if is_cuda_oom(error):
-            raise_cuda_oom_hint(error)
-        raise
+        results_dir.mkdir(parents=True, exist_ok=True)
+        with (results_dir / "training_history.csv").open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=list(history[0]))
+            writer.writeheader()
+            writer.writerows(history)
 
-    results_dir.mkdir(parents=True, exist_ok=True)
-    save_training_history(results_dir / "training_history.csv", training_history)
-
-    try:
-        best_processor = AutoProcessor.from_pretrained(best_model_dir, apply_ocr=False)
-        best_model = AutoModelForSequenceClassification.from_pretrained(best_model_dir)
-        best_model.to(device)
-        best_allowed_input_keys = model_input_keys(best_model)
-        test_loader = make_loaders(
-            {"test": rows_by_split["test"]},
-            best_processor,
-            args.batch_size,
-            args.max_length,
-            label_to_index,
-            args.num_workers,
-        )["test"]
-        test_metrics = evaluate(
-            best_model,
-            test_loader,
-            device,
-            best_allowed_input_keys,
-            class_names,
-            use_amp,
-            measure_prediction_time=True,
+        best_model = AutoModelForSequenceClassification.from_pretrained(model_dir).to(device)
+        aggregation = json.loads((model_dir / "aggregation_config.json").read_text(encoding="utf-8"))
+        test_raw = collect_evaluation(
+            best_model, loaders["test"], device, measure_prediction_time=True
+        )
+        test_metrics, _ = aggregate_raw(test_raw, method=str(aggregation["method"]))
+        save_test_results(results_dir, test_metrics, test_raw)
+        print(
+            f"TEST document accuracy={test_metrics['accuracy']:.4f} "
+            f"macro_f1={test_metrics['macro_f1']:.4f} "
+            f"aggregation={test_metrics['aggregation_method']}"
         )
     except RuntimeError as error:
         if is_cuda_oom(error):
-            raise_cuda_oom_hint(error)
+            raise RuntimeError(
+                "CUDA out of memory. Retry with --batch-size 1 and/or a larger "
+                "--gradient-accumulation-steps value."
+            ) from error
         raise
-
-    save_test_results(results_dir, test_metrics, class_names)
-
-    print("TEST RESULTS")
-    print(f"accuracy: {test_metrics['accuracy']:.4f}")
-    print(f"macro precision: {test_metrics['macro_precision']:.4f}")
-    print(f"macro recall: {test_metrics['macro_recall']:.4f}")
-    print(f"macro F1: {test_metrics['macro_f1']:.4f}")
-    print(f"prediction time seconds: {test_metrics['prediction_time_seconds']:.4f}")
-    print(f"seconds per document: {test_metrics['seconds_per_document']:.6f}")
-    print(f"Results saved to: {results_dir}")
 
 
 if __name__ == "__main__":

@@ -11,7 +11,8 @@ import torch
 from PIL import Image, ImageDraw, ImageFont
 
 try:
-    from .predict_layoutlm import load_image_and_ocr, load_layoutlm_model, predict_layoutlm
+    from .predict_layoutlm import load_layoutlm_model
+    from .predict_layoutlm import predict_file as predict_layout_file
     from .predict_resnet import load_model as load_resnet_model
     from .predict_resnet import predict_file as predict_resnet_file
     from .predict_text_model import extract_text_from_file, load_text_model, predict_text
@@ -19,7 +20,8 @@ except ImportError:
     CURRENT_DIR = Path(__file__).resolve().parent
     if str(CURRENT_DIR) not in sys.path:
         sys.path.insert(0, str(CURRENT_DIR))
-    from predict_layoutlm import load_image_and_ocr, load_layoutlm_model, predict_layoutlm  # type: ignore
+    from predict_layoutlm import load_layoutlm_model  # type: ignore
+    from predict_layoutlm import predict_file as predict_layout_file  # type: ignore
     from predict_resnet import load_model as load_resnet_model  # type: ignore
     from predict_resnet import predict_file as predict_resnet_file  # type: ignore
     from predict_text_model import extract_text_from_file, load_text_model, predict_text  # type: ignore
@@ -306,11 +308,8 @@ def evaluate_layoutlmv3(documents):
         model, processor, class_names, _, device = load_layoutlm_model(device)
         for document in documents:
             try:
-                image, words, boxes, _ = load_image_and_ocr(document["path"])
-                result = predict_layoutlm(
-                    image,
-                    words,
-                    boxes,
+                result = predict_layout_file(
+                    document["path"],
                     model=model,
                     processor=processor,
                     class_names=class_names,

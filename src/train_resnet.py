@@ -1,33 +1,50 @@
+from __future__ import annotations
+
 import argparse
 import csv
 import json
 import random
 import time
-from collections import Counter
+from collections import defaultdict
 from pathlib import Path
 
 import torch
 from PIL import Image
+from sklearn.metrics import classification_report, confusion_matrix
 from torch import nn
 from torch.utils.data import DataLoader, Dataset
 from torchvision import models, transforms
 from torchvision.models import ResNet50_Weights
 
+try:
+    from .multipage_training import (
+        aggregate_evaluation,
+        append_batch_logits,
+        load_multipage_training_rows,
+        make_document_balanced_sampler,
+        save_aggregation_config,
+        split_document_counts,
+    )
+except ImportError:
+    from multipage_training import (  # type: ignore
+        aggregate_evaluation,
+        append_batch_logits,
+        load_multipage_training_rows,
+        make_document_balanced_sampler,
+        save_aggregation_config,
+        split_document_counts,
+    )
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = PROJECT_ROOT / "data"
-METADATA_PATH = DATA_DIR / "metadata.csv"
-SPLITS_DIR = DATA_DIR / "splits"
-MODEL_DIR = PROJECT_ROOT / "models" / "resnet50"
-RESULTS_DIR = PROJECT_ROOT / "results" / "resnet50"
-
+MODEL_DIR = PROJECT_ROOT / "models" / "resnet50_multipage"
+RESULTS_DIR = PROJECT_ROOT / "results" / "resnet50_multipage"
 CLASS_NAMES = ["invoice", "cv", "contract", "email", "scientific"]
 LABEL_TO_INDEX = {label: index for index, label in enumerate(CLASS_NAMES)}
-INDEX_TO_LABEL = {index: label for label, index in LABEL_TO_INDEX.items()}
 RANDOM_SEED = 42
 
 
-class DocumentImageDataset(Dataset):
+class DocumentPageDataset(Dataset):
     def __init__(self, rows, transform):
         self.rows = rows
         self.transform = transform
@@ -38,22 +55,24 @@ class DocumentImageDataset(Dataset):
     def __getitem__(self, index):
         row = self.rows[index]
         image_path = resolve_project_path(row["image_path"])
-
         with Image.open(image_path) as image:
-            image = image.convert("RGB")
-            image = self.transform(image)
-
-        label = LABEL_TO_INDEX[row["label"]]
-        return image, torch.tensor(label, dtype=torch.long), row["id"]
+            tensor = self.transform(image.convert("RGB"))
+        return (
+            tensor,
+            torch.tensor(LABEL_TO_INDEX[str(row["label"])], dtype=torch.long),
+            str(row["document_id"]),
+            int(row["page_index"]),
+        )
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Train a ResNet50 document classifier.")
+    parser = argparse.ArgumentParser(description="Train multi-page ResNet50 classifier.")
     parser.add_argument("--epochs", type=int, default=8)
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--learning-rate", type=float, default=1e-4)
     parser.add_argument("--num-workers", type=int, default=0)
     parser.add_argument("--smoke-test", action="store_true")
+    parser.add_argument("--preflight-only", action="store_true")
     return parser.parse_args()
 
 
@@ -65,119 +84,7 @@ def set_seed(seed):
 
 def resolve_project_path(value):
     path = Path(str(value))
-    if path.is_absolute():
-        return path
-    return PROJECT_ROOT / path
-
-
-def load_metadata():
-    if not METADATA_PATH.exists():
-        raise FileNotFoundError(f"Metadata file not found: {METADATA_PATH}")
-
-    with METADATA_PATH.open("r", encoding="utf-8-sig", newline="") as file:
-        reader = csv.DictReader(file)
-        rows = list(reader)
-        fieldnames = reader.fieldnames or []
-
-    required_columns = {"id", "label", "image_path"}
-    missing_columns = required_columns.difference(fieldnames)
-    if missing_columns:
-        missing = ", ".join(sorted(missing_columns))
-        raise ValueError(f"metadata.csv is missing required columns: {missing}")
-
-    filtered_rows = []
-    missing_images = []
-
-    for row in rows:
-        label = str(row.get("label", "")).strip()
-        image_path = str(row.get("image_path", "")).strip()
-
-        if label not in LABEL_TO_INDEX:
-            continue
-
-        if not image_path:
-            missing_images.append((row.get("id", ""), "(empty image_path)"))
-            continue
-
-        resolved = resolve_project_path(image_path)
-        if not resolved.exists():
-            missing_images.append((row.get("id", ""), str(resolved)))
-            continue
-
-        row["label"] = label
-        row["image_path"] = image_path
-        filtered_rows.append(row)
-
-    if missing_images:
-        examples = "\n".join(f"  {row_id}: {path}" for row_id, path in missing_images[:20])
-        raise FileNotFoundError(
-            f"Found {len(missing_images)} metadata rows with missing images. Examples:\n{examples}"
-        )
-
-    counts = Counter(row["label"] for row in filtered_rows)
-    for label in CLASS_NAMES:
-        if counts[label] == 0:
-            raise ValueError(f"No rows found for class: {label}")
-
-    return filtered_rows, fieldnames
-
-
-def limit_for_smoke_test(rows, max_per_class=10):
-    rng = random.Random(RANDOM_SEED)
-    limited = []
-
-    for label in CLASS_NAMES:
-        label_rows = [row for row in rows if row["label"] == label]
-        rng.shuffle(label_rows)
-        limited.extend(label_rows[:max_per_class])
-
-    rng.shuffle(limited)
-    return limited
-
-
-def stratified_split(rows):
-    rng = random.Random(RANDOM_SEED)
-    train_rows = []
-    val_rows = []
-    test_rows = []
-
-    for label in CLASS_NAMES:
-        label_rows = [row for row in rows if row["label"] == label]
-        rng.shuffle(label_rows)
-
-        if len(label_rows) < 3:
-            raise ValueError(f"Class {label} has fewer than 3 rows, cannot split.")
-
-        train_count = int(len(label_rows) * 0.75)
-        val_count = int(len(label_rows) * 0.15)
-
-        train_count = max(1, train_count)
-        val_count = max(1, val_count)
-
-        if train_count + val_count >= len(label_rows):
-            val_count = 1
-            train_count = len(label_rows) - 2
-
-        train_rows.extend(label_rows[:train_count])
-        val_rows.extend(label_rows[train_count:train_count + val_count])
-        test_rows.extend(label_rows[train_count + val_count:])
-
-    rng.shuffle(train_rows)
-    rng.shuffle(val_rows)
-    rng.shuffle(test_rows)
-    return train_rows, val_rows, test_rows
-
-
-def write_split(name, rows, fieldnames):
-    SPLITS_DIR.mkdir(parents=True, exist_ok=True)
-    path = SPLITS_DIR / f"{name}.csv"
-
-    with path.open("w", encoding="utf-8", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
-
-    return path
+    return path if path.is_absolute() else PROJECT_ROOT / path
 
 
 def make_transforms():
@@ -193,306 +100,317 @@ def make_transforms():
     )
 
 
-def make_loaders(train_rows, val_rows, test_rows, batch_size, num_workers):
+def make_loaders(rows_by_split, batch_size, num_workers):
     transform = make_transforms()
     pin_memory = torch.cuda.is_available()
-
-    train_loader = DataLoader(
-        DocumentImageDataset(train_rows, transform),
-        batch_size=batch_size,
-        shuffle=True,
-        num_workers=num_workers,
-        pin_memory=pin_memory,
-    )
-    val_loader = DataLoader(
-        DocumentImageDataset(val_rows, transform),
-        batch_size=batch_size,
-        shuffle=False,
-        num_workers=num_workers,
-        pin_memory=pin_memory,
-    )
-    test_loader = DataLoader(
-        DocumentImageDataset(test_rows, transform),
-        batch_size=batch_size,
-        shuffle=False,
-        num_workers=num_workers,
-        pin_memory=pin_memory,
-    )
-    return train_loader, val_loader, test_loader
+    sampler = make_document_balanced_sampler(rows_by_split["train"])
+    return {
+        "train": DataLoader(
+            DocumentPageDataset(rows_by_split["train"], transform),
+            batch_size=batch_size,
+            sampler=sampler,
+            num_workers=num_workers,
+            pin_memory=pin_memory,
+        ),
+        "validation": DataLoader(
+            DocumentPageDataset(rows_by_split["validation"], transform),
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=num_workers,
+            pin_memory=pin_memory,
+        ),
+        "test": DataLoader(
+            DocumentPageDataset(rows_by_split["test"], transform),
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=num_workers,
+            pin_memory=pin_memory,
+        ),
+    }
 
 
 def make_model(device):
-    weights = ResNet50_Weights.DEFAULT
-    model = models.resnet50(weights=weights)
-
+    model = models.resnet50(weights=ResNet50_Weights.DEFAULT)
     for parameter in model.parameters():
         parameter.requires_grad = False
-
-    in_features = model.fc.in_features
-    model.fc = nn.Linear(in_features, len(CLASS_NAMES))
+    model.fc = nn.Linear(model.fc.in_features, len(CLASS_NAMES))
     model.to(device)
     return model
 
 
-def accuracy_from_counts(correct, total):
-    return correct / total if total else 0.0
-
-
-def classification_metrics(y_true, y_pred):
-    per_class = {}
-    precisions = []
-    recalls = []
-    f1_scores = []
-
-    for index, label in INDEX_TO_LABEL.items():
-        tp = sum(1 for true, pred in zip(y_true, y_pred) if true == index and pred == index)
-        fp = sum(1 for true, pred in zip(y_true, y_pred) if true != index and pred == index)
-        fn = sum(1 for true, pred in zip(y_true, y_pred) if true == index and pred != index)
-        support = sum(1 for true in y_true if true == index)
-
-        precision = tp / (tp + fp) if tp + fp else 0.0
-        recall = tp / (tp + fn) if tp + fn else 0.0
-        f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
-
-        per_class[label] = {
-            "precision": precision,
-            "recall": recall,
-            "f1": f1,
-            "support": support,
-        }
-        precisions.append(precision)
-        recalls.append(recall)
-        f1_scores.append(f1)
-
-    accuracy = sum(1 for true, pred in zip(y_true, y_pred) if true == pred) / len(y_true) if y_true else 0.0
+def raw_epoch_result(total_loss, item_count, logits_by_document, labels_by_document, elapsed=0.0):
     return {
-        "accuracy": accuracy,
-        "macro_precision": sum(precisions) / len(precisions),
-        "macro_recall": sum(recalls) / len(recalls),
-        "macro_f1": sum(f1_scores) / len(f1_scores),
-        "per_class": per_class,
+        "loss": total_loss / item_count if item_count else 0.0,
+        "items": item_count,
+        "logits_by_document": dict(logits_by_document),
+        "labels_by_document": labels_by_document,
+        "prediction_time_seconds": elapsed,
     }
-
-
-def confusion_matrix(y_true, y_pred):
-    matrix = [[0 for _ in CLASS_NAMES] for _ in CLASS_NAMES]
-    for true, pred in zip(y_true, y_pred):
-        matrix[true][pred] += 1
-    return matrix
 
 
 def train_one_epoch(model, loader, criterion, optimizer, device):
     model.train()
-    running_loss = 0.0
-    correct = 0
-    total = 0
-
-    for images, labels, _ in loader:
+    total_loss = 0.0
+    item_count = 0
+    logits_by_document = defaultdict(list)
+    labels_by_document = {}
+    for images, labels, document_ids, _ in loader:
         images = images.to(device)
         labels = labels.to(device)
-
         optimizer.zero_grad(set_to_none=True)
         logits = model(images)
         loss = criterion(logits, labels)
         loss.backward()
         optimizer.step()
-
         batch_size = labels.size(0)
-        running_loss += loss.item() * batch_size
-        predictions = logits.argmax(dim=1)
-        correct += (predictions == labels).sum().item()
-        total += batch_size
-
-    return running_loss / total, accuracy_from_counts(correct, total)
-
-
-@torch.no_grad()
-def evaluate(model, loader, criterion, device, measure_prediction_time=False):
-    model.eval()
-    running_loss = 0.0
-    total = 0
-    all_labels = []
-    all_predictions = []
-    all_ids = []
-    prediction_time = 0.0
-
-    for images, labels, row_ids in loader:
-        images = images.to(device)
-        labels = labels.to(device)
-
-        if measure_prediction_time:
-            start = time.perf_counter()
-            logits = model(images)
-            if device.type == "cuda":
-                torch.cuda.synchronize()
-            prediction_time += time.perf_counter() - start
-        else:
-            logits = model(images)
-
-        loss = criterion(logits, labels)
-        predictions = logits.argmax(dim=1)
-
-        batch_size = labels.size(0)
-        running_loss += loss.item() * batch_size
-        total += batch_size
-
-        all_labels.extend(labels.cpu().tolist())
-        all_predictions.extend(predictions.cpu().tolist())
-        all_ids.extend(row_ids)
-
-    metrics = classification_metrics(all_labels, all_predictions)
-    metrics["loss"] = running_loss / total if total else 0.0
-    metrics["prediction_time_seconds"] = prediction_time
-    metrics["seconds_per_sample"] = prediction_time / total if total else 0.0
-    metrics["y_true"] = all_labels
-    metrics["y_pred"] = all_predictions
-    metrics["ids"] = all_ids
+        total_loss += loss.item() * batch_size
+        item_count += batch_size
+        append_batch_logits(
+            logits_by_document, labels_by_document, document_ids, labels, logits
+        )
+    raw = raw_epoch_result(total_loss, item_count, logits_by_document, labels_by_document)
+    metrics, _ = aggregate_evaluation(
+        raw["logits_by_document"], raw["labels_by_document"], class_count=len(CLASS_NAMES)
+    )
+    metrics["loss"] = raw["loss"]
     return metrics
 
 
-def save_best_model(model, path, epoch, val_metrics):
-    MODEL_DIR.mkdir(parents=True, exist_ok=True)
+@torch.no_grad()
+def collect_evaluation(model, loader, criterion, device, measure_prediction_time=False):
+    model.eval()
+    total_loss = 0.0
+    item_count = 0
+    elapsed = 0.0
+    logits_by_document = defaultdict(list)
+    labels_by_document = {}
+    for images, labels, document_ids, _ in loader:
+        images = images.to(device)
+        labels = labels.to(device)
+        start = time.perf_counter()
+        logits = model(images)
+        if measure_prediction_time and device.type == "cuda":
+            torch.cuda.synchronize()
+        if measure_prediction_time:
+            elapsed += time.perf_counter() - start
+        loss = criterion(logits, labels)
+        batch_size = labels.size(0)
+        total_loss += loss.item() * batch_size
+        item_count += batch_size
+        append_batch_logits(
+            logits_by_document, labels_by_document, document_ids, labels, logits
+        )
+    return raw_epoch_result(
+        total_loss, item_count, logits_by_document, labels_by_document, elapsed
+    )
+
+
+def aggregate_raw(raw, *, method=None, select_on_validation=False):
+    metrics, comparisons = aggregate_evaluation(
+        raw["logits_by_document"],
+        raw["labels_by_document"],
+        class_count=len(CLASS_NAMES),
+        method=method,
+        select_on_validation=select_on_validation,
+    )
+    metrics["loss"] = raw["loss"]
+    metrics["prediction_time_seconds"] = raw["prediction_time_seconds"]
+    documents = int(metrics["documents_evaluated"])
+    metrics["seconds_per_document"] = (
+        raw["prediction_time_seconds"] / documents if documents else 0.0
+    )
+    metrics["pages_evaluated"] = raw["items"]
+    return metrics, comparisons
+
+
+def save_checkpoint(model, path, epoch, metrics, comparisons):
+    path.parent.mkdir(parents=True, exist_ok=True)
     torch.save(
         {
             "epoch": epoch,
             "model_state_dict": model.state_dict(),
             "class_names": CLASS_NAMES,
             "label_to_index": LABEL_TO_INDEX,
-            "validation_macro_f1": val_metrics["macro_f1"],
+            "validation_macro_f1": metrics["macro_f1"],
+            "aggregation_method": metrics["aggregation_method"],
+            "aggregation_top_k": metrics["aggregation_top_k"],
         },
         path,
     )
+    save_aggregation_config(
+        path.parent / "aggregation_config.json",
+        method=str(metrics["aggregation_method"]),
+        top_k=int(metrics["aggregation_top_k"]),
+        validation_comparisons=comparisons,
+    )
+    (path.parent / "label_mapping.json").write_text(
+        json.dumps({"class_names": CLASS_NAMES, "label_to_index": LABEL_TO_INDEX}, indent=2),
+        encoding="utf-8",
+    )
 
 
-def classification_report_text(metrics):
-    lines = []
-    lines.append("label,precision,recall,f1,support")
-    for label in CLASS_NAMES:
-        row = metrics["per_class"][label]
-        lines.append(
-            f"{label},{row['precision']:.6f},{row['recall']:.6f},{row['f1']:.6f},{row['support']}"
-        )
-    lines.append("")
-    lines.append(f"accuracy,{metrics['accuracy']:.6f}")
-    lines.append(f"macro_precision,{metrics['macro_precision']:.6f}")
-    lines.append(f"macro_recall,{metrics['macro_recall']:.6f}")
-    lines.append(f"macro_f1,{metrics['macro_f1']:.6f}")
-    return "\n".join(lines)
+def save_confusion_png(path, matrix):
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    figure, axis = plt.subplots(figsize=(7, 6))
+    image = axis.imshow(matrix, cmap="Blues")
+    figure.colorbar(image, ax=axis)
+    axis.set_xticks(range(len(CLASS_NAMES)), CLASS_NAMES, rotation=35, ha="right")
+    axis.set_yticks(range(len(CLASS_NAMES)), CLASS_NAMES)
+    axis.set_xlabel("Predicted")
+    axis.set_ylabel("True")
+    for row_index, row in enumerate(matrix):
+        for column_index, value in enumerate(row):
+            axis.text(column_index, row_index, str(value), ha="center", va="center")
+    figure.tight_layout()
+    figure.savefig(path, dpi=160)
+    plt.close(figure)
 
 
-def save_results(test_metrics):
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-
-    serializable_metrics = {
+def save_results(results_dir, metrics):
+    results_dir.mkdir(parents=True, exist_ok=True)
+    y_true = metrics["y_true"]
+    y_pred = metrics["y_pred"]
+    serializable = {
         key: value
-        for key, value in test_metrics.items()
-        if key not in {"y_true", "y_pred", "ids"}
+        for key, value in metrics.items()
+        if key
+        not in {
+            "y_true",
+            "y_pred",
+            "document_ids",
+            "probabilities",
+            "per_class",
+            "page_logits_by_document",
+        }
     }
-    (RESULTS_DIR / "test_metrics.json").write_text(
-        json.dumps(serializable_metrics, indent=2),
-        encoding="utf-8",
+    (results_dir / "test_metrics.json").write_text(
+        json.dumps(serializable, indent=2), encoding="utf-8"
     )
-
-    (RESULTS_DIR / "classification_report.txt").write_text(
-        classification_report_text(test_metrics) + "\n",
-        encoding="utf-8",
+    report = classification_report(
+        y_true,
+        y_pred,
+        labels=list(range(len(CLASS_NAMES))),
+        target_names=CLASS_NAMES,
+        digits=6,
+        zero_division=0,
     )
-
-    matrix = confusion_matrix(test_metrics["y_true"], test_metrics["y_pred"])
-    with (RESULTS_DIR / "confusion_matrix.csv").open("w", encoding="utf-8", newline="") as file:
-        writer = csv.writer(file)
+    (results_dir / "classification_report.txt").write_text(report, encoding="utf-8")
+    matrix = confusion_matrix(y_true, y_pred, labels=list(range(len(CLASS_NAMES))))
+    with (results_dir / "confusion_matrix.csv").open(
+        "w", encoding="utf-8", newline=""
+    ) as handle:
+        writer = csv.writer(handle)
         writer.writerow(["true\\pred", *CLASS_NAMES])
-        for label, row in zip(CLASS_NAMES, matrix):
+        for label, row in zip(CLASS_NAMES, matrix.tolist()):
             writer.writerow([label, *row])
+    save_confusion_png(results_dir / "confusion_matrix.png", matrix)
+    with (results_dir / "test_predictions.csv").open(
+        "w", encoding="utf-8", newline=""
+    ) as handle:
+        writer = csv.writer(handle)
+        writer.writerow(
+            ["document_id", "true_label", "predicted_label", "confidence", "pages_analyzed"]
+        )
+        for document_id, true, pred in zip(metrics["document_ids"], y_true, y_pred):
+            probabilities = metrics["probabilities"][document_id]
+            writer.writerow(
+                [
+                    document_id,
+                    CLASS_NAMES[true],
+                    CLASS_NAMES[pred],
+                    probabilities[pred],
+                    len(metrics["page_logits_by_document"][document_id]),
+                ]
+            )
 
-    with (RESULTS_DIR / "test_predictions.csv").open("w", encoding="utf-8", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow(["id", "true_label", "predicted_label"])
-        for row_id, true, pred in zip(test_metrics["ids"], test_metrics["y_true"], test_metrics["y_pred"]):
-            writer.writerow([row_id, INDEX_TO_LABEL[true], INDEX_TO_LABEL[pred]])
 
-
-def print_split_summary(name, rows):
-    counts = Counter(row["label"] for row in rows)
-    details = ", ".join(f"{label}: {counts[label]}" for label in CLASS_NAMES)
-    print(f"{name}: {len(rows)} ({details})")
+def target_paths(smoke_test):
+    if smoke_test:
+        return MODEL_DIR / "smoke_test_best_model.pth", RESULTS_DIR / "smoke_test"
+    return MODEL_DIR / "best_model.pth", RESULTS_DIR
 
 
 def main():
     args = parse_args()
-    set_seed(RANDOM_SEED)
-
     if args.smoke_test:
         args.epochs = 1
-        print("Smoke test enabled: using up to 10 images per class and 1 epoch.")
-
-    rows, fieldnames = load_metadata()
-    if args.smoke_test:
-        rows = limit_for_smoke_test(rows)
-
-    train_rows, val_rows, test_rows = stratified_split(rows)
-    write_split("train", train_rows, fieldnames)
-    write_split("validation", val_rows, fieldnames)
-    write_split("test", test_rows, fieldnames)
-
-    print_split_summary("Train", train_rows)
-    print_split_summary("Validation", val_rows)
-    print_split_summary("Test", test_rows)
+    set_seed(RANDOM_SEED)
+    documents, rows_by_split, artifact_path = load_multipage_training_rows(
+        "resnet_page", smoke_test=args.smoke_test
+    )
+    print(f"Authoritative manifest validated: {len(documents)} documents")
+    print(f"Page manifest: {artifact_path}")
+    print(f"Document counts: {split_document_counts(rows_by_split)}")
+    print(f"Page counts: { {name: len(rows) for name, rows in rows_by_split.items()} }")
+    if args.preflight_only:
+        print("Preflight passed. Training was not started.")
+        return
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Device: {device}")
-
-    train_loader, val_loader, test_loader = make_loaders(
-        train_rows=train_rows,
-        val_rows=val_rows,
-        test_rows=test_rows,
-        batch_size=args.batch_size,
-        num_workers=args.num_workers,
-    )
-
+    loaders = make_loaders(rows_by_split, args.batch_size, args.num_workers)
     model = make_model(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.AdamW(
         [parameter for parameter in model.parameters() if parameter.requires_grad],
         lr=args.learning_rate,
     )
-
-    best_val_f1 = -1.0
-    best_model_path = MODEL_DIR / "best_model.pth"
-
+    best_path, results_dir = target_paths(args.smoke_test)
+    best_f1 = -1.0
+    history = []
     for epoch in range(1, args.epochs + 1):
-        train_loss, train_accuracy = train_one_epoch(model, train_loader, criterion, optimizer, device)
-        val_metrics = evaluate(model, val_loader, criterion, device)
-
-        print(
-            "Epoch "
-            f"{epoch}/{args.epochs} | "
-            f"train loss: {train_loss:.4f} | "
-            f"train accuracy: {train_accuracy:.4f} | "
-            f"validation loss: {val_metrics['loss']:.4f} | "
-            f"validation accuracy: {val_metrics['accuracy']:.4f} | "
-            f"validation macro F1: {val_metrics['macro_f1']:.4f}"
+        train_metrics = train_one_epoch(model, loaders["train"], criterion, optimizer, device)
+        validation_raw = collect_evaluation(model, loaders["validation"], criterion, device)
+        validation_metrics, comparisons = aggregate_raw(
+            validation_raw, select_on_validation=True
         )
+        history.append(
+            {
+                "epoch": epoch,
+                "train_loss": train_metrics["loss"],
+                "train_accuracy": train_metrics["accuracy"],
+                "validation_loss": validation_metrics["loss"],
+                "validation_accuracy": validation_metrics["accuracy"],
+                "validation_macro_f1": validation_metrics["macro_f1"],
+                "aggregation_method": validation_metrics["aggregation_method"],
+            }
+        )
+        print(
+            f"Epoch {epoch}/{args.epochs} | train loss {train_metrics['loss']:.4f} | "
+            f"train document accuracy {train_metrics['accuracy']:.4f} | "
+            f"validation loss {validation_metrics['loss']:.4f} | "
+            f"validation document accuracy {validation_metrics['accuracy']:.4f} | "
+            f"validation macro F1 {validation_metrics['macro_f1']:.4f} | "
+            f"aggregation {validation_metrics['aggregation_method']}"
+        )
+        if validation_metrics["macro_f1"] > best_f1:
+            best_f1 = float(validation_metrics["macro_f1"])
+            save_checkpoint(model, best_path, epoch, validation_metrics, comparisons)
 
-        if val_metrics["macro_f1"] > best_val_f1:
-            best_val_f1 = val_metrics["macro_f1"]
-            save_best_model(model, best_model_path, epoch, val_metrics)
-            print(f"Saved best model: {best_model_path}")
+    results_dir.mkdir(parents=True, exist_ok=True)
+    with (results_dir / "training_history.csv").open(
+        "w", encoding="utf-8", newline=""
+    ) as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(history[0]))
+        writer.writeheader()
+        writer.writerows(history)
 
-    checkpoint = torch.load(best_model_path, map_location=device)
+    checkpoint = torch.load(best_path, map_location=device)
     model.load_state_dict(checkpoint["model_state_dict"])
-
-    test_metrics = evaluate(model, test_loader, criterion, device, measure_prediction_time=True)
-    save_results(test_metrics)
-
-    print("TEST RESULTS")
-    print(f"accuracy: {test_metrics['accuracy']:.4f}")
-    print(f"macro precision: {test_metrics['macro_precision']:.4f}")
-    print(f"macro recall: {test_metrics['macro_recall']:.4f}")
-    print(f"macro F1: {test_metrics['macro_f1']:.4f}")
-    print(f"prediction time seconds: {test_metrics['prediction_time_seconds']:.4f}")
-    print(f"seconds per sample: {test_metrics['seconds_per_sample']:.6f}")
-    print(f"Results saved to: {RESULTS_DIR}")
+    test_raw = collect_evaluation(
+        model, loaders["test"], criterion, device, measure_prediction_time=True
+    )
+    test_metrics, _ = aggregate_raw(test_raw, method=checkpoint["aggregation_method"])
+    test_metrics["page_logits_by_document"] = test_raw["logits_by_document"]
+    save_results(results_dir, test_metrics)
+    print(
+        f"TEST document accuracy={test_metrics['accuracy']:.4f} "
+        f"macro_f1={test_metrics['macro_f1']:.4f} "
+        f"aggregation={test_metrics['aggregation_method']}"
+    )
 
 
 if __name__ == "__main__":

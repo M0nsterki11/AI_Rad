@@ -14,9 +14,9 @@ DEFAULT_REPOS = {
     "layoutlmv3": "M0nsterki11/document-ai-layoutlmv3",
 }
 UPLOAD_TARGETS = {
-    "resnet50": PROJECT_ROOT / "models" / "resnet50",
-    "xlm_roberta": PROJECT_ROOT / "models" / "xlm_roberta",
-    "layoutlmv3": PROJECT_ROOT / "models" / "layoutlmv3" / "best_model",
+    "resnet50": PROJECT_ROOT / "models" / "resnet50_multipage",
+    "xlm_roberta": PROJECT_ROOT / "models" / "xlm_roberta_multipage" / "best_model",
+    "layoutlmv3": PROJECT_ROOT / "models" / "layoutlmv3_multipage" / "best_model",
 }
 IGNORE_PATTERNS = [
     "data/**",
@@ -29,6 +29,7 @@ IGNORE_PATTERNS = [
     "logs/**",
     ".cache/**",
     ".hf_cache/**",
+    "smoke_test_best_model.pth",
     "smoke_test_best_model/**",
 ]
 
@@ -40,17 +41,17 @@ def parse_args():
     parser.add_argument(
         "--resnet50-repo-id",
         default=os.environ.get("HF_RESNET50_REPO_ID", DEFAULT_REPOS["resnet50"]),
-        help="Hugging Face model repo for models/resnet50/.",
+        help="Hugging Face model repo for models/resnet50_multipage/.",
     )
     parser.add_argument(
         "--xlm-roberta-repo-id",
         default=os.environ.get("HF_XLM_ROBERTA_REPO_ID", DEFAULT_REPOS["xlm_roberta"]),
-        help="Hugging Face model repo for models/xlm_roberta/.",
+        help="Hugging Face model repo for models/xlm_roberta_multipage/best_model/.",
     )
     parser.add_argument(
         "--layoutlmv3-repo-id",
         default=os.environ.get("HF_LAYOUTLMV3_REPO_ID", DEFAULT_REPOS["layoutlmv3"]),
-        help="Hugging Face model repo for models/layoutlmv3/best_model/.",
+        help="Hugging Face model repo for models/layoutlmv3_multipage/best_model/.",
     )
     parser.add_argument(
         "--private",

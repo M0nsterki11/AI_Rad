@@ -2,7 +2,6 @@ import json
 import sys
 import tempfile
 import traceback
-from contextlib import contextmanager
 from pathlib import Path
 
 import pandas as pd
@@ -16,37 +15,34 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.predict_resnet import (  # noqa: E402
-    load_document_image as load_resnet_document_image,
     load_model as load_resnet_model,
-    predict_file as predict_resnet_file,
+    predict_images as predict_resnet_images,
 )
 from src.predict_text_model import (  # noqa: E402
-    extract_text_from_file,
     load_text_model,
-    predict_file as predict_text_file,
     predict_text,
 )
 from src.predict_layoutlm import (  # noqa: E402
-    load_image_and_ocr,
     load_layoutlm_model,
-    predict_layoutlm,
+    predict_layout_pages,
 )
 from src.model_downloader import (  # noqa: E402
     ensure_model_available,
     is_model_available,
 )
-from src.document_conversion import (  # noqa: E402
-    DocumentConversionError,
-    convert_docx_to_pdf,
-    convert_pdf_first_page_to_image,
-)
 from src.document_adapter import prepare_document_for_models  # noqa: E402
-from src.preprocess import OCRProcessingError  # noqa: E402
 
 
-RESNET_RESULTS_DIR = PROJECT_ROOT / "results" / "resnet50"
-XLM_RESULTS_DIR = PROJECT_ROOT / "results" / "xlm_roberta"
-LAYOUT_RESULTS_DIR = PROJECT_ROOT / "results" / "layoutlmv3"
+def preferred_results_dir(multipage_name, legacy_name):
+    multipage_dir = PROJECT_ROOT / "results" / multipage_name
+    if (multipage_dir / "test_metrics.json").is_file():
+        return multipage_dir
+    return PROJECT_ROOT / "results" / legacy_name
+
+
+RESNET_RESULTS_DIR = preferred_results_dir("resnet50_multipage", "resnet50")
+XLM_RESULTS_DIR = preferred_results_dir("xlm_roberta_multipage", "xlm_roberta")
+LAYOUT_RESULTS_DIR = preferred_results_dir("layoutlmv3_multipage", "layoutlmv3")
 EXTERNAL_RESULTS_DIR = PROJECT_ROOT / "results" / "external_test"
 FINAL_COMPARISON_PATH = PROJECT_ROOT / "results" / "final_comparison.csv"
 FINAL_COMPARISON_CHART_PATH = PROJECT_ROOT / "results" / "final_comparison.png"
@@ -68,17 +64,7 @@ PREDICTION_MODEL_LABELS = {
 }
 CLASS_NAMES = ["invoice", "cv", "contract", "email", "scientific"]
 PREDICTION_CONFIDENCE_THRESHOLD = 0.50
-DOCX_CONVERSION_WARNING = (
-    "Automatska konverzija DOCX-a nije uspjela. DOCX nije moguće pretvoriti "
-    "u sliku na ovom serveru. Spremite dokument kao PDF i pokušajte ponovno."
-)
 ALL_UPLOAD_TYPES = ["pdf", "png", "jpg", "jpeg", "txt", "docx"]
-ADAPTABLE_DOCUMENT_EXTENSIONS = {f".{extension}" for extension in ALL_UPLOAD_TYPES}
-MODEL_SUPPORTED_EXTENSIONS = {
-    "resnet50": ADAPTABLE_DOCUMENT_EXTENSIONS,
-    "xlm_roberta": ADAPTABLE_DOCUMENT_EXTENSIONS,
-    "layoutlmv3": ADAPTABLE_DOCUMENT_EXTENSIONS,
-}
 
 MODEL_OPTIONS = [
     "ResNet50 – vizualni model",
@@ -117,32 +103,6 @@ def get_layoutlm_model():
     return model, processor, class_names, label_to_index, device
 
 
-def save_uploaded_file(uploaded_file):
-    suffix = Path(uploaded_file.name).suffix.lower()
-    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as temp_file:
-        temp_file.write(uploaded_file.getbuffer())
-        return Path(temp_file.name)
-
-
-@contextmanager
-def prepare_resnet_input(document_path, model_keys):
-    document_path = Path(document_path)
-    if "resnet50" not in model_keys or document_path.suffix.lower() != ".docx":
-        yield document_path
-        return
-
-    st.info(
-        "ResNet50 je vizualni model. DOCX se automatski pokušava pretvoriti "
-        "u PDF/sliku prije predikcije."
-    )
-    with tempfile.TemporaryDirectory(prefix="resnet_docx_") as temporary_dir:
-        output_dir = Path(temporary_dir)
-        with st.spinner("Pretvaram DOCX u sliku za vizualni model..."):
-            pdf_path = convert_docx_to_pdf(document_path, output_dir)
-            image_path = convert_pdf_first_page_to_image(pdf_path, output_dir)
-        yield image_path
-
-
 def show_model_status_sidebar():
     st.sidebar.subheader("Status modela")
     for model_key, model_label in PREDICTION_MODEL_LABELS.items():
@@ -150,386 +110,9 @@ def show_model_status_sidebar():
         st.sidebar.write(f"{model_label}: {status}")
 
 
-def ensure_models_for_prediction(model_keys):
-    for model_key in model_keys:
-        if is_model_available(model_key):
-            continue
-
-        model_label = PREDICTION_MODEL_LABELS.get(model_key, model_key)
-        with st.spinner("Preuzimam model..."):
-            available, message = ensure_model_available(model_key)
-
-        if available:
-            continue
-
-        if "Hugging Face repo ID" in message:
-            st.warning(message)
-        else:
-            st.error(f"{model_label}: {message}")
-        return False
-
-    return True
-
-
-def resnet_probability_frame(probabilities):
-    rows = [
-        {
-            "klasa": label,
-            "vjerojatnost": probability,
-            "postotak": f"{probability * 100:.2f}%",
-        }
-        for label, probability in probabilities.items()
-    ]
-    rows.sort(key=lambda row: row["vjerojatnost"], reverse=True)
-    return pd.DataFrame(rows)
-
-
-def text_probability_frame(probabilities):
-    return pd.DataFrame(
-        [
-            {
-                "klasa": row["class"],
-                "vjerojatnost": row["probability"],
-                "postotak": f"{row['probability'] * 100:.2f}%",
-            }
-            for row in probabilities
-        ]
-    )
-
-
-def ranked_probability_frame(probabilities):
-    return text_probability_frame(probabilities)
-
-
-def probability_dict_from_ranked(probabilities):
-    return {row["class"]: row["probability"] for row in probabilities}
-
-
-def show_probability_outputs(probability_df):
-    st.dataframe(probability_df, hide_index=True, use_container_width=True)
-    chart_df = probability_df.set_index("klasa")[["vjerojatnost"]]
-    st.bar_chart(chart_df)
-
-
 def is_recognized_prediction(result):
     confidence = float(result.get("confidence", 0.0) or 0.0)
     return confidence >= PREDICTION_CONFIDENCE_THRESHOLD
-
-
-def show_prediction_status(result):
-    recognized = is_recognized_prediction(result)
-    if recognized:
-        st.info(
-            "Prepoznato: True. Model je iznad minimalnog praga sigurnosti "
-            f"od {PREDICTION_CONFIDENCE_THRESHOLD * 100:.0f}%."
-        )
-    else:
-        st.warning(
-            "Predikcija je završena, ali model nije dovoljno siguran za pouzdanu "
-            f"klasifikaciju (prag {PREDICTION_CONFIDENCE_THRESHOLD * 100:.0f}%)."
-        )
-    return recognized
-
-
-def display_class(result, recognized):
-    return result["predicted_class"] if recognized else "nepoznato"
-
-
-def split_compatible_models(model_keys, extension):
-    compatible = [
-        model_key
-        for model_key in model_keys
-        if extension in MODEL_SUPPORTED_EXTENSIONS.get(model_key, set())
-    ]
-    incompatible = [model_key for model_key in model_keys if model_key not in compatible]
-    return compatible, incompatible
-
-
-def incompatible_model_reason(model_key, extension):
-    if model_key == "resnet50" and extension == ".txt":
-        return "ResNet50 je vizualni model i ne podržava TXT bez pretvaranja u sliku."
-    return f"Model ne podržava {extension or 'ovu vrstu datoteke'} kao ulaz."
-
-
-def show_incompatible_models(incompatible_model_keys, extension):
-    if not incompatible_model_keys:
-        return
-
-    status_df = pd.DataFrame(
-        [
-            {
-                "Model": PREDICTION_MODEL_LABELS.get(model_key, model_key),
-                "Status obrade": "Nepodržano / nije moguće pripremiti",
-                "Prepoznato": False,
-                "Razlog": incompatible_model_reason(model_key, extension),
-            }
-            for model_key in incompatible_model_keys
-        ]
-    )
-    if incompatible_model_keys == ["resnet50"] and extension == ".txt":
-        st.warning(incompatible_model_reason("resnet50", extension))
-    else:
-        st.warning(
-            "Dokument je učitan, ali ga svi odabrani modeli ne mogu obraditi. "
-            "Tekstualne datoteke izravno podržava XLM-RoBERTa."
-        )
-    st.dataframe(status_df, hide_index=True, use_container_width=True)
-
-
-def show_resnet_prediction(temp_path):
-    model, class_names, device, _ = get_resnet_model()
-    preview = load_resnet_document_image(temp_path)
-    st.image(preview, caption="Prva stranica", use_container_width=True)
-
-    if st.button("Klasificiraj dokument", type="primary"):
-        result = predict_resnet_file(temp_path, model=model, class_names=class_names, device=device)
-        probability_df = resnet_probability_frame(result["probabilities"])
-        recognized = show_prediction_status(result)
-
-        st.subheader("ResNet50 predikcija")
-        col_status, col_class, col_confidence, col_time = st.columns(4)
-        col_status.metric("Prepoznato", str(recognized))
-        col_class.metric("Klasa", display_class(result, recognized))
-        col_confidence.metric("Sigurnost", f"{result['confidence'] * 100:.2f}%")
-        col_time.metric("Vrijeme", f"{result['prediction_time_seconds']:.4f} s")
-        show_probability_outputs(probability_df)
-
-
-def show_text_prediction(temp_path):
-    model, tokenizer, class_names, _, device = get_text_model()
-    text = extract_text_from_file(temp_path)
-
-    with st.expander("Preview izdvojenog teksta", expanded=False):
-        st.text(text[:1000])
-
-    if st.button("Klasificiraj dokument", type="primary"):
-        result = predict_text(
-            text,
-            model=model,
-            tokenizer=tokenizer,
-            class_names=class_names,
-            device=device,
-        )
-        probability_df = text_probability_frame(result["probabilities"])
-        recognized = show_prediction_status(result)
-
-        st.subheader("XLM-RoBERTa predikcija")
-        col_status, col_class, col_confidence, col_time = st.columns(4)
-        col_status.metric("Prepoznato", str(recognized))
-        col_class.metric("Klasa", display_class(result, recognized))
-        col_confidence.metric("Sigurnost", f"{result['confidence'] * 100:.2f}%")
-        col_time.metric("Vrijeme", f"{result['prediction_time_seconds']:.4f} s")
-        show_probability_outputs(probability_df)
-
-
-def show_layoutlm_prediction(temp_path):
-    model, processor, class_names, _, device = get_layoutlm_model()
-    image, words, boxes, ocr_text = load_image_and_ocr(temp_path)
-    st.image(image, caption="Prva stranica", use_container_width=True)
-
-    with st.expander("Preview OCR teksta", expanded=False):
-        st.text(ocr_text[:1000])
-
-    if st.button("Klasificiraj dokument", type="primary"):
-        result = predict_layoutlm(
-            image,
-            words,
-            boxes,
-            model=model,
-            processor=processor,
-            class_names=class_names,
-            device=device,
-        )
-        probability_df = ranked_probability_frame(result["probabilities"])
-        recognized = show_prediction_status(result)
-
-        st.subheader("LayoutLMv3 predikcija")
-        col_status, col_class, col_confidence, col_time = st.columns(4)
-        col_status.metric("Prepoznato", str(recognized))
-        col_class.metric("Klasa", display_class(result, recognized))
-        col_confidence.metric("Sigurnost", f"{result['confidence'] * 100:.2f}%")
-        col_time.metric("Vrijeme", f"{result['prediction_time_seconds']:.4f} s")
-        show_probability_outputs(probability_df)
-
-
-def show_comparison(temp_path, resnet_input_path=None):
-    resnet_input_path = Path(resnet_input_path or temp_path)
-    resnet_model, resnet_classes, resnet_device, _ = get_resnet_model()
-    text_model, tokenizer, text_classes, _, text_device = get_text_model()
-
-    preview = load_resnet_document_image(resnet_input_path)
-    st.image(preview, caption="Prva stranica za ResNet50", use_container_width=True)
-
-    extracted_text = extract_text_from_file(temp_path)
-    with st.expander("Preview izdvojenog teksta za XLM-RoBERTa", expanded=False):
-        st.text(extracted_text[:1000])
-
-    if st.button("Klasificiraj dokument", type="primary"):
-        resnet_result = predict_resnet_file(
-            resnet_input_path,
-            model=resnet_model,
-            class_names=resnet_classes,
-            device=resnet_device,
-        )
-        text_result = predict_text(
-            extracted_text,
-            model=text_model,
-            tokenizer=tokenizer,
-            class_names=text_classes,
-            device=text_device,
-        )
-        resnet_recognized = is_recognized_prediction(resnet_result)
-        text_recognized = is_recognized_prediction(text_result)
-
-        left, right = st.columns(2)
-        with left:
-            st.subheader("ResNet50")
-            st.metric("Prepoznato", str(resnet_recognized))
-            st.metric("Predikcija", display_class(resnet_result, resnet_recognized))
-            st.metric("Sigurnost", f"{resnet_result['confidence'] * 100:.2f}%")
-            st.metric("Vrijeme", f"{resnet_result['prediction_time_seconds']:.4f} s")
-
-        with right:
-            st.subheader("XLM-RoBERTa")
-            st.metric("Prepoznato", str(text_recognized))
-            st.metric("Predikcija", display_class(text_result, text_recognized))
-            st.metric("Sigurnost", f"{text_result['confidence'] * 100:.2f}%")
-            st.metric("Vrijeme", f"{text_result['prediction_time_seconds']:.4f} s")
-
-        resnet_probs = resnet_result["probabilities"]
-        text_probs = probability_dict_from_ranked(text_result["probabilities"])
-        labels = resnet_classes if resnet_classes == text_classes else sorted(set(resnet_probs) | set(text_probs))
-        comparison_df = pd.DataFrame(
-            [
-                {
-                    "Klasa": label,
-                    "ResNet50": resnet_probs.get(label, 0.0),
-                    "XLM-RoBERTa": text_probs.get(label, 0.0),
-                }
-                for label in labels
-            ]
-        )
-        st.dataframe(comparison_df, hide_index=True, use_container_width=True)
-
-        if not (resnet_recognized and text_recognized):
-            st.warning("Najmanje jedan model nije dovoljno siguran: Prepoznato = False.")
-        elif resnet_result["predicted_class"] != text_result["predicted_class"]:
-            st.info("Modeli se ne slažu u predikciji.")
-
-
-def show_all_models_comparison(temp_path, resnet_input_path=None):
-    resnet_input_path = Path(resnet_input_path or temp_path)
-    resnet_model, resnet_classes, resnet_device, _ = get_resnet_model()
-    text_model, tokenizer, text_classes, _, text_device = get_text_model()
-    layout_model, layout_processor, layout_classes, _, layout_device = get_layoutlm_model()
-
-    image, words, boxes, ocr_text = load_image_and_ocr(temp_path)
-    st.image(image, caption="Prva stranica", use_container_width=True)
-
-    extracted_text = extract_text_from_file(temp_path)
-    with st.expander("Preview izdvojenog teksta", expanded=False):
-        st.text(extracted_text[:1000])
-    with st.expander("Preview OCR teksta za LayoutLMv3", expanded=False):
-        st.text(ocr_text[:1000])
-
-    if st.button("Klasificiraj dokument", type="primary"):
-        resnet_result = predict_resnet_file(
-            resnet_input_path,
-            model=resnet_model,
-            class_names=resnet_classes,
-            device=resnet_device,
-        )
-        text_result = predict_text(
-            extracted_text,
-            model=text_model,
-            tokenizer=tokenizer,
-            class_names=text_classes,
-            device=text_device,
-        )
-        layout_result = predict_layoutlm(
-            image,
-            words,
-            boxes,
-            model=layout_model,
-            processor=layout_processor,
-            class_names=layout_classes,
-            device=layout_device,
-        )
-        resnet_recognized = is_recognized_prediction(resnet_result)
-        text_recognized = is_recognized_prediction(text_result)
-        layout_recognized = is_recognized_prediction(layout_result)
-
-        summary_df = pd.DataFrame(
-            [
-                {
-                    "Model": "ResNet50",
-                    "Predviđena klasa": display_class(resnet_result, resnet_recognized),
-                    "Prepoznato": resnet_recognized,
-                    "Sigurnost": f"{resnet_result['confidence'] * 100:.2f}%",
-                    "Vrijeme predikcije": f"{resnet_result['prediction_time_seconds']:.4f} s",
-                },
-                {
-                    "Model": "XLM-RoBERTa",
-                    "Predviđena klasa": display_class(text_result, text_recognized),
-                    "Prepoznato": text_recognized,
-                    "Sigurnost": f"{text_result['confidence'] * 100:.2f}%",
-                    "Vrijeme predikcije": f"{text_result['prediction_time_seconds']:.4f} s",
-                },
-                {
-                    "Model": "LayoutLMv3",
-                    "Predviđena klasa": display_class(layout_result, layout_recognized),
-                    "Prepoznato": layout_recognized,
-                    "Sigurnost": f"{layout_result['confidence'] * 100:.2f}%",
-                    "Vrijeme predikcije": f"{layout_result['prediction_time_seconds']:.4f} s",
-                },
-            ]
-        )
-        st.subheader("Sažetak predikcije")
-        st.dataframe(summary_df, hide_index=True, use_container_width=True)
-
-        resnet_probs = resnet_result["probabilities"]
-        text_probs = probability_dict_from_ranked(text_result["probabilities"])
-        layout_probs = probability_dict_from_ranked(layout_result["probabilities"])
-
-        comparison_df = pd.DataFrame(
-            [
-                {
-                    "Klasa": label,
-                    "ResNet50": format_percent(resnet_probs.get(label, 0.0)),
-                    "XLM-RoBERTa": format_percent(text_probs.get(label, 0.0)),
-                    "LayoutLMv3": format_percent(layout_probs.get(label, 0.0)),
-                }
-                for label in CLASS_NAMES
-            ]
-        )
-        st.subheader("Vjerojatnosti po klasama")
-        st.dataframe(comparison_df, hide_index=True, use_container_width=True)
-
-        chart_df = pd.DataFrame(
-            [
-                {
-                    "Klasa": label,
-                    "ResNet50": safe_float(resnet_probs.get(label, 0.0)) * 100,
-                    "XLM-RoBERTa": safe_float(text_probs.get(label, 0.0)) * 100,
-                    "LayoutLMv3": safe_float(layout_probs.get(label, 0.0)) * 100,
-                }
-                for label in CLASS_NAMES
-            ]
-        ).set_index("Klasa")
-        st.bar_chart(chart_df)
-
-        all_recognized = resnet_recognized and text_recognized and layout_recognized
-        predicted_classes = {
-            display_class(resnet_result, resnet_recognized),
-            display_class(text_result, text_recognized),
-            display_class(layout_result, layout_recognized),
-        }
-        if not all_recognized:
-            st.warning("Najmanje jedan model nije dovoljno siguran: Prepoznato = False.")
-        elif len(predicted_classes) > 1:
-            st.warning("Modeli se ne slažu u predikciji za ovaj dokument.")
-        else:
-            st.info("Sva tri modela predviđaju istu klasu za ovaj dokument.")
 
 
 def preparation_error_reason(prepared, categories):
@@ -545,6 +128,28 @@ def prepared_model_status(prepared, model_key):
     image_path = prepared.get("image_path")
     text_path = prepared.get("text_path")
     ocr_path = prepared.get("ocr_path")
+    page_artifacts = prepared.get("page_artifacts") or []
+    layout_page_artifacts = prepared.get("layout_page_artifacts") or []
+
+    if model_key == "resnet50" and page_artifacts:
+        if all(Path(page["image_path"]).is_file() for page in page_artifacts):
+            return True, ""
+
+    if model_key == "layoutlmv3" and layout_page_artifacts:
+        try:
+            for page in layout_page_artifacts:
+                if not Path(page["image_path"]).is_file() or not Path(page["ocr_path"]).is_file():
+                    raise ValueError(f"Nedostaje artefakt stranice {int(page['page_index']) + 1}.")
+                words = page.get("words", [])
+                boxes = page.get("boxes", [])
+                if not words or len(words) != len(boxes):
+                    raise ValueError(
+                        f"OCR riječi i boxovi nisu valjani za stranicu "
+                        f"{int(page['page_index']) + 1}."
+                    )
+        except Exception as error:
+            return False, f"OCR/layout input nije moguće učitati: {error}"
+        return True, ""
 
     if model_key == "resnet50":
         if image_path and Path(image_path).is_file():
@@ -608,6 +213,27 @@ def skipped_outcome(model_key, reason):
     }
 
 
+def prepared_page_inputs(prepared, *, layout=False):
+    cache_key = "_loaded_layout_page_inputs" if layout else "_loaded_page_inputs"
+    cached = prepared.get(cache_key)
+    if cached is not None:
+        return cached
+    artifact_key = "layout_page_artifacts" if layout else "page_artifacts"
+    pages = prepared.get(artifact_key) or []
+    images = []
+    for page in pages:
+        with Image.open(page["image_path"]) as source:
+            images.append(source.convert("RGB"))
+    cached = {
+        "images": images,
+        "words": [list(page.get("words", [])) for page in pages],
+        "boxes": [list(page.get("boxes", [])) for page in pages],
+        "page_indices": [int(page["page_index"]) for page in pages],
+    }
+    prepared[cache_key] = cached
+    return cached
+
+
 def run_prepared_model_prediction(prepared, model_key):
     ready, reason = prepared_model_status(prepared, model_key)
     if not ready:
@@ -620,8 +246,11 @@ def run_prepared_model_prediction(prepared, model_key):
     try:
         if model_key == "resnet50":
             model, class_names, device, _ = get_resnet_model()
-            result = predict_resnet_file(
-                prepared["image_path"],
+            page_inputs = prepared_page_inputs(prepared)
+            result = predict_resnet_images(
+                page_inputs["images"],
+                page_indices=page_inputs["page_indices"],
+                total_pages=prepared.get("total_pages"),
                 model=model,
                 class_names=class_names,
                 device=device,
@@ -637,14 +266,14 @@ def run_prepared_model_prediction(prepared, model_key):
                 device=device,
             )
         elif model_key == "layoutlmv3":
-            payload = json.loads(Path(prepared["ocr_path"]).read_text(encoding="utf-8"))
-            with Image.open(prepared["image_path"]) as source_image:
-                image = source_image.convert("RGB")
+            page_inputs = prepared_page_inputs(prepared, layout=True)
             model, processor, class_names, _, device = get_layoutlm_model()
-            result = predict_layoutlm(
-                image,
-                payload.get("words", []),
-                payload.get("boxes", []),
+            result = predict_layout_pages(
+                page_inputs["images"],
+                page_inputs["words"],
+                page_inputs["boxes"],
+                page_indices=page_inputs["page_indices"],
+                total_pages=prepared.get("total_pages"),
                 model=model,
                 processor=processor,
                 class_names=class_names,
@@ -699,7 +328,25 @@ def show_prepared_document_preview(prepared, model_keys):
 
     image_path = prepared.get("image_path")
     if image_path and Path(image_path).is_file():
-        st.image(str(image_path), caption="Pripremljeni vizualni input", use_container_width=True)
+        st.image(
+            str(image_path),
+            caption="Preview prve odabrane stranice",
+            width="stretch",
+        )
+
+    total_pages = int(prepared.get("total_pages") or 0)
+    selected_indices = [int(index) for index in prepared.get("analyzed_page_indices", [])]
+    if total_pages:
+        page_col, analyzed_col = st.columns(2)
+        page_col.metric("Ukupan broj stranica", total_pages)
+        analyzed_col.metric("Analizirano stranica", len(selected_indices))
+        selected_display = ", ".join(str(index + 1) for index in selected_indices)
+        st.caption(f"Odabrane stranice: {selected_display}")
+        layout_indices = [int(index) for index in prepared.get("layout_page_indices", [])]
+        if len(layout_indices) != len(selected_indices):
+            st.caption(
+                f"LayoutLMv3 valjane OCR stranice: {len(layout_indices)} / {len(selected_indices)}"
+            )
 
     text_path = prepared.get("text_path")
     if text_path and Path(text_path).is_file():
@@ -717,7 +364,7 @@ def show_prepared_document_preview(prepared, model_keys):
                 "Razlog": reason,
             }
         )
-    st.dataframe(pd.DataFrame(preparation_rows), hide_index=True, use_container_width=True)
+    st.dataframe(pd.DataFrame(preparation_rows), hide_index=True, width="stretch")
 
     if prepared.get("errors"):
         with st.expander("Detalji pripreme dokumenta", expanded=False):
@@ -750,12 +397,65 @@ def show_live_prediction_results(outcomes):
                     if result
                     else "—"
                 ),
+                "Analizirano": (
+                    f"{result.get('pages_analyzed')} stranica"
+                    if result.get("pages_analyzed") is not None
+                    else (
+                        f"{result.get('chunks_analyzed')} chunkova"
+                        if result.get("chunks_analyzed") is not None
+                        else "-"
+                    )
+                ),
                 "Razlog": outcome.get("reason", ""),
             }
         )
 
     st.subheader("Rezultati live predikcije")
-    st.dataframe(pd.DataFrame(summary_rows), hide_index=True, use_container_width=True)
+    st.dataframe(pd.DataFrame(summary_rows), hide_index=True, width="stretch")
+
+    for outcome in outcomes:
+        result = outcome.get("result") or {}
+        page_rows = result.get("page_predictions") or []
+        chunk_rows = result.get("chunk_predictions") or []
+        if not page_rows and not chunk_rows:
+            continue
+        with st.expander(f"Detalji: {outcome['model']}", expanded=False):
+            if page_rows:
+                detail = pd.DataFrame(page_rows).rename(
+                    columns={
+                        "page_index": "Stranica (indeks)",
+                        "predicted_class": "Predikcija",
+                        "confidence": "Sigurnost",
+                        "ocr_word_count": "OCR rijeci",
+                    }
+                )
+                detail["Stranica"] = detail["Stranica (indeks)"] + 1
+                detail["Sigurnost"] = detail["Sigurnost"].map(
+                    lambda value: f"{safe_float(value) * 100:.2f}%"
+                )
+                visible = [
+                    column
+                    for column in ["Stranica", "Predikcija", "Sigurnost", "OCR rijeci"]
+                    if column in detail.columns
+                ]
+                st.dataframe(detail[visible], hide_index=True, width="stretch")
+            if chunk_rows:
+                detail = pd.DataFrame(chunk_rows).rename(
+                    columns={
+                        "chunk_index": "Chunk (indeks)",
+                        "predicted_class": "Predikcija",
+                        "confidence": "Sigurnost",
+                        "token_count": "Tokena",
+                    }
+                )
+                detail["Sigurnost"] = detail["Sigurnost"].map(
+                    lambda value: f"{safe_float(value) * 100:.2f}%"
+                )
+                st.write(
+                    f"Ukupno chunkova: {result.get('total_chunks', len(chunk_rows))}; "
+                    f"analizirano: {result.get('chunks_analyzed', len(chunk_rows))}."
+                )
+                st.dataframe(detail, hide_index=True, width="stretch")
 
     successful = [outcome for outcome in outcomes if outcome["status"] == "Uspješno"]
     for outcome in outcomes:
@@ -784,7 +484,7 @@ def show_live_prediction_results(outcomes):
         st.subheader("Usporedba vjerojatnosti")
         st.dataframe(
             (probability_df * 100).map(lambda value: f"{value:.2f}%"),
-            use_container_width=True,
+            width="stretch",
         )
         st.bar_chart(probability_df * 100)
 
@@ -889,7 +589,7 @@ def internal_metrics_table():
 
 
 def show_internal_test_tab():
-    st.dataframe(internal_metrics_table(), hide_index=True, use_container_width=True)
+    st.dataframe(internal_metrics_table(), hide_index=True, width="stretch")
 
     selected_model = st.selectbox("Detalji modela", list(RESULT_DIRS), key="internal_model")
     results_dir = RESULT_DIRS[selected_model]
@@ -926,7 +626,7 @@ def show_internal_test_tab():
                     "Support": int(safe_float(values.get("support", 0))),
                 }
             )
-        st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
+        st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
 
     report_path = results_dir / "classification_report.txt"
     if report_path.exists():
@@ -969,7 +669,7 @@ def show_external_test_tab():
             "Oznaka": ["Najbolji vanjski macro F1" if index == best_index else "" for index in df.index],
         }
     )
-    st.dataframe(display_df, hide_index=True, use_container_width=True)
+    st.dataframe(display_df, hide_index=True, width="stretch")
 
     chart_df = df.set_index("model")[["accuracy", "macro_f1"]] * 100
     chart_df = chart_df.rename(columns={"accuracy": "Accuracy", "macro_f1": "Macro F1"})
@@ -996,10 +696,10 @@ def show_confusion_matrix_from_dir(results_dir, model_name, test_name):
     csv_path = results_dir / "confusion_matrix.csv"
 
     if png_path.exists():
-        st.image(str(png_path), caption=f"{model_name} - {test_name}", use_container_width=True)
+        st.image(str(png_path), caption=f"{model_name} - {test_name}", width="stretch")
     elif csv_path.exists():
         matrix_df = confusion_csv_as_frame(csv_path)
-        st.dataframe(matrix_df.style.background_gradient(cmap="Blues"), use_container_width=True)
+        st.dataframe(matrix_df.style.background_gradient(cmap="Blues"), width="stretch")
     else:
         st.warning(f"Nedostaje confusion matrix PNG/CSV u {results_dir}")
 
@@ -1083,7 +783,7 @@ def show_external_predictions_tab():
             ),
         }
     )
-    st.dataframe(display_df, hide_index=True, use_container_width=True)
+    st.dataframe(display_df, hide_index=True, width="stretch")
 
 
 def final_comparison_summary(df):
@@ -1154,7 +854,7 @@ def show_final_comparison_tab():
             "Oznake": tags,
         }
     )
-    st.dataframe(display_df, hide_index=True, use_container_width=True)
+    st.dataframe(display_df, hide_index=True, width="stretch")
 
     chart_df = df.set_index("model")[["internal_macro_f1", "external_macro_f1"]] * 100
     chart_df = chart_df.rename(
@@ -1167,7 +867,7 @@ def show_final_comparison_tab():
 
     if FINAL_COMPARISON_CHART_PATH.exists():
         with st.expander("Graf accuracy i macro F1", expanded=False):
-            st.image(str(FINAL_COMPARISON_CHART_PATH), use_container_width=True)
+            st.image(str(FINAL_COMPARISON_CHART_PATH), width="stretch")
 
     st.write(final_comparison_summary(df))
     st.markdown(
