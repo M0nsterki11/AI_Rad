@@ -1,0 +1,4 @@
+Na internom testnom skupu najbolji model je LayoutLMv3 (macro F1: 100.00%).
+Na vanjskom testnom skupu najbolji model je XLM-RoBERTa (macro F1: 69.29%).
+Najmanji pad macro F1 rezultata ima XLM-RoBERTa (pad: 30.04%).
+Razlika izmedu internih i vanjskih rezultata pokazuje koliko modeli generaliziraju na dokumente iz drugih izvora.

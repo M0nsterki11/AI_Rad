@@ -1,0 +1,13 @@
+{
+  "accuracy": 0.8505263157894737,
+  "macro_precision": 0.8530864457965095,
+  "macro_recall": 0.850876239511823,
+  "macro_f1": 0.8500901026735421,
+  "aggregation_method": "mean",
+  "aggregation_top_k": 3,
+  "documents_evaluated": 475,
+  "loss": 0.5672132257382366,
+  "prediction_time_seconds": 2.0623151999934635,
+  "seconds_per_document": 0.004341716210512554,
+  "pages_evaluated": 1093
+}

@@ -4,18 +4,18 @@ import argparse
 import os
 from pathlib import Path
 
-from huggingface_hub import HfApi
+from huggingface_hub import HfApi, get_token
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REPOS = {
-    "resnet50": "M0nsterki11/document-ai-resnet50",
-    "xlm_roberta": "M0nsterki11/document-ai-xlm-roberta",
-    "layoutlmv3": "M0nsterki11/document-ai-layoutlmv3",
+    "resnet50": "M0nsterkill/document-ai-resnet50",
+    "xlm_roberta": "M0nsterkill/document-ai-xlm-roberta",
+    "layoutlmv3": "M0nsterkill/document-ai-layoutlmv3",
 }
 UPLOAD_TARGETS = {
     "resnet50": PROJECT_ROOT / "models" / "resnet50_multipage",
-    "xlm_roberta": PROJECT_ROOT / "models" / "xlm_roberta_multipage" / "best_model",
+    "xlm_roberta": PROJECT_ROOT / "models" / "xlm_roberta_multipage",
     "layoutlmv3": PROJECT_ROOT / "models" / "layoutlmv3_multipage" / "best_model",
 }
 IGNORE_PATTERNS = [
@@ -46,7 +46,7 @@ def parse_args():
     parser.add_argument(
         "--xlm-roberta-repo-id",
         default=os.environ.get("HF_XLM_ROBERTA_REPO_ID", DEFAULT_REPOS["xlm_roberta"]),
-        help="Hugging Face model repo for models/xlm_roberta_multipage/best_model/.",
+        help="Hugging Face model repo for models/xlm_roberta_multipage/.",
     )
     parser.add_argument(
         "--layoutlmv3-repo-id",
@@ -62,10 +62,10 @@ def parse_args():
 
 
 def require_token():
-    token = os.environ.get("HF_TOKEN")
+    token = os.environ.get("HF_TOKEN") or get_token()
     if not token:
         raise RuntimeError(
-            "HF_TOKEN is required for uploading. Set it in your terminal environment first."
+            "Hugging Face authentication is required. Set HF_TOKEN or run: hf auth login"
         )
     return token
 

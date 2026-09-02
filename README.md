@@ -129,7 +129,8 @@ $env:HF_TOKEN="hf_..."
 python scripts\upload_models_to_hf.py
 ```
 
-Skripta ništa ne uploada bez `HF_TOKEN`. Repo ID-jevi mogu se zadati kroz:
+Skripta koristi `HF_TOKEN` ili postojeću prijavu napravljenu naredbom
+`hf auth login`. Repo ID-jevi mogu se zadati kroz:
 
 ```text
 HF_RESNET50_REPO_ID

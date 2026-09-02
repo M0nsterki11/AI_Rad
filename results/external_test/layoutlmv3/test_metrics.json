@@ -35,8 +35,8 @@
       "support": 5
     }
   },
-  "prediction_time_seconds": 1.398061099996994,
-  "seconds_per_document": 0.05592244399987976,
+  "prediction_time_seconds": 6.211184799994953,
+  "seconds_per_document": 0.24844739199979812,
   "documents_processed": 25,
   "documents_failed": 0,
   "documents_total": 25
