@@ -1,13 +1,13 @@
 {
-  "accuracy": 0.8505263157894737,
-  "macro_precision": 0.8530864457965095,
-  "macro_recall": 0.850876239511823,
-  "macro_f1": 0.8500901026735421,
+  "accuracy": 0.8736842105263158,
+  "macro_precision": 0.875605119976392,
+  "macro_recall": 0.8739712051868802,
+  "macro_f1": 0.873168964275083,
   "aggregation_method": "mean",
   "aggregation_top_k": 3,
   "documents_evaluated": 475,
-  "loss": 0.5672132257382366,
-  "prediction_time_seconds": 2.0623151999934635,
-  "seconds_per_document": 0.004341716210512554,
+  "loss": 0.5585260165059447,
+  "prediction_time_seconds": 1.9709100000291073,
+  "seconds_per_document": 0.004149284210587595,
   "pages_evaluated": 1093
 }

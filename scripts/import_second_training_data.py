@@ -4,6 +4,7 @@ import argparse
 import csv
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -66,7 +67,7 @@ MULTIPAGE_DIR = DATA_DIR / "multipage"
 DOCUMENT_MANIFEST_PATH = MULTIPAGE_DIR / "document_manifest.csv"
 PAGE_MANIFEST_PATH = MULTIPAGE_DIR / "page_manifest.csv"
 CHUNK_MANIFEST_PATH = MULTIPAGE_DIR / "chunk_manifest.jsonl"
-STAGING_ROOT = DATA_DIR / "staging_second_training_import"
+STAGING_ROOT = DATA_DIR / "staging_training_import"
 RESULTS_DIR = PROJECT_ROOT / "results" / "dataset_expansion"
 TOKENIZER_CANDIDATES = (
     PROJECT_ROOT / "models" / "xlm_roberta_multipage" / "best_model",
@@ -141,11 +142,20 @@ FAILED_PAGE_FIELDS = (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Import local second-training documents safely into the existing "
+            "Import local training documents safely into the existing "
             "multi-page dataset. New documents are assigned only to train."
         )
     )
     parser.add_argument("--candidate-root", type=Path, default=DEFAULT_CANDIDATE_ROOT)
+    parser.add_argument(
+        "--import-name",
+        type=import_name_arg,
+        default="second_training",
+        help=(
+            "Stable identifier used for document IDs, destination folder, backups, "
+            "and report names (default: second_training)."
+        ),
+    )
     parser.add_argument("--commit", action="store_true", help="Apply the audited import.")
     parser.add_argument("--per-document-timeout", type=int, default=120)
     parser.add_argument("--image-similarity-threshold", type=float, default=0.94)
@@ -155,6 +165,13 @@ def parse_args() -> argparse.Namespace:
     if args.per_document_timeout < 5:
         parser.error("--per-document-timeout must be at least 5 seconds")
     return args
+
+
+def import_name_arg(value: str) -> str:
+    normalized = re.sub(r"[^a-z0-9]+", "_", str(value).casefold()).strip("_")
+    if not normalized:
+        raise argparse.ArgumentTypeError("--import-name must contain a letter or number")
+    return normalized
 
 
 def worker_main(job_path: Path) -> None:
@@ -186,7 +203,9 @@ def candidate_label(path: Path, root: Path) -> str:
     return CLASS_ALIASES[folder]
 
 
-def collect_candidates(root: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def collect_candidates(
+    root: Path, import_name: str
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     candidates = []
     failures = []
     for path in sorted(root.rglob("*"), key=lambda item: item.as_posix().casefold()):
@@ -212,7 +231,9 @@ def collect_candidates(root: Path) -> tuple[list[dict[str, Any]], list[dict[str,
                 "relative_path": relative,
                 "label": label,
                 "sha256": digest,
-                "document_id": f"second_train_{label}_{digest[:12]}",
+                "document_id": f"{import_name}_{label}_{digest[:12]}",
+                "import_name": import_name,
+                "source_collection": root.name,
             }
         )
     return candidates, failures
@@ -286,10 +307,10 @@ def audit_candidates(
         try:
             text_hint = candidate_text_hint(path)
             fingerprint = build_fingerprint_record(
-                key=f"second_training:{document_id}",
+                key=f"{candidate['import_name']}:{document_id}",
                 raw_path=path,
                 label=str(candidate["label"]),
-                source="second_training_candidate",
+                source=f"{candidate['import_name']}_candidate",
                 text_hint=text_hint,
                 group_id=document_id,
             )
@@ -375,9 +396,10 @@ def failure_row(
 def final_paths(candidate: Mapping[str, Any]) -> dict[str, Path]:
     document_id = str(candidate["document_id"])
     label = str(candidate["label"])
+    import_name = str(candidate["import_name"])
     extension = Path(candidate["path"]).suffix.casefold()
     return {
-        "raw": DATA_DIR / "raw" / label / "second_training" / f"{document_id}{extension}",
+        "raw": DATA_DIR / "raw" / label / import_name / f"{document_id}{extension}",
         "image": DATA_DIR / "processed" / "images" / f"{document_id}.png",
         "text": DATA_DIR / "processed" / "texts" / f"{document_id}.txt",
         "ocr": DATA_DIR / "processed" / "ocr" / f"{document_id}.json",
@@ -476,7 +498,7 @@ def preprocess_candidates(
 ) -> tuple[list[dict[str, Any]], list[dict[str, str]]]:
     prepared = []
     failures = []
-    for candidate in tqdm(candidates, desc="Preprocessing second-training documents"):
+    for candidate in tqdm(candidates, desc="Preprocessing training documents"):
         item, failure = stage_candidate(candidate, timeout)
         if failure:
             failures.append(failure)
@@ -486,9 +508,9 @@ def preprocess_candidates(
     return prepared, failures
 
 
-def backup_tables() -> Path:
+def backup_tables(import_name: str) -> Path:
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup_root = PROJECT_ROOT / f"backup_second_training_{timestamp}"
+    backup_root = PROJECT_ROOT / f"backup_{import_name}_{timestamp}"
     paths = (
         METADATA_PATH,
         SOURCE_TRACKING_PATH,
@@ -530,12 +552,14 @@ def metadata_row(candidate: Mapping[str, Any], paths: Mapping[str, Path]) -> dic
 
 
 def source_row(candidate: Mapping[str, Any], row: Mapping[str, str]) -> dict[str, str]:
+    import_name = str(candidate["import_name"])
+    source_collection = str(candidate["source_collection"])
     return {
         "id": str(candidate["document_id"]),
         "label": str(candidate["label"]),
         "raw_path": row["raw_path"],
-        "source_name": "manual_second_training",
-        "source_url_or_dataset": f"local://data/Second_Traning_data/{candidate['relative_path']}",
+        "source_name": f"manual_{import_name}",
+        "source_url_or_dataset": f"local://data/{source_collection}/{candidate['relative_path']}",
         "download_date": date.today().isoformat(),
         "original_id": str(candidate["document_id"]),
         "language": "",
@@ -727,6 +751,7 @@ def verify_existing_split_partition(
 def commit_import(
     prepared: Sequence[dict[str, Any]],
     existing_metadata: list[dict[str, str]],
+    import_name: str,
 ) -> tuple[list[dict[str, str]], list[dict[str, str]], Path, list[dict[str, str]], list[dict[str, str]]]:
     existing_sources = read_csv_rows(SOURCE_TRACKING_PATH) if SOURCE_TRACKING_PATH.is_file() else []
     existing_train = read_csv_rows(SPLITS_DIR / "train.csv", METADATA_FIELDS)
@@ -741,7 +766,7 @@ def commit_import(
     validate_document_manifest(existing_documents)
     old_split_by_id = {row["document_id"]: row["split"] for row in existing_documents}
 
-    backup_root = backup_tables()
+    backup_root = backup_tables(import_name)
     metadata_additions = []
     source_additions = []
     import_rows = []
@@ -811,32 +836,33 @@ def write_reports(
     backup_root: Path | None,
     candidate_count: int,
     accepted_count: int,
+    import_name: str,
 ) -> None:
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     atomic_write_csv(
-        RESULTS_DIR / "second_training_duplicate_report.csv",
+        RESULTS_DIR / f"{import_name}_duplicate_report.csv",
         decisions,
         DUPLICATE_REPORT_FIELDS,
     )
     atomic_write_csv(
-        RESULTS_DIR / "second_training_import_failures.csv",
+        RESULTS_DIR / f"{import_name}_import_failures.csv",
         failures,
         FAILURE_FIELDS,
     )
     atomic_write_csv(
-        RESULTS_DIR / "second_training_import_manifest.csv",
+        RESULTS_DIR / f"{import_name}_import_manifest.csv",
         import_rows,
         IMPORT_MANIFEST_FIELDS,
     )
     atomic_write_csv(
-        RESULTS_DIR / "second_training_failed_pages.csv",
+        RESULTS_DIR / f"{import_name}_failed_pages.csv",
         failed_pages,
         FAILED_PAGE_FIELDS,
     )
     decisions_count = Counter(str(row.get("decision", "")) for row in decisions)
     imported_by_label = Counter(str(row.get("label", "")) for row in import_rows)
     lines = [
-        "SECOND TRAINING DATA IMPORT SUMMARY",
+        f"{import_name.upper()} DATA IMPORT SUMMARY",
         "",
         f"Mode: {'COMMIT' if commit else 'DRY RUN'}",
         f"Candidates found: {candidate_count}",
@@ -858,20 +884,20 @@ def write_reports(
     lines.extend(
         [
             "",
-            f"Duplicate report: {RESULTS_DIR / 'second_training_duplicate_report.csv'}",
-            f"Import manifest: {RESULTS_DIR / 'second_training_import_manifest.csv'}",
-            f"Failures: {RESULTS_DIR / 'second_training_import_failures.csv'}",
-            f"Failed pages: {RESULTS_DIR / 'second_training_failed_pages.csv'}",
+            f"Duplicate report: {RESULTS_DIR / f'{import_name}_duplicate_report.csv'}",
+            f"Import manifest: {RESULTS_DIR / f'{import_name}_import_manifest.csv'}",
+            f"Failures: {RESULTS_DIR / f'{import_name}_import_failures.csv'}",
+            f"Failed pages: {RESULTS_DIR / f'{import_name}_failed_pages.csv'}",
             "Training was not started.",
         ]
     )
-    (RESULTS_DIR / "second_training_import_summary.txt").write_text(
+    (RESULTS_DIR / f"{import_name}_import_summary.txt").write_text(
         "\n".join(lines) + "\n", encoding="utf-8"
     )
 
 
-def print_plan(candidates, accepted, decisions, failures) -> None:
-    print("\nSECOND TRAINING DRY RUN")
+def print_plan(candidates, accepted, decisions, failures, import_name: str) -> None:
+    print(f"\n{import_name.upper()} DRY RUN")
     print("=" * 72)
     print(f"Candidates: {len(candidates)}")
     print(f"Accepted as unique: {len(accepted)}")
@@ -893,7 +919,7 @@ def main() -> None:
 
     candidate_root = resolve_candidate_root(args.candidate_root)
     existing_metadata = read_csv_rows(METADATA_PATH, METADATA_FIELDS)
-    candidates, inventory_failures = collect_candidates(candidate_root)
+    candidates, inventory_failures = collect_candidates(candidate_root, args.import_name)
     if not candidates:
         raise ValueError(f"No supported candidates found under: {candidate_root}")
     accepted, decisions, audit_failures = audit_candidates(
@@ -914,8 +940,9 @@ def main() -> None:
             backup_root=None,
             candidate_count=len(candidates),
             accepted_count=len(accepted),
+            import_name=args.import_name,
         )
-        print_plan(candidates, accepted, decisions, failures)
+        print_plan(candidates, accepted, decisions, failures, args.import_name)
         return
 
     prepared, preprocessing_failures = preprocess_candidates(
@@ -923,7 +950,7 @@ def main() -> None:
     )
     failures.extend(preprocessing_failures)
     import_rows, artifact_failures, backup_root, failed_pages, _ = commit_import(
-        prepared, existing_metadata
+        prepared, existing_metadata, args.import_name
     )
     failures.extend(artifact_failures)
     write_reports(
@@ -935,15 +962,16 @@ def main() -> None:
         backup_root=backup_root,
         candidate_count=len(candidates),
         accepted_count=len(accepted),
+        import_name=args.import_name,
     )
-    print("\nSECOND TRAINING IMPORT COMPLETE")
+    print(f"\n{args.import_name.upper()} IMPORT COMPLETE")
     print("=" * 72)
     print(f"Imported documents: {len(import_rows)}")
     for label, count in sorted(Counter(row["label"] for row in import_rows).items()):
         print(f"{label}: {count} -> train")
     print(f"Failures: {len(failures)}")
     print(f"Backup: {backup_root}")
-    print(f"Summary: {RESULTS_DIR / 'second_training_import_summary.txt'}")
+    print(f"Summary: {RESULTS_DIR / f'{args.import_name}_import_summary.txt'}")
     print("Training was NOT started.")
 
 

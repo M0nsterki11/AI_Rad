@@ -1,6 +1,6 @@
 true\pred,invoice,cv,contract,email,scientific
-invoice,84,4,0,2,2
-cv,10,76,2,2,6
-contract,0,0,90,5,1
-email,4,4,0,81,7
-scientific,12,4,4,2,73
+invoice,85,5,0,1,1
+cv,8,78,2,1,7
+contract,0,0,93,2,1
+email,2,4,1,82,7
+scientific,11,1,4,2,77
