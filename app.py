@@ -413,50 +413,6 @@ def show_live_prediction_results(outcomes):
     st.subheader("Rezultati live predikcije")
     st.dataframe(pd.DataFrame(summary_rows), hide_index=True, width="stretch")
 
-    for outcome in outcomes:
-        result = outcome.get("result") or {}
-        page_rows = result.get("page_predictions") or []
-        chunk_rows = result.get("chunk_predictions") or []
-        if not page_rows and not chunk_rows:
-            continue
-        with st.expander(f"Detalji: {outcome['model']}", expanded=False):
-            if page_rows:
-                detail = pd.DataFrame(page_rows).rename(
-                    columns={
-                        "page_index": "Stranica (indeks)",
-                        "predicted_class": "Predikcija",
-                        "confidence": "Sigurnost",
-                        "ocr_word_count": "OCR rijeci",
-                    }
-                )
-                detail["Stranica"] = detail["Stranica (indeks)"] + 1
-                detail["Sigurnost"] = detail["Sigurnost"].map(
-                    lambda value: f"{safe_float(value) * 100:.2f}%"
-                )
-                visible = [
-                    column
-                    for column in ["Stranica", "Predikcija", "Sigurnost", "OCR rijeci"]
-                    if column in detail.columns
-                ]
-                st.dataframe(detail[visible], hide_index=True, width="stretch")
-            if chunk_rows:
-                detail = pd.DataFrame(chunk_rows).rename(
-                    columns={
-                        "chunk_index": "Chunk (indeks)",
-                        "predicted_class": "Predikcija",
-                        "confidence": "Sigurnost",
-                        "token_count": "Tokena",
-                    }
-                )
-                detail["Sigurnost"] = detail["Sigurnost"].map(
-                    lambda value: f"{safe_float(value) * 100:.2f}%"
-                )
-                st.write(
-                    f"Ukupno chunkova: {result.get('total_chunks', len(chunk_rows))}; "
-                    f"analizirano: {result.get('chunks_analyzed', len(chunk_rows))}."
-                )
-                st.dataframe(detail, hide_index=True, width="stretch")
-
     successful = [outcome for outcome in outcomes if outcome["status"] == "Uspješno"]
     for outcome in outcomes:
         if outcome["status"] == "Preskočeno":
