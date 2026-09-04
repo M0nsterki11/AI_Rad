@@ -328,11 +328,13 @@ def show_prepared_document_preview(prepared, model_keys):
 
     image_path = prepared.get("image_path")
     if image_path and Path(image_path).is_file():
-        st.image(
-            str(image_path),
-            caption="Preview prve odabrane stranice",
-            width="stretch",
-        )
+        _, preview_column, _ = st.columns([1, 1, 1])
+        with preview_column:
+            st.image(
+                str(image_path),
+                caption="Preview prve odabrane stranice",
+                width="stretch",
+            )
 
     total_pages = int(prepared.get("total_pages") or 0)
     selected_indices = [int(index) for index in prepared.get("analyzed_page_indices", [])]
@@ -356,12 +358,11 @@ def show_prepared_document_preview(prepared, model_keys):
 
     preparation_rows = []
     for model_key in model_keys:
-        ready, reason = prepared_model_status(prepared, model_key)
+        ready, _ = prepared_model_status(prepared, model_key)
         preparation_rows.append(
             {
                 "Model": PREDICTION_MODEL_LABELS.get(model_key, model_key),
                 "Status pripreme": "Spremno" if ready else "Nepodržano / nije moguće pripremiti",
-                "Razlog": reason,
             }
         )
     st.dataframe(pd.DataFrame(preparation_rows), hide_index=True, width="stretch")
@@ -406,7 +407,6 @@ def show_live_prediction_results(outcomes):
                         else "-"
                     )
                 ),
-                "Razlog": outcome.get("reason", ""),
             }
         )
 
@@ -599,13 +599,6 @@ def show_internal_test_tab():
             "Provjera splitova pronašla je 22 vrlo slična para dokumenata između splitova, "
             "pa rezultate treba interpretirati uz oprez."
         )
-    elif selected_model == "LayoutLMv3":
-        st.warning(
-            "LayoutLMv3 ostvario je 100% na internom testnom skupu, ali provjera je pronašla "
-            "velik broj vizualno vrlo sličnih dokumenata i mogući source/template bias. "
-            "Rezultat treba potvrditi na dokumentima iz drugih izvora."
-        )
-
     metrics = load_metrics(results_dir)
     if metrics is None:
         st.warning(f"Nedostaje {results_dir / 'test_metrics.json'}")
@@ -903,14 +896,6 @@ def show_results_dashboard():
         show_confusion_matrices_tab()
     with tabs[3]:
         show_external_predictions_tab()
-
-    st.info(
-        "Interni test prikazuje rezultate na dokumentima iz istih izvora kao trening skup. "
-        "Vanjski test prikazuje rezultate na novim dokumentima iz drugih izvora. Velika razlika "
-        "između internih i vanjskih rezultata pokazuje da modeli mogu naučiti obilježja izvora "
-        "i predloška dokumenta, a ne samo stvarnu semantičku klasu dokumenta."
-    )
-
 
 def main():
     st.set_page_config(page_title="Document AI Classifier", layout="wide")
