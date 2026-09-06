@@ -832,10 +832,6 @@ def show_final_comparison_tab():
 
 def show_results_dashboard():
     st.header("Evaluacija modela")
-    st.write(
-        "Interni test koristi dokumente iz istih izvora kao trening skup, dok vanjski test koristi "
-        "nove dokumente koji nisu korišteni u treniranju."
-    )
     tabs = st.tabs(
         [
             "Interni test",
