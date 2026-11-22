@@ -124,10 +124,13 @@ def _clean_pdf_words(page, image: Image.Image) -> tuple[list[str], list[list[int
         word = clean_text(item[4])
         if not word:
             continue
-        x1 = max(0, min(image.width, int(round(float(item[0]) * scale_x))))
-        y1 = max(0, min(image.height, int(round(float(item[1]) * scale_y))))
-        x2 = max(x1, min(image.width, int(round(float(item[2]) * scale_x))))
-        y2 = max(y1, min(image.height, int(round(float(item[3]) * scale_y))))
+        # get_text returns unrotated coordinates; get_pixmap and page.rect
+        # already reflect PDF /Rotate. Align words with that rendered image.
+        rectangle = fitz.Rect(item[:4]) * page.rotation_matrix
+        x1 = max(0, min(image.width, int(round(rectangle.x0 * scale_x))))
+        y1 = max(0, min(image.height, int(round(rectangle.y0 * scale_y))))
+        x2 = max(x1, min(image.width, int(round(rectangle.x1 * scale_x))))
+        y2 = max(y1, min(image.height, int(round(rectangle.y1 * scale_y))))
         words.append(word)
         boxes.append([x1, y1, x2, y2])
     return words, boxes

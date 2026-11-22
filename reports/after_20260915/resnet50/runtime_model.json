@@ -1,0 +1,37 @@
+{
+  "model": "resnet50",
+  "resolved_weight_path": "C:\\Users\\borna\\Desktop\\AI zavrsni\\AI modeli\\document_ai_classifier\\models\\resnet50_multipage\\best_model.pth",
+  "weight_sha256": "1c691fa0d61d8575dbea7d243f7bee6b204125c0bf2b73a8afd89bf6b9c70385",
+  "weight_bytes": 94392401,
+  "eval_mode": true,
+  "loaded_state_keys": 320,
+  "saved_state_keys": 320,
+  "missing_saved_keys": [],
+  "unused_saved_keys": [],
+  "unequal_loaded_tensors": [],
+  "all_loaded_tensors_match_saved": true,
+  "aggregation": [
+    "mean",
+    3
+  ],
+  "metadata": {
+    "epoch": 8,
+    "class_names": [
+      "invoice",
+      "cv",
+      "contract",
+      "email",
+      "scientific"
+    ],
+    "label_to_index": {
+      "invoice": 0,
+      "cv": 1,
+      "contract": 2,
+      "email": 3,
+      "scientific": 4
+    },
+    "validation_macro_f1": 0.8759080547884022,
+    "aggregation_method": "mean",
+    "aggregation_top_k": 3
+  }
+}

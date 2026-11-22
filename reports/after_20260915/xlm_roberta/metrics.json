@@ -1,0 +1,406 @@
+{
+  "external_existing/app_fresh": {
+    "n": 25,
+    "accuracy": 0.96,
+    "macro_f1": 0.9595959595959596,
+    "per_class": {
+      "invoice": {
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1-score": 0.8888888888888888,
+        "support": 5.0
+      },
+      "cv": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "contract": {
+        "precision": 0.8333333333333334,
+        "recall": 1.0,
+        "f1-score": 0.9090909090909091,
+        "support": 5.0
+      },
+      "email": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "scientific": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      }
+    },
+    "confusion_labels": [
+      "invoice",
+      "cv",
+      "contract",
+      "email",
+      "scientific",
+      "PROCESSING_ERROR"
+    ],
+    "confusion_matrix": [
+      [
+        4,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        5,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        5,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        5,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "processing_errors": 0,
+    "confidence_80": {
+      "covered": 25,
+      "coverage": 1.0,
+      "wrong": 1
+    }
+  },
+  "internal_test/app_fresh": {
+    "n": 100,
+    "accuracy": 0.94,
+    "macro_f1": 0.949131769131769,
+    "per_class": {
+      "invoice": {
+        "precision": 0.95,
+        "recall": 0.95,
+        "f1-score": 0.95,
+        "support": 20.0
+      },
+      "cv": {
+        "precision": 0.95,
+        "recall": 0.95,
+        "f1-score": 0.95,
+        "support": 20.0
+      },
+      "contract": {
+        "precision": 0.9090909090909091,
+        "recall": 1.0,
+        "f1-score": 0.9523809523809523,
+        "support": 20.0
+      },
+      "email": {
+        "precision": 1.0,
+        "recall": 0.85,
+        "f1-score": 0.918918918918919,
+        "support": 20.0
+      },
+      "scientific": {
+        "precision": 1.0,
+        "recall": 0.95,
+        "f1-score": 0.9743589743589743,
+        "support": 20.0
+      }
+    },
+    "confusion_labels": [
+      "invoice",
+      "cv",
+      "contract",
+      "email",
+      "scientific",
+      "PROCESSING_ERROR"
+    ],
+    "confusion_matrix": [
+      [
+        19,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        19,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        20,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1,
+        17,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        19,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "processing_errors": 2,
+    "confidence_80": {
+      "covered": 96,
+      "coverage": 0.96,
+      "wrong": 2
+    }
+  },
+  "internal_test/app_stored": {
+    "n": 100,
+    "accuracy": 0.95,
+    "macro_f1": 0.9594674303018333,
+    "per_class": {
+      "invoice": {
+        "precision": 0.95,
+        "recall": 0.95,
+        "f1-score": 0.95,
+        "support": 20.0
+      },
+      "cv": {
+        "precision": 0.95,
+        "recall": 0.95,
+        "f1-score": 0.95,
+        "support": 20.0
+      },
+      "contract": {
+        "precision": 0.9523809523809523,
+        "recall": 1.0,
+        "f1-score": 0.975609756097561,
+        "support": 20.0
+      },
+      "email": {
+        "precision": 1.0,
+        "recall": 0.9,
+        "f1-score": 0.9473684210526315,
+        "support": 20.0
+      },
+      "scientific": {
+        "precision": 1.0,
+        "recall": 0.95,
+        "f1-score": 0.9743589743589743,
+        "support": 20.0
+      }
+    },
+    "confusion_labels": [
+      "invoice",
+      "cv",
+      "contract",
+      "email",
+      "scientific",
+      "PROCESSING_ERROR"
+    ],
+    "confusion_matrix": [
+      [
+        19,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        19,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        20,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        18,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        19,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "processing_errors": 2,
+    "confidence_80": {
+      "covered": 96,
+      "coverage": 0.96,
+      "wrong": 1
+    }
+  },
+  "internal_test/evaluation_stored": {
+    "n": 100,
+    "accuracy": 0.95,
+    "macro_f1": 0.9504198112542144,
+    "per_class": {
+      "invoice": {
+        "precision": 0.95,
+        "recall": 0.95,
+        "f1-score": 0.95,
+        "support": 20.0
+      },
+      "cv": {
+        "precision": 0.8636363636363636,
+        "recall": 0.95,
+        "f1-score": 0.9047619047619048,
+        "support": 20.0
+      },
+      "contract": {
+        "precision": 0.9523809523809523,
+        "recall": 1.0,
+        "f1-score": 0.975609756097561,
+        "support": 20.0
+      },
+      "email": {
+        "precision": 1.0,
+        "recall": 0.9,
+        "f1-score": 0.9473684210526315,
+        "support": 20.0
+      },
+      "scientific": {
+        "precision": 1.0,
+        "recall": 0.95,
+        "f1-score": 0.9743589743589743,
+        "support": 20.0
+      }
+    },
+    "confusion_labels": [
+      "invoice",
+      "cv",
+      "contract",
+      "email",
+      "scientific",
+      "PROCESSING_ERROR"
+    ],
+    "confusion_matrix": [
+      [
+        19,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        19,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        20,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        18,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        19,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "processing_errors": 0,
+    "confidence_80": {
+      "covered": 98,
+      "coverage": 0.98,
+      "wrong": 3
+    }
+  }
+}

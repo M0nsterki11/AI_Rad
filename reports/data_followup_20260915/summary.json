@@ -1,0 +1,256 @@
+{
+  "diagnostic_only_no_classifier_training": true,
+  "texts_under_20_chars": [
+    {
+      "id": "invoice_extra_0012",
+      "label": "invoice",
+      "split": "train",
+      "chars": 19
+    },
+    {
+      "id": "invoice_extra_0106",
+      "label": "invoice",
+      "split": "train",
+      "chars": 8
+    },
+    {
+      "id": "invoice_extra_0183",
+      "label": "invoice",
+      "split": "train",
+      "chars": 2
+    },
+    {
+      "id": "invoice_extra_0185",
+      "label": "invoice",
+      "split": "train",
+      "chars": 3
+    },
+    {
+      "id": "invoice_extra_0186",
+      "label": "invoice",
+      "split": "train",
+      "chars": 17
+    },
+    {
+      "id": "invoice_extra_0193",
+      "label": "invoice",
+      "split": "train",
+      "chars": 11
+    },
+    {
+      "id": "invoice_extra_0204",
+      "label": "invoice",
+      "split": "train",
+      "chars": 14
+    },
+    {
+      "id": "invoice_extra_0207",
+      "label": "invoice",
+      "split": "train",
+      "chars": 19
+    },
+    {
+      "id": "invoice_extra_0212",
+      "label": "invoice",
+      "split": "train",
+      "chars": 4
+    },
+    {
+      "id": "invoice_extra_0223",
+      "label": "invoice",
+      "split": "train",
+      "chars": 18
+    },
+    {
+      "id": "invoice_extra_0226",
+      "label": "invoice",
+      "split": "test",
+      "chars": 14
+    },
+    {
+      "id": "invoice_extra_0236",
+      "label": "invoice",
+      "split": "validation",
+      "chars": 1
+    },
+    {
+      "id": "invoice_extra_0258",
+      "label": "invoice",
+      "split": "validation",
+      "chars": 2
+    },
+    {
+      "id": "invoice_extra_0281",
+      "label": "invoice",
+      "split": "train",
+      "chars": 11
+    },
+    {
+      "id": "invoice_extra_0284",
+      "label": "invoice",
+      "split": "train",
+      "chars": 14
+    },
+    {
+      "id": "invoice_extra_0294",
+      "label": "invoice",
+      "split": "train",
+      "chars": 15
+    },
+    {
+      "id": "invoice_extra_0307",
+      "label": "invoice",
+      "split": "train",
+      "chars": 9
+    },
+    {
+      "id": "invoice_extra_0365",
+      "label": "invoice",
+      "split": "train",
+      "chars": 8
+    },
+    {
+      "id": "cv_extra_0279",
+      "label": "cv",
+      "split": "train",
+      "chars": 13
+    },
+    {
+      "id": "cv_extra_0303",
+      "label": "cv",
+      "split": "train",
+      "chars": 17
+    },
+    {
+      "id": "cv_extra_0423",
+      "label": "cv",
+      "split": "train",
+      "chars": 18
+    },
+    {
+      "id": "cv_extra_0435",
+      "label": "cv",
+      "split": "train",
+      "chars": 14
+    },
+    {
+      "id": "email_extra_0072",
+      "label": "email",
+      "split": "test",
+      "chars": 12
+    },
+    {
+      "id": "scientific_extra_0267",
+      "label": "scientific",
+      "split": "validation",
+      "chars": 5
+    },
+    {
+      "id": "scientific_extra_0293",
+      "label": "scientific",
+      "split": "train",
+      "chars": 10
+    },
+    {
+      "id": "scientific_extra_0343",
+      "label": "scientific",
+      "split": "train",
+      "chars": 14
+    },
+    {
+      "id": "scientific_extra_0350",
+      "label": "scientific",
+      "split": "train",
+      "chars": 10
+    },
+    {
+      "id": "scientific_extra_0367",
+      "label": "scientific",
+      "split": "validation",
+      "chars": 10
+    },
+    {
+      "id": "invoice_extra_0442",
+      "label": "invoice",
+      "split": "test",
+      "chars": 13
+    },
+    {
+      "id": "invoice_extra_0447",
+      "label": "invoice",
+      "split": "train",
+      "chars": 3
+    },
+    {
+      "id": "invoice_extra_0495",
+      "label": "invoice",
+      "split": "test",
+      "chars": 19
+    },
+    {
+      "id": "cv_extra_0525",
+      "label": "cv",
+      "split": "train",
+      "chars": 13
+    },
+    {
+      "id": "email_extra_0465",
+      "label": "email",
+      "split": "validation",
+      "chars": 13
+    },
+    {
+      "id": "email_extra_0533",
+      "label": "email",
+      "split": "train",
+      "chars": 11
+    }
+  ],
+  "identical_selected_chunk_inputs_cross_split_groups": 7,
+  "test_ids_identical_chunk_inputs_in_train": [
+    "contract_0010"
+  ],
+  "near_text_candidates_cosine_ge_098": {
+    "validation": 18,
+    "test": 14
+  },
+  "raw_pdf_count": 2059,
+  "pdf_documents_with_rotation": [
+    {
+      "id": "second_train_contract_c7ad3161be2b",
+      "split": "train",
+      "rotated_indices": [
+        0,
+        1
+      ],
+      "total_pages": 2
+    },
+    {
+      "id": "second_train_scientific_2818da634c9e",
+      "split": "train",
+      "rotated_indices": [
+        33,
+        90,
+        111,
+        119
+      ],
+      "total_pages": 135
+    },
+    {
+      "id": "second_train_scientific_385bef74d586",
+      "split": "train",
+      "rotated_indices": [
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184
+      ],
+      "total_pages": 333
+    }
+  ],
+  "pdf_metadata_errors": [],
+  "language_note": "Only source metadata hr is confirmed; no automatic language classifier used"
+}

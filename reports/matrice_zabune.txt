@@ -1,0 +1,54 @@
+MATRICE ZABUNE — svježa obrada kroz aplikaciju, nakon popravaka
+Iste predikcije dobivene su i prije popravaka.
+Redci = stvarna oznaka. Stupci = predikcija.
+Redoslijed stupaca: invoice, cv, contract, email, scientific, GREŠKA_OBRADE.
+Interni uzorak: 100 dokumenata, 20 po klasi, seed 20260915.
+Postojeći vanjski skup: 25 dokumenata, 5 po klasi; oznake prema mapama.
+
+INTERNI / ResNet50
+invoice     18  2  0  0  0  0
+cv           1 18  0  0  1  0
+contract     0  0 20  0  0  0
+email        0  3  2 14  1  0
+scientific   2  0  1  0 17  0
+
+INTERNI / XLM-RoBERTa
+invoice     19  0  0  0  0  1
+cv           0 19  1  0  0  0
+contract     0  0 20  0  0  0
+email        1  0  1 17  0  1
+scientific   0  1  0  0 19  0
+
+INTERNI / LayoutLMv3
+invoice     20  0  0  0  0  0
+cv           0 19  0  1  0  0
+contract     0  0 20  0  0  0
+email        0  0  0 20  0  0
+scientific   0  0  0  0 20  0
+
+VANJSKI / ResNet50
+invoice      3  1  0  1  0  0
+cv           0  3  0  1  1  0
+contract     0  2  0  0  3  0
+email        0  2  0  3  0  0
+scientific   0  0  0  0  5  0
+
+VANJSKI / XLM-RoBERTa
+invoice      4  0  1  0  0  0
+cv           0  5  0  0  0  0
+contract     0  0  5  0  0  0
+email        0  0  0  5  0  0
+scientific   0  0  0  0  5  0
+
+VANJSKI / LayoutLMv3
+invoice      5  0  0  0  0  0
+cv           0  5  0  0  0  0
+contract     0  0  5  0  0  0
+email        0  0  0  5  0  0
+scientific   0  0  0  0  5  0
+
+Izvori: after_20260915/{resnet50,xlm_roberta,layoutlmv3}/metrics.json,
+ključevi internal_test/app_fresh i external_existing/app_fresh.
+Puna preciznost, odziv, F1 i support: per_class_metrics.csv.
+Greške obrade ulaze u nazivnik accuracy i kao propuštene stvarne klase u F1.
+GREŠKA_OBRADE nije šesta trenirana klasa.

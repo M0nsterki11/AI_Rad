@@ -1,0 +1,107 @@
+[
+  {
+    "sha256": "72104f24451478d5ec28fed48e6a5a976f8627ff22e705b34e93ae47c96020e6",
+    "entries": [
+      {
+        "document_id": "contract_0008",
+        "label": "contract",
+        "split": "validation"
+      },
+      {
+        "document_id": "contract_0095",
+        "label": "contract",
+        "split": "train"
+      }
+    ]
+  },
+  {
+    "sha256": "4c5d246fef0ead8f27dfc28651cb20fb76d0605ae1337d59334dbc144eb6f485",
+    "entries": [
+      {
+        "document_id": "contract_0010",
+        "label": "contract",
+        "split": "test"
+      },
+      {
+        "document_id": "contract_0100",
+        "label": "contract",
+        "split": "train"
+      }
+    ]
+  },
+  {
+    "sha256": "39ee77cf025b72a3cd0fa76c97214fdc56dba11d6a9c53309ae6621ad1ec8b66",
+    "entries": [
+      {
+        "document_id": "contract_0015",
+        "label": "contract",
+        "split": "test"
+      },
+      {
+        "document_id": "contract_0105",
+        "label": "contract",
+        "split": "validation"
+      }
+    ]
+  },
+  {
+    "sha256": "a1a22bd3265c46d1d611cc143d42e9f998f35913fea68750b6ae8568f54fe009",
+    "entries": [
+      {
+        "document_id": "contract_0025",
+        "label": "contract",
+        "split": "validation"
+      },
+      {
+        "document_id": "contract_0118",
+        "label": "contract",
+        "split": "train"
+      }
+    ]
+  },
+  {
+    "sha256": "abe22ed84a29677e9c965632835f8e2b5b6ddc9e1e9801a928339216db875bf1",
+    "entries": [
+      {
+        "document_id": "contract_0035",
+        "label": "contract",
+        "split": "train"
+      },
+      {
+        "document_id": "contract_0129",
+        "label": "contract",
+        "split": "validation"
+      }
+    ]
+  },
+  {
+    "sha256": "5404b4e479ded0436383e95a88ab13f23dcddaf3496acb8ed9c175a3f5ed509c",
+    "entries": [
+      {
+        "document_id": "contract_0048",
+        "label": "contract",
+        "split": "train"
+      },
+      {
+        "document_id": "contract_0145",
+        "label": "contract",
+        "split": "validation"
+      }
+    ]
+  },
+  {
+    "sha256": "71c8d41b59be9e348f0619a53068d590bcb1527eb1acf8ddbd115b1d030b0dc4",
+    "entries": [
+      {
+        "document_id": "contract_0064",
+        "label": "contract",
+        "split": "validation"
+      },
+      {
+        "document_id": "contract_0171",
+        "label": "contract",
+        "split": "train"
+      }
+    ]
+  }
+]

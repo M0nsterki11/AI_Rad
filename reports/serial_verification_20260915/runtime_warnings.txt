@@ -1,0 +1,9 @@
+Napomena o stvarno opaženom stderr izlazu serijske pripreme:
+MuPDF error: format error: No common ancestor in structure tree
+
+Poruka je opažena više puta pri obradi postojećih vanjskih PDF-ova.
+Ovo je bilješka o opaženom upozorenju, nije potpuni sirovi stderr log.
+Priprema je završila povratnim kodom 0 za svih 125 odabranih dokumenata.
+Završna usporedba potvrđuje jednake slike (piksele), tekst, riječi/boxove,
+odabir stranica i zabilježene greške kao pri prethodnoj pripremi.
+Dokaz: reports/final_verification.json.

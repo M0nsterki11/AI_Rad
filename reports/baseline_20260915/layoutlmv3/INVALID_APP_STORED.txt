@@ -1,0 +1,11 @@
+IMPORTANT: Only the app_stored pathway in this directory is INVALID as a model measurement.
+The first version of scripts/diagnose_models.py did not attach stored OCR words/boxes
+to the synthetic prepared payload. This caused 100 diagnostic-harness failures.
+It was NOT a production model or application failure. Original outputs are retained.
+
+Valid repaired comparison: ../corrected_harness/layoutlmv3/
+Project-relative: reports/baseline_20260915/corrected_harness/layoutlmv3/
+Original app_fresh and evaluation_stored predictions in this directory remain valid.
+The replay used preserved PRE-FIX preparation artifacts and current (fixed) code.
+The prediction functions, weights and evaluation input preparation were not changed.
+Execution source fingerprints for the replay are recorded in execution_code.json.

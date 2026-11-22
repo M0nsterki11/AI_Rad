@@ -1,0 +1,10 @@
+{
+  "available": true,
+  "command": "C:\\Program Files\\Tesseract-OCR\\tesseract.exe",
+  "version": "5.4.0.20240606",
+  "languages": [
+    "eng",
+    "osd"
+  ],
+  "requested_ocr_language": "no lang parameter (Tesseract default)"
+}

@@ -1,0 +1,68 @@
+{
+  "model": "xlm_roberta",
+  "resolved_weight_path": "C:\\Users\\borna\\Desktop\\AI zavrsni\\AI modeli\\document_ai_classifier\\models\\xlm_roberta_multipage\\best_model\\model.safetensors",
+  "weight_sha256": "c84289d1e3a111e5d6b26d213e17147a7e4e951ec11e7b36a3181d7defecf34c",
+  "weight_bytes": 1112214236,
+  "eval_mode": true,
+  "loaded_state_keys": 201,
+  "saved_state_keys": 201,
+  "missing_saved_keys": [],
+  "unused_saved_keys": [],
+  "unequal_loaded_tensors": [],
+  "all_loaded_tensors_match_saved": true,
+  "aggregation": [
+    "top_k_mean",
+    3
+  ],
+  "metadata": {
+    "transformers_version": "5.12.1",
+    "architectures": [
+      "XLMRobertaForSequenceClassification"
+    ],
+    "output_hidden_states": false,
+    "return_dict": true,
+    "dtype": "float32",
+    "chunk_size_feed_forward": 0,
+    "is_encoder_decoder": false,
+    "id2label": {
+      "0": "invoice",
+      "1": "cv",
+      "2": "contract",
+      "3": "email",
+      "4": "scientific"
+    },
+    "label2id": {
+      "contract": 2,
+      "cv": 1,
+      "email": 3,
+      "invoice": 0,
+      "scientific": 4
+    },
+    "problem_type": "single_label_classification",
+    "vocab_size": 250002,
+    "hidden_size": 768,
+    "num_hidden_layers": 12,
+    "num_attention_heads": 12,
+    "intermediate_size": 3072,
+    "hidden_act": "gelu",
+    "hidden_dropout_prob": 0.1,
+    "attention_probs_dropout_prob": 0.1,
+    "max_position_embeddings": 514,
+    "type_vocab_size": 1,
+    "initializer_range": 0.02,
+    "layer_norm_eps": 1e-05,
+    "pad_token_id": 1,
+    "bos_token_id": 0,
+    "eos_token_id": 2,
+    "use_cache": true,
+    "classifier_dropout": null,
+    "is_decoder": false,
+    "add_cross_attention": false,
+    "tie_word_embeddings": true,
+    "_name_or_path": "C:\\Users\\borna\\Desktop\\AI zavrsni\\AI modeli\\document_ai_classifier\\models\\xlm_roberta_multipage\\best_model",
+    "model_type": "xlm-roberta",
+    "output_past": true,
+    "position_embedding_type": "absolute",
+    "output_attentions": false
+  }
+}

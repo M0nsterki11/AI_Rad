@@ -1,0 +1,1127 @@
+[
+  {
+    "dataset": "internal_test",
+    "id": "invoice_hr_synthetic_0136",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_hr_synthetic_0136.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "2211cb8cb579dd9fec60a593d75bf6fb58c6e542cabf0b0b4b082f2c72dc7b8f",
+    "seconds": 0.5586515000013605
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_hr_synthetic_0003",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_hr_synthetic_0003.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "a94b9cba30baf663c1edacb95675086a05ef5c3b93b287421fc43845ea4a9020",
+    "seconds": 0.5466601999996783
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_hr_synthetic_0169",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_hr_synthetic_0169.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "3b3fd091fe71908f394f1d82303d75d7fac14aa9a0103d3bc6fbdb47b3177f51",
+    "seconds": 0.5966408999993291
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_0132",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\images\\invoice_0132.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "ef677f86d0ba71a6bef3481f036d08bb20d32c47f15ccb645fcd25bf6c153df5",
+    "seconds": 0.31589770000027784
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_extra_0116",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_extra_0116.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "9378e6b93fcfe0f334fcdc10a1cc3b5d8857d6897ba51a7d2aae4f7f622412cd",
+    "seconds": 0.4354083000016544
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_extra_0226",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_extra_0226.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "224cc5b03e2bc466d01e240077afb3d57248f08e10d593ff6f4fe30c5648be75",
+    "seconds": 0.19163839999964694
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_0030",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\images\\invoice_0030.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "f412de24dfd51e59f8c03fb5ba181c1cc645e18b79715a1878ac3345aec155fc",
+    "seconds": 0.34236719999898924
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_extra_0337",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_extra_0337.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "1ada655a25a132ac66325b6c4ef993daae2ab61a7b8839fb12d9a523af219c20",
+    "seconds": 0.7097764000009192
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_extra_0206",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_extra_0206.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "9133a58817b6d69f9a7d4df3b21642f9691cd3de39b24e6e5ddc6cccaec815d1",
+    "seconds": 0.8203426000000036
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_0159",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\images\\invoice_0159.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "71db6eec0a950c1ae52aaec14b27363f81c843763f756198a484939dc35d96c5",
+    "seconds": 0.31685040000047593
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_extra_0532",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_extra_0532.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "6c0175b85f82863200657c0a0f7a9e3e612f5167b61f218579a4aaa6321909a5",
+    "seconds": 0.8951364000004105
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_extra_0376",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_extra_0376.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "45c82a9b3bd214b43ac2b6da5421fceca5fd383e95228373d364ab98a6d26bc1",
+    "seconds": 0.6570052000006399
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_hr_synthetic_aug_0025",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_hr_synthetic_aug_0025.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "d29e2172a6d02756e4101bba47535e2fbf7daf2f36c1732ddc17550d2f14d57e",
+    "seconds": 0.5985006999999314
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_extra_0013",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_extra_0013.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "ef48374a5ddcea862a2379910b4508ddb0d4243c61504c5fdc89f7b50422e392",
+    "seconds": 0.3357323999989603
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_0067",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\images\\invoice_0067.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "a585058df22e0c07f66ffb8c033959c199411d0f12afa984939fccb975993988",
+    "seconds": 0.34048340000117605
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_0089",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\images\\invoice_0089.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "b0c9afd3d3230e66b99e74b3b9dc34c25dbf5892f8f6ead7cfaf750a05b4741e",
+    "seconds": 0.34903959999974177
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_0133",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\images\\invoice_0133.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "c1aa9d8eda0220c546fcbf87d6a716160ebfd96de8ab2a50899e5696aef31adb",
+    "seconds": 0.29763180000009015
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_0190",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\images\\invoice_0190.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "bca71963cd93da5e0d1e2cf550e8441f5f50e8bb9e286b8691c606fa9ff395f1",
+    "seconds": 0.3597324000002118
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_extra_0090",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_extra_0090.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "0c1a146d59e88e9e842fdf6119ea98a90b496ff006049283f779dd15194ab1a3",
+    "seconds": 0.5441304999985732
+  },
+  {
+    "dataset": "internal_test",
+    "id": "invoice_extra_0181",
+    "label": "invoice",
+    "raw_path": "data\\raw\\invoice\\invoice_extra_0181.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "5b62ea4b1a792ac8200d20268c2dab019a96679f33c2400b9190ea7fc898913d",
+    "seconds": 0.8083480000004784
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0550",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0550.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "2f711b9a2569a926439f45a54e16a4e35295c50fd3701736959c2422935db1f3",
+    "seconds": 0.8925591999995959
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_0008",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\pdfs\\cv_0008_digital.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "933d0b24605d45538d71642fa95d8a3ed37bd5bdeaac418122e8942ddb5166a9",
+    "seconds": 0.9172409000002517
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0088",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0088.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "9174986f131b59dc98190a5e1629b23a1645e671965bb165673e12757378586f",
+    "seconds": 1.2535894000011467
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_hr_synthetic_0175",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_hr_synthetic_0175.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "21fa8c934eda4709a62c1ae56a67d54ee38c169193b3dd9a0db2ead7fc63465b",
+    "seconds": 0.5209174999999959
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0321",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0321.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "09646710495b5d472e1576754ad76456f53f7d6801acd9eae881a1a26b63329f",
+    "seconds": 0.5287465000001248
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0263",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0263.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "1c75edaf5740d891dc8b887e5d503c438fce55d5cab2bfcde578ba297c354e08",
+    "seconds": 0.9600018000001
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_hr_synthetic_0156",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_hr_synthetic_0156.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "42e6cd7aef870a1f2e506fdebcf1265165195904fd79a8804cee5b7bb0426e5e",
+    "seconds": 1.4753352999996423
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_0190",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\pdfs\\cv_0190_testing.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "25a160fb0adaa5facef341b3b54a8034d95a8c43ae7d28a7ac48fa7ae4258e86",
+    "seconds": 2.5431302999986656
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0302",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0302.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "f6fbe7087275c49c0b4312669525a6cbd827d3efc8692c0d1e955bdd6c7f6cf6",
+    "seconds": 0.450797400000738
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_0137",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\pdfs\\cv_0137_banking.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "cb6834a68a51f4dc074197b7bbcdebd717be0ebbe6dea115672324fb25b7fa07",
+    "seconds": 1.446865699999762
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0217",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0217.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "e4e12424c344a9f0480e149fc6470200938c4cb9855f4ef7d71d63eb211469c0",
+    "seconds": 0.4844650000013644
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0103",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0103.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "7444e577d903fe9b515ed55af102828bfe3f930be2b22cb18a97834a09419f5e",
+    "seconds": 0.14838370000143186
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0033",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0033.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "22b1fbcb0a9bf9b48146dc5fb65d4cb0e65a20f58feef4c89d4c9c0a61425397",
+    "seconds": 0.7357404000013048
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0115",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0115.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "91152f4370f612250ac3b8c103d63a13a1cb7c7aa267705e7330ae4e10cd6c43",
+    "seconds": 0.4107540999993944
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0443",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0443.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "9b28cf970365ba3503b4d0005ba696801138883bf57cc6b8a0927168110bd42a",
+    "seconds": 0.5147795000011683
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0058",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0058.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "b501dac392f85c3f52a512650ca5f0ef55346ed9a8092c8b304472ec03fee2c3",
+    "seconds": 5.455602900001395
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_0148",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\pdfs\\cv_0148_consult.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "03c86a431a51c18bc6fdafdf839b2c195f88f04d07ac0d1e8c23e4707e229cc8",
+    "seconds": 1.6165943999985757
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_0129",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\pdfs\\cv_0129_data_science_resumes.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "2e7997276a27670371bb3ce4d8a585ddfd2694b73aa83003330d13c620265265",
+    "seconds": 1.5015571999992972
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0112",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0112.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "fc5952fd1155a52dd6c60860bdb26deb360fb8d2ab106d80ba38fd21903ba9d0",
+    "seconds": 0.6334843999993609
+  },
+  {
+    "dataset": "internal_test",
+    "id": "cv_extra_0269",
+    "label": "cv",
+    "raw_path": "data\\raw\\cv\\cv_extra_0269.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "c3e2077142438132079aed2a4734ab275ec198f08ca7a394b5b439b143abe517",
+    "seconds": 0.8035001000007469
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0001",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0001.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "cd95c36862503314616d5795a90a9bcf184370479eb5cb1b62358c2a4f39b773",
+    "seconds": 3.828822700001183
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0147",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0147.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "5724c85d6feb4b257da900cb4787ac17f7d3d3f95924d963786b9b584495337b",
+    "seconds": 3.6653604000002815
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_0199",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\text\\contract_0195.txt",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "f4a3da51a8b96f3212644eafc52a0768e311f857cee3831d5b67755ed942ade7",
+    "seconds": 0.2942614000003232
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0031",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0031.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "99f7540368316769f6de85ba19031b182dde9c599790e57871baf9530f732d96",
+    "seconds": 2.4941278000005696
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_0012",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\pdf\\contract_0022.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "315b78c40f04fc8cc23df4a41b761fd3ca54830511b8dee00ee9bbfea18aeaf0",
+    "seconds": 1.3478587999998126
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0168",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0168.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "5cf5f420d13702f371af74bbe34988e8a11adc20382af05a19e668d02fc30e90",
+    "seconds": 0.11511840000093798
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_0183",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\text\\contract_0165.txt",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "d4b6076f26137b4a04d848392cc2a5bf9b4d417d96e7fc47ff5777df78f86115",
+    "seconds": 0.24317860000155633
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0063",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0063.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "1f09a5fbe4aa72fa66b95f40645fbc162eecc753ebd4a50852c77ec7aa8dd6a6",
+    "seconds": 0.3354268000002776
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_hr_aug_0022",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_hr_aug_0022.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "8c1d33ad3f003141dc4080e8c3716e2cca2b38baf30d8e1fd7c2288fdd1bdde3",
+    "seconds": 0.4500130000014906
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0467",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0467.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "853c5999263ed65118f2b2fb94c6697e133be36d174c1d2c4341da188d249b7a",
+    "seconds": 1.997724200000448
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0537",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0537.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "51e235f34e12a89913fcc170c134bcd96af036a7055c2dd9f076169e7a8a942d",
+    "seconds": 2.0244249000006675
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_hr_0064",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_hr_0064.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "7d51a65cc3aec6e1b13504d99be7ac678ae5c68a558dc87427510fe4e53bea01",
+    "seconds": 0.5475397999998677
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_0055",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\pdf\\contract_0113.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "675ed4dfbe020b185d8550fd48b653c3ff4067222d5d85fe1522d5928e7e9a5e",
+    "seconds": 2.738911200000075
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0460",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0460.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "a348cc52295caafa92d9c611cedafacfe67a776d2a0a76bc7076e9e358364bb8",
+    "seconds": 1.9079488000006677
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0471",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0471.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "c5685282f2d3d545500b27854176cb7d61ba0593b7c5c56a17217f016b525691",
+    "seconds": 1.8641212999991694
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0099",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0099.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "e328f2b7c380bf6f6bfb8ac752d814863e613ef5e8f4eadb8c751c90636e29ee",
+    "seconds": 1.4166944000007788
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0034",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0034.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "047523e64941091f9d4aeabbf77568e2a92c3c0f0b2c56cee64cf36fb2545237",
+    "seconds": 0.710689800000182
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0397",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0397.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "9019ca9374d4e38ac0250f9047bc708a6d2b9659be3fc7663bac830a89240ac5",
+    "seconds": 1.865847400000348
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0051",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0051.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "9f94ff15d32adbfc5d0fc4f1cf7c8c40369dd791826cefbc37f1e366b6976228",
+    "seconds": 0.837512300000526
+  },
+  {
+    "dataset": "internal_test",
+    "id": "contract_extra_0383",
+    "label": "contract",
+    "raw_path": "data\\raw\\contract\\contract_extra_0383.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "87985cf5770c795aee7656f5a2a18623c2b86b412c22620c171381ab3c96d617",
+    "seconds": 0.24048369999945862
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_extra_0325",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_extra_0325.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "cedc5e9f95e4a315e3ee0c2f1910acc2783a51fc2edfeb8d7908daa64d7ddb90",
+    "seconds": 0.45078209999883256
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_hr_gmail_like_aug_0014",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_hr_gmail_like_aug_0014.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "da1a51f9129864fc4486120c4e50effea0ab86ae2c3ae3e0063eb130ceba9401",
+    "seconds": 0.4752452999982779
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_extra_0364",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_extra_0364.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "b19d12f06aca88c879d8c86a3e3ffc9d3d9c531082a227936b24b9e0905505a1",
+    "seconds": 0.82489539999915
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_extra_0225",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_extra_0225.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "abc1ff8bd7926528cf5d08104bf30714c8f79bddf55202a4e113fd54307b9d05",
+    "seconds": 0.2231658000000607
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_0060",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\text\\email_0060.txt",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "5e97d7c4b800264f30964fe1668335c778c7187a91a8c2d02e2e5c90a59a6bff",
+    "seconds": 0.22379080000064278
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_extra_0262",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_extra_0262.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "bdf993bdaba5d4d81ee4b47a6963251a5243ad6d0f305c75666e253e2167bda7",
+    "seconds": 0.5976317000004201
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_extra_0345",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_extra_0345.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "9e774aa8b053ea4b1f4a2d98f021ff5c91f27f1adf63125f8f7fee0f88fc2b72",
+    "seconds": 0.3277957999998762
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_hr_gmail_like_0123",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_hr_gmail_like_0123.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "ced37a55787e3dda8817565147b2e9660ea886ec3779a676aea686e217ebbb0e",
+    "seconds": 0.40352340000026743
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_0092",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\text\\email_0092.txt",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "6c9ac74ee7f68ee7b737340e219b31b065c5410459ca04211023999a138b1306",
+    "seconds": 0.087066699999923
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_0178",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\text\\email_0178.txt",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "4d57dd723ecdc185c782e232d0fcf0d21a771265f67eda68cdec097a052ad040",
+    "seconds": 0.25118140000085987
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_extra_0547",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_extra_0547.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "b02d554d2a194444a7e7a1b7c716f5b2512514144644ff697b92ddefaa937a91",
+    "seconds": 0.18502759999864793
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_extra_0084",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_extra_0084.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "75a9e79ae9af02a39520012eea6b0a0837bd286efc06cc9126fb6c344e522da5",
+    "seconds": 0.3242716999993718
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_0127",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\text\\email_0127.txt",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "965c9e7642dc537ec5cc3b44cd4fc07303399bd8360925115200637d6c9113b7",
+    "seconds": 0.10795169999983045
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_extra_0072",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_extra_0072.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "3389235e651a0438c451450dbaaafdecb09497bec4d154396166b6b2eab3bb8e",
+    "seconds": 0.16655940000055125
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_hr_gmail_like_0146",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_hr_gmail_like_0146.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "b9b0308e5c0349e23f0970008c604e467bdf4294f3c553f9f1d4dec73fbab0d6",
+    "seconds": 0.4212035999989894
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_extra_0315",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_extra_0315.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "4c8a5389206854d7a56e1c4fe3f532d1ba2438321a7a6970c3b7d9602255de28",
+    "seconds": 1.2461165000004257
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_0077",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\text\\email_0077.txt",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "6981c9f2489e7df38cca9290bf51e39259d640cdfcaad862a7987856388d073e",
+    "seconds": 0.08058840000012424
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_extra_0033",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_extra_0033.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "f41e5b1ba0fef288475bc5b76c0a1c746fbd1ab0ecfb78707dcff6ab1c152514",
+    "seconds": 0.8141434999997728
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_extra_0411",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_extra_0411.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "ccc8f5f61ccc135f56531a039c1bae202824f9acda91e8df7891192421cda5fd",
+    "seconds": 0.3661118999989412
+  },
+  {
+    "dataset": "internal_test",
+    "id": "email_hr_gmail_like_0044",
+    "label": "email",
+    "raw_path": "data\\raw\\email\\email_hr_gmail_like_0044.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "77736dc14a2eeddef7aaf212fa88f861ff7d757ad6c2dfd0d168c4966f179e29",
+    "seconds": 0.4771567999996478
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0110",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0110.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "af6e1765e4ecac3d58b522bcbe4ad489cd2494eedc833051b88d8b1dd4d1c849",
+    "seconds": 2.905934000000343
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_hr_0093",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_hr_0093.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "f1bafa8c6508f2333fb59d9fdfd4f59d8b85b186bf4e33eb233ba7f3eb49922f",
+    "seconds": 0.9209786000010354
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_hr_0034",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_hr_0034.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "b949af46d8deee0ed0b71bb8bd8b36aa747392df1960930b446ddb7374ef601a",
+    "seconds": 0.903531900001326
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0536",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0536.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "db03c91bb4b35d7792424e106967f2c0e048d3972a5f5bfcad6950e92a2b82b2",
+    "seconds": 0.3663010000000213
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0146",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0146.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "8b0791c3bdba80bb745c34644b1ee6034b09620a61380ff189808e76dda68785",
+    "seconds": 4.1077881999990495
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0513",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0513.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "8c1c152be43ff9d0746c9ca833438ec86590f81ad95630bc2c3dfdd18a8d7b4b",
+    "seconds": 1.282557500000621
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_hr_0076",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_hr_0076.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "5fadfba87fdd480125c51947570ff52d31ef726d7e7f8fa219bc04032cb72f19",
+    "seconds": 0.8330630000000383
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0347",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0347.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "ac3a91e991fef9065c798aa9bcbf37e0410ce983e6100a522ae9aae6ef30ca75",
+    "seconds": 0.4694343999999546
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0429",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0429.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "eceb8d6d7cd21b6e4b0b7dd6f0512dd21eb6cc1d4c8faf204c67d9a8d32abdb4",
+    "seconds": 1.0282956999999442
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0308",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0308.png",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "9d056ff602766154a17895cb59a984bedcf6d99c2396fb2ecf87d6f5dee77b19",
+    "seconds": 0.6091887999991741
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0002",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0002.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "0e6edb1aa5e437522c04e426b2157767e1739ab83d304bbed5c63f69a458fce7",
+    "seconds": 2.170111100000213
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_hr_0018",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_hr_0018.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "0cae34d1626b61450ec4fb9db57038fa6566ccd93d8806233353f3b1081aaf66",
+    "seconds": 0.8172317000007752
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0053",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0053.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "7516f4f46446cfdadefc586169726ede7cf6d200762a00d80c44ebe1519ca5c0",
+    "seconds": 3.7711756999997306
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0201",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0201.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "9d71f5bdffe23bce6df701a4cc292b91ab19d5d6a0d0f2e501c481a0d6c157f5",
+    "seconds": 3.932438400001047
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_0188",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\text\\scientific_0173.txt",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "04f30af5ccbb274b07befb1df15bd4f6e997594f61807dbe4fb54d54637c07de",
+    "seconds": 0.2750935000003665
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_hr_0025",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_hr_0025.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "bb2f858a1e5cc3f82de5360690314a0ff271709c259f8099bb2fce0809c7d880",
+    "seconds": 0.9105606000011903
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0504",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0504.jpg",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "cba59c672b0acb93b31bc367376ef440dd60b9133edbf44b279d71de8a13fafc",
+    "seconds": 1.0307413999998971
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0170",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0170.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "ee13275fd45d58f0ac2e8037e20f7a181c4ff6b596a41f277f7eb32f6ff2e377",
+    "seconds": 2.5656001000006654
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_0093",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\pdf\\scientific_0181.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "b6275d0b0b93870569a8b8abd816a34b4fed051c9973f626a4e042eaeb6a46cc",
+    "seconds": 1.5722955000001093
+  },
+  {
+    "dataset": "internal_test",
+    "id": "scientific_extra_0112",
+    "label": "scientific",
+    "raw_path": "data\\raw\\scientific\\scientific_extra_0112.pdf",
+    "label_source": "multipage_manifest",
+    "raw_sha256": "7aa9cc199d0cc7e5d5d352e5917998ed4686dcae880f82247d68357097aabe56",
+    "seconds": 4.191359600001306
+  },
+  {
+    "dataset": "external_existing",
+    "id": "contract_01_ojp_personal_services",
+    "label": "contract",
+    "raw_path": "data\\external_test\\raw\\contract\\contract_01_ojp_personal_services.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "1b54cd42b3d35a3db7a11a9f16e21a67243ef715ff73ca1d9ff1ce04150a02d2",
+    "seconds": 0.4283276999994996
+  },
+  {
+    "dataset": "external_existing",
+    "id": "contract_02_okc_professional_services",
+    "label": "contract",
+    "raw_path": "data\\external_test\\raw\\contract\\contract_02_okc_professional_services.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "432a9f42a5885afbcb1f28c119fb45c3648f8f912c5cb9919aaa1d9bc3adfa90",
+    "seconds": 2.1838306999998167
+  },
+  {
+    "dataset": "external_existing",
+    "id": "contract_03_rpvca_technical_services",
+    "label": "contract",
+    "raw_path": "data\\external_test\\raw\\contract\\contract_03_rpvca_technical_services.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "3272378b62bc12f88050da2f39df04568b2efd7512b8a21b00c75707babcbca6",
+    "seconds": 1.8872186999997211
+  },
+  {
+    "dataset": "external_existing",
+    "id": "contract_04_lincoln_services",
+    "label": "contract",
+    "raw_path": "data\\external_test\\raw\\contract\\contract_04_lincoln_services.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "dd0ef47b654dc713dac8034c285eaa58216ab98d3b838343ba32f08e8e97d454",
+    "seconds": 2.504243499999575
+  },
+  {
+    "dataset": "external_existing",
+    "id": "contract_05_certna_audit_agreement",
+    "label": "contract",
+    "raw_path": "data\\external_test\\raw\\contract\\contract_05_certna_audit_agreement.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "6052d45dea1067f95c1bdb6ffac46dd20fd374ad1b30a7f986b2cd06bf5ac939",
+    "seconds": 2.4413638999994873
+  },
+  {
+    "dataset": "external_existing",
+    "id": "cv_01_brianna_robinson",
+    "label": "cv",
+    "raw_path": "data\\external_test\\raw\\cv\\cv_01_brianna_robinson.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "9c6f094460e0d82d75fb9bdac3ddaa5dd1d20f380e1042c6bccbfb90f308d50b",
+    "seconds": 0.21924369999942428
+  },
+  {
+    "dataset": "external_existing",
+    "id": "cv_02_uiowa_sample",
+    "label": "cv",
+    "raw_path": "data\\external_test\\raw\\cv\\cv_02_uiowa_sample.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "c50936b669a242ad6403538f5bdb22257377fe10309ee9fc7a17ef3642e61365",
+    "seconds": 0.20451230000071519
+  },
+  {
+    "dataset": "external_existing",
+    "id": "cv_03_illinois_samples",
+    "label": "cv",
+    "raw_path": "data\\external_test\\raw\\cv\\cv_03_illinois_samples.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "134a7aa4b36893e62131bcd1ba5b14032e8cc72e056e3b21de0e0769e008bd6f",
+    "seconds": 0.5410830000000715
+  },
+  {
+    "dataset": "external_existing",
+    "id": "cv_04_stanford_examples",
+    "label": "cv",
+    "raw_path": "data\\external_test\\raw\\cv\\cv_04_stanford_examples.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "f31ccbe4fdcba85e571616b144aa23fc218403e12d1528d466538c7dee92977f",
+    "seconds": 2.0117387999998755
+  },
+  {
+    "dataset": "external_existing",
+    "id": "cv_05_ucdavis_samples",
+    "label": "cv",
+    "raw_path": "data\\external_test\\raw\\cv\\cv_05_ucdavis_samples.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "f0001c355dcb5729ddc894cf77e211ad86d22fd0761b20d7b62655243582feb9",
+    "seconds": 1.7429475999997521
+  },
+  {
+    "dataset": "external_existing",
+    "id": "email_01_project_update",
+    "label": "email",
+    "raw_path": "data\\external_test\\raw\\email\\email_01_project_update.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "0b3c20cbb0482665f3f7f48aa99ad11e1f478ef7cd6c9c76bd7b102774b9e110",
+    "seconds": 0.09647539999969013
+  },
+  {
+    "dataset": "external_existing",
+    "id": "email_02_meeting_reschedule",
+    "label": "email",
+    "raw_path": "data\\external_test\\raw\\email\\email_02_meeting_reschedule.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "72ea9d50a86874644675d6da75fd2742ee22c3adca4636cd104de91f9d0fb1f6",
+    "seconds": 0.08616540000002715
+  },
+  {
+    "dataset": "external_existing",
+    "id": "email_03_support_response",
+    "label": "email",
+    "raw_path": "data\\external_test\\raw\\email\\email_03_support_response.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "8dc1d836f7f785080ee3472a6cdac04136eaa1406a57f879ca9522215530d16b",
+    "seconds": 0.08833679999952437
+  },
+  {
+    "dataset": "external_existing",
+    "id": "email_04_hr_onboarding",
+    "label": "email",
+    "raw_path": "data\\external_test\\raw\\email\\email_04_hr_onboarding.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "66554ef95a9e31ff24d24da7a9f815b85d69ae0fb3ec60fd0223896979006f79",
+    "seconds": 0.09976070000084292
+  },
+  {
+    "dataset": "external_existing",
+    "id": "email_05_delivery_confirmation",
+    "label": "email",
+    "raw_path": "data\\external_test\\raw\\email\\email_05_delivery_confirmation.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "2cc9427671d134ad8d3f08c77fd55b27123bc183a592c708932102d9d3217c4e",
+    "seconds": 0.09394550000070012
+  },
+  {
+    "dataset": "external_existing",
+    "id": "invoice_01_microsoft_contoso",
+    "label": "invoice",
+    "raw_path": "data\\external_test\\raw\\invoice\\invoice_01_microsoft_contoso.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "4da941f20655cb852986df272a22f66aff47c97a18b103a1e8e44641cf581642",
+    "seconds": 0.1630844999999681
+  },
+  {
+    "dataset": "external_existing",
+    "id": "invoice_02_morgan_state",
+    "label": "invoice",
+    "raw_path": "data\\external_test\\raw\\invoice\\invoice_02_morgan_state.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "f8903c641611755da84055bbad0d48839214d9b070cfbe61668ba7811b3f4099",
+    "seconds": 0.15807789999962552
+  },
+  {
+    "dataset": "external_existing",
+    "id": "invoice_03_sliced_invoices",
+    "label": "invoice",
+    "raw_path": "data\\external_test\\raw\\invoice\\invoice_03_sliced_invoices.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "c2de358a0974f9b047aed8e457def7d4b1b39170f44819ec3152b42db787d72e",
+    "seconds": 0.13418319999982486
+  },
+  {
+    "dataset": "external_existing",
+    "id": "invoice_04_ups_commercial",
+    "label": "invoice",
+    "raw_path": "data\\external_test\\raw\\invoice\\invoice_04_ups_commercial.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "ed8753a4b9351239ade1b941e01897cdbf1928a788c194eac468f198c45bd779",
+    "seconds": 0.13307040000108827
+  },
+  {
+    "dataset": "external_existing",
+    "id": "invoice_05_harvest_template",
+    "label": "invoice",
+    "raw_path": "data\\external_test\\raw\\invoice\\invoice_05_harvest_template.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "fa3a4fc9a08a0466b861689f14998350cb9c3170ad9750b5fbe5506119e2012d",
+    "seconds": 0.12097200000062003
+  },
+  {
+    "dataset": "external_existing",
+    "id": "scientific_01_machine_learning_deep_learning",
+    "label": "scientific",
+    "raw_path": "data\\external_test\\raw\\scientific\\scientific\\scientific_01_machine_learning_deep_learning.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "db7828983d5fffd60c14bf7c4c0eefdb9ae565f4da97d13a0e19d9778bdb59ca",
+    "seconds": 2.8102856000004977
+  },
+  {
+    "dataset": "external_existing",
+    "id": "scientific_02_ml_in_artificial_intelligence",
+    "label": "scientific",
+    "raw_path": "data\\external_test\\raw\\scientific\\scientific\\scientific_02_ml_in_artificial_intelligence.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "33659b27402060b36617af1aa92550a0a68a3e9702bcc0982fb08fb79e9e1005",
+    "seconds": 2.6293055999994976
+  },
+  {
+    "dataset": "external_existing",
+    "id": "scientific_03_mlops_overview",
+    "label": "scientific",
+    "raw_path": "data\\external_test\\raw\\scientific\\scientific\\scientific_03_mlops_overview.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "680907b6ee15a9ca113c33acfc981988dc6dc7fcf06c337a2e112dd5d7aff319",
+    "seconds": 2.8752850999990187
+  },
+  {
+    "dataset": "external_existing",
+    "id": "scientific_04_informed_machine_learning",
+    "label": "scientific",
+    "raw_path": "data\\external_test\\raw\\scientific\\scientific\\scientific_04_informed_machine_learning.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "d407043a615223c85846bdce64568a3dba2589f3d1a94c2afa243fee979806a9",
+    "seconds": 4.007851899999878
+  },
+  {
+    "dataset": "external_existing",
+    "id": "scientific_05_application_driven_ml",
+    "label": "scientific",
+    "raw_path": "data\\external_test\\raw\\scientific\\scientific\\scientific_05_application_driven_ml.pdf",
+    "label_source": "folder_not_independently_adjudicated",
+    "raw_sha256": "a54caf57734cd3d48ea0fca850615239f52d8dbec1d634039ff3057a46510822",
+    "seconds": 3.659965099999681
+  }
+]

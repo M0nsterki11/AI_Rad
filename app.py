@@ -31,6 +31,7 @@ from src.model_downloader import (  # noqa: E402
     is_model_available,
 )
 from src.document_adapter import prepare_document_for_models  # noqa: E402
+from src.model_runtime import model_cache_identity, log_loaded_model  # noqa: E402
 
 
 def preferred_results_dir(multipage_name, legacy_name):
@@ -82,25 +83,45 @@ MODEL_KEYS_BY_OPTION = {
 }
 
 
-@st.cache_resource
-def get_resnet_model():
+@st.cache_resource(max_entries=1)
+def _cached_resnet_model(identity):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model, class_names, checkpoint_structure = load_resnet_model(device)
+    log_loaded_model("resnet50", model)
     return model, class_names, device, checkpoint_structure
 
 
-@st.cache_resource
-def get_text_model():
+@st.cache_resource(max_entries=1)
+def _cached_text_model(identity):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model, tokenizer, class_names, label_to_index, device = load_text_model(device)
+    log_loaded_model("xlm_roberta", model)
     return model, tokenizer, class_names, label_to_index, device
 
 
-@st.cache_resource
-def get_layoutlm_model():
+@st.cache_resource(max_entries=1)
+def _cached_layoutlm_model(identity):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model, processor, class_names, label_to_index, device = load_layoutlm_model(device)
+    log_loaded_model("layoutlmv3", model)
     return model, processor, class_names, label_to_index, device
+
+
+def get_resnet_model():
+    return _cached_resnet_model(model_cache_identity("resnet50"))
+
+
+def get_text_model():
+    return _cached_text_model(model_cache_identity("xlm_roberta"))
+
+
+def get_layoutlm_model():
+    return _cached_layoutlm_model(model_cache_identity("layoutlmv3"))
+
+
+get_resnet_model.clear = _cached_resnet_model.clear
+get_text_model.clear = _cached_text_model.clear
+get_layoutlm_model.clear = _cached_layoutlm_model.clear
 
 
 def show_model_status_sidebar():

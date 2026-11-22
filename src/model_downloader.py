@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 import shutil
 from pathlib import Path
@@ -73,6 +74,10 @@ def download_resnet50():
     weight_file = _find_resnet_weight(source_dir)
     if weight_file:
         shutil.copy2(weight_file, target_dir / "best_model.pth")
+
+    aggregation_config = _find_file(source_dir, "aggregation_config.json")
+    if aggregation_config:
+        shutil.copy2(aggregation_config, target_dir / "aggregation_config.json")
 
     return target_dir
 
@@ -157,11 +162,7 @@ def _is_resnet50_available(root):
         root / "models" / "resnet50_multipage",
         root / "models" / "resnet50",
     ]
-    return any(
-        (model_dir / "label_mapping.json").exists()
-        and (model_dir / "best_model.pth").exists()
-        for model_dir in candidates
-    )
+    return any(is_local_model_complete("resnet50", model_dir) for model_dir in candidates)
 
 
 def _is_xlm_roberta_available(root):
@@ -169,19 +170,7 @@ def _is_xlm_roberta_available(root):
         root / "models" / "xlm_roberta_multipage" / "best_model",
         root / "models" / "xlm_roberta" / "best_model",
     ]
-    for model_dir in candidates:
-        has_mapping = (model_dir / "label_mapping.json").exists() or (
-            model_dir.parent / "label_mapping.json"
-        ).exists()
-        if (
-            model_dir.exists()
-            and (model_dir / "config.json").exists()
-            and _has_transformers_weight(model_dir)
-            and _has_tokenizer_file(model_dir)
-            and has_mapping
-        ):
-            return True
-    return False
+    return any(is_local_model_complete("xlm_roberta", model_dir) for model_dir in candidates)
 
 
 def _is_layoutlmv3_available(root):
@@ -189,13 +178,24 @@ def _is_layoutlmv3_available(root):
         root / "models" / "layoutlmv3_multipage" / "best_model",
         root / "models" / "layoutlmv3" / "best_model",
     ]
-    return any(
-        model_dir.exists()
-        and (model_dir / "config.json").exists()
-        and _has_transformers_weight(model_dir)
-        and _has_tokenizer_file(model_dir)
-        for model_dir in candidates
-    )
+    return any(is_local_model_complete("layoutlmv3", model_dir) for model_dir in candidates)
+
+
+def is_local_model_complete(model_key, model_dir):
+    """Use the same existence checks for availability and priority selection.
+
+    This is not weight integrity validation; actual loaders still validate state
+    shapes/labels. An interrupted download must not shadow a complete fallback.
+    """
+    model_dir = Path(model_dir)
+    if model_key == "resnet50":
+        return (model_dir / "label_mapping.json").is_file() and (model_dir / "best_model.pth").is_file()
+    complete = ((model_dir / "config.json").is_file()
+                and _has_transformers_weight(model_dir) and _has_tokenizer_file(model_dir))
+    if model_key == "xlm_roberta":
+        complete = complete and ((model_dir / "label_mapping.json").is_file()
+                                or (model_dir.parent / "label_mapping.json").is_file())
+    return complete
 
 
 def _snapshot_download(model_key):
@@ -210,13 +210,20 @@ def _snapshot_download(model_key):
             "Nedostaje dependency huggingface_hub. Instalirajte requirements.txt."
         ) from error
 
-    return Path(
+    snapshot = Path(
         snapshot_download(
             repo_id=repo_id,
             repo_type="model",
             token=_get_hf_token(),
         )
     )
+    if os.environ.get("DOCUMENT_AI_MODEL_DIAGNOSTICS") == "1":
+        print("DOCUMENT_AI_DOWNLOAD " + json.dumps({
+            "model_key": model_key, "repo_id": repo_id,
+            "resolved_snapshot_revision": snapshot.name,
+            "revision_requested": None,
+        }), flush=True)
+    return snapshot
 
 
 def _get_repo_id(model_key):

@@ -1,0 +1,28 @@
+{
+  "utc": "2026-09-15T14:35:59.645693+00:00",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "commit": "d1bcf62b4997d9ceb5ee2c4675155ff297ad43e1",
+  "branch": "diagnostika/modeli-20260915",
+  "code_sha256": {
+    "app.py": "0d4b027aa7b7c802a401a4c9b582d663b14112bf82bfaa150e6173ee61d0ac59",
+    "src\\dataset_expansion.py": "482d57218bd0b12c1a2396544d1e4920d0aa6a9bfcc81f1b3204dd5955a8c938",
+    "src\\document_adapter.py": "abc978a7592f5d17421477057d1f824d46905329ff5c2ad1b04af057ad15aca3",
+    "src\\document_conversion.py": "24349cd0639b7523bc2231c2e1d48987c28e751bc3e451b3d3cc85bb5889f1ad",
+    "src\\evaluate.py": "b3fef4b4a3e6ae2662a32a824f287241290fe493fc4362e22af3154729c9fbce",
+    "src\\evaluate_external_test.py": "e490e10db1161049227dec4691b02a89a6e60d9f0bd8a1c0438954e7b64c0a78",
+    "src\\model_downloader.py": "e6a8412505e8ccb2b2dc4836f8551fd4a1c37c468de54bfbb357eefb057c49a6",
+    "src\\model_runtime.py": "0818723c43bd9f6b68d38df9eed431771e76d1fbfc913fd13f42c1f15eb5790a",
+    "src\\multipage.py": "590c889e2940c7fa1569c3ffcbde129b1dd3c9a77991a742a9f1e13f4b366301",
+    "src\\multipage_manifest.py": "b602f0e527ccd7d05e9026de49159f9552ad4cb1e92ae1a8f9360fe8d051632f",
+    "src\\multipage_preprocess.py": "7fa977cb76abc6e14e6bcd360e78fbaaa039b1e8554c6d2544512d429f9b00d3",
+    "src\\multipage_training.py": "29d99c4ddfb406c3f4fd3ec1a228b57f3f78e9bf16c749f1dc76e56b5760c529",
+    "src\\predict_layoutlm.py": "9a627056d321a031f0386979594ee727c08c0528d27cbbe51b72afae808ef9d1",
+    "src\\predict_resnet.py": "d2986a00bd96524421cea3c933f002ae5d1278a501e91b126433fe73ba98cf5b",
+    "src\\predict_text_model.py": "43e20bea204fcb9118249c03b2f9f4b51aba85f7ff76dbe10801c72b7f3a0afe",
+    "src\\preprocess.py": "c04c37b4547418cae779ff89c94ac421fe1993ad694a498e6c5a9625f5bf4698",
+    "src\\train_layoutlm.py": "699a5ee98415cc4fa227f61e896ba3f3b05c1c3f14bca110362018b1c1b7bed9",
+    "src\\train_resnet.py": "3aab5c1069e6b463e129db271270d61e8159bab3fcec36cc6260067ad748c549",
+    "src\\train_text_model.py": "06a8b706b8e63817f81f8dd985e0bfc5a8d85077842e0d1b614116ab0295a557",
+    "scripts\\diagnose_models.py": "b41893eed9b8ea5886d034451b90ee6816edbbfb8c75330c41e593c0052123f8"
+  }
+}
