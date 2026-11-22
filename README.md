@@ -153,10 +153,3 @@ standardnim `unittest` runnerom:
 ```powershell
 python -m unittest discover -s tests -v
 ```
-
-## GitHub sadržaj
-
-GitHub repozitorij sadrži kod, testove, konfiguraciju i male rezultate potrebne
-za Streamlit prikaz. Ne sadrži dataset, lokalne modele, backup foldere ni velike
-binarne artefakte. Povijesne, nereferencirane datoteke sačuvane su u
-`legacy/` i nisu dio aktualnog pipelinea.
