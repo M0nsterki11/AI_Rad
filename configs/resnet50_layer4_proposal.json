@@ -1,0 +1,20 @@
+{
+  "description": "Unexecuted validation-led experiment; not an accuracy claim",
+  "seed": 42,
+  "initial_checkpoint": "models/resnet50_multipage/best_model.pth",
+  "initial_checkpoint_sha256": "1c691fa0d61d8575dbea7d243f7bee6b204125c0bf2b73a8afd89bf6b9c70385",
+  "output_dir": "models/resnet50_layer4_experiment_20260915",
+  "epochs": 8,
+  "batch_size": 8,
+  "backbone_learning_rate": 0.00001,
+  "head_learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "trainable_prefixes": ["layer4.", "fc."],
+  "batchnorm_running_statistics": "frozen_all_layers",
+  "batchnorm_affine_parameters": "trainable_only_in_layer4",
+  "validation_aggregation": "mean",
+  "aggregation_top_k": 3,
+  "early_stopping_patience": 2,
+  "selection_metric": "validation_macro_f1",
+  "test_usage": "not evaluated or used for model selection"
+}

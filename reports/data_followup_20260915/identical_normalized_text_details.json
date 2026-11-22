@@ -1,0 +1,240 @@
+[
+  {
+    "sha256": "48ed47d0424b6920990b47f5da99a769a2f6fcc2232abdf2a2df2cc3a1ca2566",
+    "entries": [
+      {
+        "document_id": "contract_0008",
+        "label": "contract",
+        "split": "validation"
+      },
+      {
+        "document_id": "contract_0095",
+        "label": "contract",
+        "split": "train"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 65052
+  },
+  {
+    "sha256": "941bc5707936d69418a7446b6b3a4f28d79a0efdd1a365fb74748aba3eb802cb",
+    "entries": [
+      {
+        "document_id": "contract_0010",
+        "label": "contract",
+        "split": "test"
+      },
+      {
+        "document_id": "contract_0100",
+        "label": "contract",
+        "split": "train"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 17747
+  },
+  {
+    "sha256": "5b19b45b58acadcc0caec0e0697442d81d6bca55cf65622d8bc131c83ef2b3df",
+    "entries": [
+      {
+        "document_id": "contract_0012",
+        "label": "contract",
+        "split": "test"
+      },
+      {
+        "document_id": "contract_0101",
+        "label": "contract",
+        "split": "train"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 67639
+  },
+  {
+    "sha256": "cadf6c42d58babda6908ac73fbc7fc219c49edc815f929f3df629d8a369c474c",
+    "entries": [
+      {
+        "document_id": "contract_0015",
+        "label": "contract",
+        "split": "test"
+      },
+      {
+        "document_id": "contract_0105",
+        "label": "contract",
+        "split": "validation"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 16298
+  },
+  {
+    "sha256": "ef4e46d3dd064dd964a34d6c97c7898db3e78cac8d1e0afcb80479cd90ecee65",
+    "entries": [
+      {
+        "document_id": "contract_0016",
+        "label": "contract",
+        "split": "train"
+      },
+      {
+        "document_id": "contract_0107",
+        "label": "contract",
+        "split": "validation"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 20182
+  },
+  {
+    "sha256": "fd88326764a50cd847e2ce7bab53caf0b9cb89541af8da8824d517c0a87b4c4c",
+    "entries": [
+      {
+        "document_id": "contract_0025",
+        "label": "contract",
+        "split": "validation"
+      },
+      {
+        "document_id": "contract_0118",
+        "label": "contract",
+        "split": "train"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 1888
+  },
+  {
+    "sha256": "39814649e0c50b45ed05b2f3e4e7e353880f16c21813a7742bfa9435441fefa0",
+    "entries": [
+      {
+        "document_id": "contract_0035",
+        "label": "contract",
+        "split": "train"
+      },
+      {
+        "document_id": "contract_0129",
+        "label": "contract",
+        "split": "validation"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 29549
+  },
+  {
+    "sha256": "729dee6b1719a85b95a3644b260f9ec4bc739ca429a634da60639b0b0f893a91",
+    "entries": [
+      {
+        "document_id": "contract_0039",
+        "label": "contract",
+        "split": "train"
+      },
+      {
+        "document_id": "contract_0134",
+        "label": "contract",
+        "split": "test"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 40599
+  },
+  {
+    "sha256": "852809db995d3de3c84a52d3d962537b00d33bf1d93dc8b1ef5317d5d781d5c8",
+    "entries": [
+      {
+        "document_id": "contract_0048",
+        "label": "contract",
+        "split": "train"
+      },
+      {
+        "document_id": "contract_0145",
+        "label": "contract",
+        "split": "validation"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 52864
+  },
+  {
+    "sha256": "be72d466b8f65f33cf6288df344d2601a2d55f0f1a040ff5acf6e682a084882e",
+    "entries": [
+      {
+        "document_id": "contract_0064",
+        "label": "contract",
+        "split": "validation"
+      },
+      {
+        "document_id": "contract_0171",
+        "label": "contract",
+        "split": "train"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 58428
+  },
+  {
+    "sha256": "db8f5f09b50093e359d2873b6a3af19ffb880140eb4e41adf4037a08cd06327b",
+    "entries": [
+      {
+        "document_id": "contract_0079",
+        "label": "contract",
+        "split": "validation"
+      },
+      {
+        "document_id": "contract_0184",
+        "label": "contract",
+        "split": "train"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 21688
+  },
+  {
+    "sha256": "7bb2a907fd56a1c06ba85df77c3c1c80d813875cd0276e677d12803ccd02f01b",
+    "entries": [
+      {
+        "document_id": "contract_0083",
+        "label": "contract",
+        "split": "train"
+      },
+      {
+        "document_id": "contract_0190",
+        "label": "contract",
+        "split": "validation"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 24547
+  },
+  {
+    "sha256": "bd7c63421c23e119435feb04b463058171827504be0854fcb96aae24610d1c2f",
+    "entries": [
+      {
+        "document_id": "contract_0084",
+        "label": "contract",
+        "split": "train"
+      },
+      {
+        "document_id": "contract_0195",
+        "label": "contract",
+        "split": "validation"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 3222
+  },
+  {
+    "sha256": "80840afced13ff4eebabf4d03eec273faf4c8ba4ab5a74c4bdb0c7baaaf6be5b",
+    "entries": [
+      {
+        "document_id": "contract_0087",
+        "label": "contract",
+        "split": "train"
+      },
+      {
+        "document_id": "contract_0199",
+        "label": "contract",
+        "split": "test"
+      }
+    ],
+    "cross_split": true,
+    "normalized_chars": 29875
+  }
+]

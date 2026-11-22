@@ -1,0 +1,82 @@
+WARNING: Hugging Face Rows API request failed (1/5, status=502); retrying in 1s.
+Staging manifest is incomplete or stale; adding only untracked raw staging files.
+Reconstructing staging entries from existing raw staging files.
+Resuming staging: C:\Users\borna\AppData\Local\Temp\tmpwzacvly8
+Staged documents: invoice=0, cv=0, contract=0, email=2, scientific=0
+SKIPPED document: data/raw/contract/broken.pdf (bad PDF)
+
+test_augmentation_fraction_cannot_exceed_twenty_percent (test_add_croatian_dataset.CroatianDatasetTests.test_augmentation_fraction_cannot_exceed_twenty_percent) ... usage: add_croatian_dataset.py [-h] [--target-per-class TARGET_PER_CLASS]
+                               [--dry-run] [--skip-existing] [--seed SEED]
+                               [--augmentation-fraction AUGMENTATION_FRACTION]
+                               [--request-timeout REQUEST_TIMEOUT]
+                               [--per-document-timeout PER_DOCUMENT_TIMEOUT]
+                               [--max-hrcak-pages MAX_HRCAK_PAGES]
+                               [--hrcak-download-approved]
+add_croatian_dataset.py: error: --augmentation-fraction must be between 0 and 0.20
+ok
+test_augmentation_keeps_image_dimensions (test_add_croatian_dataset.CroatianDatasetTests.test_augmentation_keeps_image_dimensions) ... ok
+test_generated_oibs_are_intentionally_invalid (test_add_croatian_dataset.CroatianDatasetTests.test_generated_oibs_are_intentionally_invalid) ... ok
+test_invoice_variants_are_not_pixel_identical (test_add_croatian_dataset.CroatianDatasetTests.test_invoice_variants_are_not_pixel_identical) ... ok
+test_legacy_source_rows_receive_new_fields (test_add_croatian_dataset.CroatianDatasetTests.test_legacy_source_rows_receive_new_fields) ... ok
+test_minimal_xlsx_is_read_without_openpyxl (test_add_croatian_dataset.CroatianDatasetTests.test_minimal_xlsx_is_read_without_openpyxl) ... ok
+test_other_synthetic_generators_produce_diverse_candidate_pools (test_add_croatian_dataset.CroatianDatasetTests.test_other_synthetic_generators_produce_diverse_candidate_pools) ... ok
+test_public_procurement_values_remove_contact_identifiers (test_add_croatian_dataset.CroatianDatasetTests.test_public_procurement_values_remove_contact_identifiers) ... ok
+test_resume_starts_after_highest_synthetic_original_id (test_add_croatian_dataset.CroatianDatasetTests.test_resume_starts_after_highest_synthetic_original_id) ... ok
+test_scientific_generator_produces_a_diverse_candidate_pool (test_add_croatian_dataset.CroatianDatasetTests.test_scientific_generator_produces_a_diverse_candidate_pool) ... ok
+test_synthetic_renderers_produce_aligned_words_and_boxes (test_add_croatian_dataset.CroatianDatasetTests.test_synthetic_renderers_produce_aligned_words_and_boxes) ... ok
+test_docx_without_visual_conversion_only_keeps_xlm_ready (test_app_compatibility.AppCompatibilityTests.test_docx_without_visual_conversion_only_keeps_xlm_ready) ... ok
+test_prepared_inputs_make_all_models_ready (test_app_compatibility.AppCompatibilityTests.test_prepared_inputs_make_all_models_ready) ... ok
+test_augmentation_stays_with_parent_in_group_aware_split (test_dataset_expansion.DatasetExpansionTests.test_augmentation_stays_with_parent_in_group_aware_split) ... ok
+test_augmentation_uses_a_replacement_after_duplicate (test_dataset_expansion.DatasetExpansionTests.test_augmentation_uses_a_replacement_after_duplicate) ... ok
+test_exact_file_duplicate_is_rejected (test_dataset_expansion.DatasetExpansionTests.test_exact_file_duplicate_is_rejected) ... ok
+test_external_test_paths_are_rejected (test_dataset_expansion.DatasetExpansionTests.test_external_test_paths_are_rejected) ... ok
+test_group_aware_split_uses_75_15_10_ratio (test_dataset_expansion.DatasetExpansionTests.test_group_aware_split_uses_75_15_10_ratio) ... ok
+test_huggingface_rows_api_materializes_a_bounded_page (test_dataset_expansion.DatasetExpansionTests.test_huggingface_rows_api_materializes_a_bounded_page) ... ok
+test_normalized_text_duplicate_is_rejected_across_different_files (test_dataset_expansion.DatasetExpansionTests.test_normalized_text_duplicate_is_rejected_across_different_files) ... ok
+test_partial_staging_does_not_satisfy_plan (test_dataset_expansion.DatasetExpansionTests.test_partial_staging_does_not_satisfy_plan) ... ok
+test_processed_output_validation_checks_all_three_artifacts (test_dataset_expansion.DatasetExpansionTests.test_processed_output_validation_checks_all_three_artifacts) ... ok
+test_resume_preserves_manifest_rows_and_adds_only_untracked_files (test_dataset_expansion.DatasetExpansionTests.test_resume_preserves_manifest_rows_and_adds_only_untracked_files) ... ok
+test_shared_layout_with_different_text_is_not_a_visual_duplicate (test_dataset_expansion.DatasetExpansionTests.test_shared_layout_with_different_text_is_not_a_visual_duplicate) ... ok
+test_staging_manifest_round_trip_preserves_resume_fields (test_dataset_expansion.DatasetExpansionTests.test_staging_manifest_round_trip_preserves_resume_fields) ... ok
+test_streaming_shuffle_buffer_is_memory_bounded (test_dataset_expansion.DatasetExpansionTests.test_streaming_shuffle_buffer_is_memory_bounded) ... ok
+test_visual_fingerprint_is_created_for_images (test_dataset_expansion.DatasetExpansionTests.test_visual_fingerprint_is_created_for_images) ... ok
+test_worker_command_times_out_and_is_terminated (test_dataset_expansion.DatasetExpansionTests.test_worker_command_times_out_and_is_terminated) ... ok
+test_docx_keeps_text_when_libreoffice_is_unavailable (test_document_adapter.DocumentAdapterTests.test_docx_keeps_text_when_libreoffice_is_unavailable) ... ok
+test_image_uses_ocr_for_text_and_layout (test_document_adapter.DocumentAdapterTests.test_image_uses_ocr_for_text_and_layout) ... ok
+test_pdf_uses_embedded_text_and_prepares_first_page (test_document_adapter.DocumentAdapterTests.test_pdf_uses_embedded_text_and_prepares_first_page) ... ok
+test_txt_prepares_text_image_and_layout (test_document_adapter.DocumentAdapterTests.test_txt_prepares_text_image_and_layout) ... ok
+test_docx_conversion_uses_headless_libreoffice (test_document_conversion.DocumentConversionTests.test_docx_conversion_uses_headless_libreoffice) ... ok
+test_missing_libreoffice_has_clear_error (test_document_conversion.DocumentConversionTests.test_missing_libreoffice_has_clear_error) ... ok
+test_pdf_first_page_is_rendered_to_png (test_document_conversion.DocumentConversionTests.test_pdf_first_page_is_rendered_to_png) ... ok
+test_aggregation_modes_return_probabilities (test_multipage.MultipageTests.test_aggregation_modes_return_probabilities) ... ok
+test_aggregation_tie_prefers_configured_default (test_multipage.MultipageTests.test_aggregation_tie_prefers_configured_default) ... ok
+test_blank_pdf_page_is_preserved_for_resnet_and_skipped_for_layout (test_multipage.MultipageTests.test_blank_pdf_page_is_preserved_for_resnet_and_skipped_for_layout) ... ok
+test_document_balanced_weights_equalize_document_mass (test_multipage.MultipageTests.test_document_balanced_weights_equalize_document_mass) ... ok
+test_document_level_evaluation_counts_each_document_once (test_multipage.MultipageTests.test_document_level_evaluation_counts_each_document_once) ... ok
+test_live_adapter_prepares_one_shared_multipage_payload (test_multipage.MultipageTests.test_live_adapter_prepares_one_shared_multipage_payload) ... ok
+test_long_document_selects_head_middle_and_tail (test_multipage.MultipageTests.test_long_document_selects_head_middle_and_tail) ... ok
+test_manifest_builder_keeps_augmentation_with_parent (test_multipage.MultipageTests.test_manifest_builder_keeps_augmentation_with_parent) ... ok
+test_manifest_rejects_group_leakage (test_multipage.MultipageTests.test_manifest_rejects_group_leakage) ... ok
+test_page_builder_continues_after_document_failure (test_multipage.MultipageTests.test_page_builder_continues_after_document_failure) ... 
+Multi-page image/OCR preprocessing:   0%|          | 0/2 [00:00<?, ?it/s]
+                                                                         
+
+Multi-page image/OCR preprocessing:   0%|          | 0/2 [00:00<?, ?it/s]
+Multi-page image/OCR preprocessing: 100%|██████████| 2/2 [00:00<?, ?it/s]
+ok
+test_pdf_page_artifacts_are_aligned_one_page_at_a_time (test_multipage.MultipageTests.test_pdf_page_artifacts_are_aligned_one_page_at_a_time) ... ok
+test_pixel_boxes_are_normalized_with_shared_logic (test_multipage.MultipageTests.test_pixel_boxes_are_normalized_with_shared_logic) ... ok
+test_short_document_selects_every_page (test_multipage.MultipageTests.test_short_document_selects_every_page) ... ok
+test_tokenizer_overflow_is_limited_with_representative_chunks (test_multipage.MultipageTests.test_tokenizer_overflow_is_limited_with_representative_chunks) ... ok
+test_training_entry_points_do_not_reference_legacy_splits (test_multipage.MultipageTests.test_training_entry_points_do_not_reference_legacy_splits) ... ok
+test_availability_check_calls_tesseract (test_ocr_runtime.TesseractRuntimeTests.test_availability_check_calls_tesseract) ... ok
+test_image_without_recognized_text_has_friendly_error (test_ocr_runtime.TesseractRuntimeTests.test_image_without_recognized_text_has_friendly_error) ... ok
+test_pdf_uses_embedded_text_without_ocr (test_ocr_runtime.TesseractRuntimeTests.test_pdf_uses_embedded_text_without_ocr) ... ok
+test_scanned_pdf_falls_back_to_ocr (test_ocr_runtime.TesseractRuntimeTests.test_scanned_pdf_falls_back_to_ocr) ... ok
+test_tesseract_execution_error_is_not_silenced (test_ocr_runtime.TesseractRuntimeTests.test_tesseract_execution_error_is_not_silenced) ... ok
+test_unavailable_tesseract_raises_clear_error (test_ocr_runtime.TesseractRuntimeTests.test_unavailable_tesseract_raises_clear_error) ... ok
+
+----------------------------------------------------------------------
+Ran 56 tests in 37.806s
+
+OK

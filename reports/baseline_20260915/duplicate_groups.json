@@ -1,0 +1,6792 @@
+{
+  "raw_file": [],
+  "page_file": [
+    {
+      "sha256": "70ba5eba81fc61b0aea6595409abea324e51a8a1e74b54aecff3a96ff9e32de7",
+      "entries": [
+        {
+          "document_id": "contract_0061",
+          "page_index": "15",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_0088",
+          "page_index": "3",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_extra_0120",
+          "page_index": "2",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_extra_0157",
+          "page_index": "2",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "262bfb72601edb99eaa365d70f64528bedb1ab540e1dc6a387bc2350676dd94d",
+      "entries": [
+        {
+          "document_id": "cv_extra_0141",
+          "page_index": "7",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0159",
+          "page_index": "1",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0159",
+          "page_index": "3",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "second_train_scientific_2818da634c9e",
+          "page_index": "1",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "second_train_scientific_027261b34011",
+          "page_index": "1",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "second_train_scientific_027261b34011",
+          "page_index": "3",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "82428d4b41c75240f9488c001839c793a7f07cc994ab742379b626af44153cd9",
+      "entries": [
+        {
+          "document_id": "second_train_contract_547c7240a52d",
+          "page_index": "35",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "second_train_contract_ebc1ab6cd127",
+          "page_index": "0",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    }
+  ],
+  "text_normalized": [
+    {
+      "sha256": "baba5508c7ff84b578fe59cb0a9a7b3d7e9bf36778f373c3fc7467a76ef0321f",
+      "entries": [
+        {
+          "document_id": "contract_0001",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0092",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "48ed47d0424b6920990b47f5da99a769a2f6fcc2232abdf2a2df2cc3a1ca2566",
+      "entries": [
+        {
+          "document_id": "contract_0008",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_0095",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "ecf231be1a7c4f33671ebddf31d7b6c749d4473d4a21a98700082181c14b3eee",
+      "entries": [
+        {
+          "document_id": "contract_0009",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0099",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "941bc5707936d69418a7446b6b3a4f28d79a0efdd1a365fb74748aba3eb802cb",
+      "entries": [
+        {
+          "document_id": "contract_0010",
+          "label": "contract",
+          "split": "test"
+        },
+        {
+          "document_id": "contract_0100",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "5b19b45b58acadcc0caec0e0697442d81d6bca55cf65622d8bc131c83ef2b3df",
+      "entries": [
+        {
+          "document_id": "contract_0012",
+          "label": "contract",
+          "split": "test"
+        },
+        {
+          "document_id": "contract_0101",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "cadf6c42d58babda6908ac73fbc7fc219c49edc815f929f3df629d8a369c474c",
+      "entries": [
+        {
+          "document_id": "contract_0015",
+          "label": "contract",
+          "split": "test"
+        },
+        {
+          "document_id": "contract_0105",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "ef4e46d3dd064dd964a34d6c97c7898db3e78cac8d1e0afcb80479cd90ecee65",
+      "entries": [
+        {
+          "document_id": "contract_0016",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0107",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "06e78d0a0a4b21b77afbed7a382ac91f6cf0ce5ed260284445535fad4aaabbdd",
+      "entries": [
+        {
+          "document_id": "contract_0018",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0108",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "fd88326764a50cd847e2ce7bab53caf0b9cb89541af8da8824d517c0a87b4c4c",
+      "entries": [
+        {
+          "document_id": "contract_0025",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_0118",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "5ca653931fbb2f5ac660a0930410c068b8956400db5b92f477c410e627d0c898",
+      "entries": [
+        {
+          "document_id": "contract_0028",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0122",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "49e8e31e442f2101499058f8c2a92217d522503f0515ff33520b72df86ff5974",
+      "entries": [
+        {
+          "document_id": "contract_0030",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0126",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "8b92a06c3a4c5b089104b9b9070402d3c692920a2fe05c53bcf8ac218772fe35",
+      "entries": [
+        {
+          "document_id": "contract_0032",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0127",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "39814649e0c50b45ed05b2f3e4e7e353880f16c21813a7742bfa9435441fefa0",
+      "entries": [
+        {
+          "document_id": "contract_0035",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0129",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "111dc3f2825ea4b69f1446d4f5ce0fe8f58c94a73b999a0f1a9e9d42c8e750c8",
+      "entries": [
+        {
+          "document_id": "contract_0036",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0130",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "729dee6b1719a85b95a3644b260f9ec4bc739ca429a634da60639b0b0f893a91",
+      "entries": [
+        {
+          "document_id": "contract_0039",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0134",
+          "label": "contract",
+          "split": "test"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "852809db995d3de3c84a52d3d962537b00d33bf1d93dc8b1ef5317d5d781d5c8",
+      "entries": [
+        {
+          "document_id": "contract_0048",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0145",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "7734e15ea82abdd5ac9ef5150826b13e1abd666f221ce9fee2c2b74b9042cdb3",
+      "entries": [
+        {
+          "document_id": "contract_0054",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0155",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "fe1740292676996e322165e7d9a2eba01f15b7b07b865caca3ed646d756dc83a",
+      "entries": [
+        {
+          "document_id": "contract_0059",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0158",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "de4882f8dc4280c94ed25b9c5e613105cd6eec1fe2a08eb47d0fb912cdde15fb",
+      "entries": [
+        {
+          "document_id": "contract_0062",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0167",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "be72d466b8f65f33cf6288df344d2601a2d55f0f1a040ff5acf6e682a084882e",
+      "entries": [
+        {
+          "document_id": "contract_0064",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_0171",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "57883c99b43f6e554057922e9b13f97db4e2d51a7ec4b21c4515787e6eefe320",
+      "entries": [
+        {
+          "document_id": "contract_0066",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0173",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e4a3a0fa5641c4265f4fbe582cde7c3ade70c0628e881298f314be8105c09b25",
+      "entries": [
+        {
+          "document_id": "contract_0067",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0174",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "64bfebd5bcc4e2b247e0c81d73d4ab1353c3f4f0bf46bf1623ca246529c048c9",
+      "entries": [
+        {
+          "document_id": "contract_0070",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0178",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "db8f5f09b50093e359d2873b6a3af19ffb880140eb4e41adf4037a08cd06327b",
+      "entries": [
+        {
+          "document_id": "contract_0079",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_0184",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "7bb2a907fd56a1c06ba85df77c3c1c80d813875cd0276e677d12803ccd02f01b",
+      "entries": [
+        {
+          "document_id": "contract_0083",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0190",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "bd7c63421c23e119435feb04b463058171827504be0854fcb96aae24610d1c2f",
+      "entries": [
+        {
+          "document_id": "contract_0084",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0195",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "80840afced13ff4eebabf4d03eec273faf4c8ba4ab5a74c4bdb0c7baaaf6be5b",
+      "entries": [
+        {
+          "document_id": "contract_0087",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0199",
+          "label": "contract",
+          "split": "test"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "62e05b2d8f43931aafd1aa2ed8b2ed59ec1b6cfe0e835483f6cf25c5bf1a10d9",
+      "entries": [
+        {
+          "document_id": "contract_0091",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0200",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "21b6ca9aaf9c0ca5914120ed36235d3853f4586cbe6a4d3218014a1ddadbb2f2",
+      "entries": [
+        {
+          "document_id": "invoice_extra_0185",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_extra_0447",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "83f80839918cf3ca4bb5b4451ea886179fc00a0494a8f164af9f911c9486718d",
+      "entries": [
+        {
+          "document_id": "invoice_extra_0315",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_extra_0483",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4b0152ea8597f46b7ae1b795b53f3668526e03bdbbdff270d0717a828786f0ed",
+      "entries": [
+        {
+          "document_id": "email_extra_0049",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0497",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "63376611d26db4da5dee17510214e73fd7fa186a559181d235a622cf5038055e",
+      "entries": [
+        {
+          "document_id": "email_extra_0261",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0475",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "892b73a5828c643264e19dfe8ac444088e9decc64b6d2bbbb9a71f7461cbaaae",
+      "entries": [
+        {
+          "document_id": "email_extra_0317",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0476",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1bb7e346cec0e9194146fc2c000c6bd86e2ffa4676a649a98bd3b8c3ac5a87d2",
+      "entries": [
+        {
+          "document_id": "email_extra_0329",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0494",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "8390bbf4af3aac04e65f0bbd7d7262bbd7d017e2412fbd25173c04f11d0ed215",
+      "entries": [
+        {
+          "document_id": "email_extra_0334",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0528",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5d533c919dfd4138caca0d0bbbcf14e70996d26d5f84e6b47740a759b4e57f65",
+      "entries": [
+        {
+          "document_id": "email_extra_0339",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0525",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f6eb83509fb2898eebcfad548c6a1f07b5b65c38e847685dc85b1fc091e0f03b",
+      "entries": [
+        {
+          "document_id": "email_extra_0340",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0479",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b5b87d39e065a78a12492a9fe2c83963287e5bcd3f6f30969c33a2b4047d9334",
+      "entries": [
+        {
+          "document_id": "email_extra_0349",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0543",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e2adf0ffe352c4880e22384df1733f38e23e3bfe25c933a2bdc1cb6b4531f0da",
+      "entries": [
+        {
+          "document_id": "email_extra_0350",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0442",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3d41bc69f9e0b6cebb3f3b107be42c660852f943f4b75c521c3c5fcb16681ee5",
+      "entries": [
+        {
+          "document_id": "email_extra_0354",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0483",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "d509fda7b452773d8b3b1fabf452b7e1746762af2f925de6ddbf7bd1aca98277",
+      "entries": [
+        {
+          "document_id": "email_extra_0355",
+          "label": "email",
+          "split": "test"
+        },
+        {
+          "document_id": "email_extra_0517",
+          "label": "email",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "32d9bda47ef82fd9302052b729174427a7e4df7907c140c57f2239e6d1fdd03f",
+      "entries": [
+        {
+          "document_id": "email_extra_0369",
+          "label": "email",
+          "split": "validation"
+        },
+        {
+          "document_id": "email_extra_0444",
+          "label": "email",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7c8f4524a7411275133bf1edad06832dc702a1cee3f7f5b0240b1c5251d1b3fa",
+      "entries": [
+        {
+          "document_id": "email_extra_0371",
+          "label": "email",
+          "split": "test"
+        },
+        {
+          "document_id": "email_extra_0467",
+          "label": "email",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e839ebdcf514136e19a1f42859bc441eabdc9987edbbb441c48b6650d338d6f4",
+      "entries": [
+        {
+          "document_id": "email_extra_0372",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0507",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ee57abd8734524685816d7eba3ca77f442c5901680db1f9be7b5997292606bef",
+      "entries": [
+        {
+          "document_id": "email_extra_0379",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0506",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f2d691a0c72e748692185e4eb58cd910ed8adb6e61c60b61913a3ba7139a81f7",
+      "entries": [
+        {
+          "document_id": "email_extra_0380",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0540",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f2992f0f1bc02fb522d5988764cbe547b7cadded9a72fafba0bb72b599a2fa61",
+      "entries": [
+        {
+          "document_id": "email_extra_0389",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0502",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e3950fd59752866b76615dbd65afa5dc0796b28eb667bc20ff8f4d6a2fccc89c",
+      "entries": [
+        {
+          "document_id": "email_extra_0392",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0520",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1dbd91ed9626f2779ea4e0f76cd22f71430ef50878459d6df2ebd1e5c2f8e01a",
+      "entries": [
+        {
+          "document_id": "email_extra_0397",
+          "label": "email",
+          "split": "validation"
+        },
+        {
+          "document_id": "email_extra_0464",
+          "label": "email",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "836c64d33dfcdbf3b378c13db98a0da99027a04a14e6c4ba53a1dd026641da9b",
+      "entries": [
+        {
+          "document_id": "email_extra_0399",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0534",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "01f37dc083675280c81d710ff1d9ab72fe10f3d67ffbfa762c23edb1158df13a",
+      "entries": [
+        {
+          "document_id": "email_extra_0403",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0546",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "767f0f1bc3f8163f43c1fec17885243922ae580e2c03082a5c2106d5ca0bede4",
+      "entries": [
+        {
+          "document_id": "email_extra_0406",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0447",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "810300e6500c2cc531c226c1fa9cb15bdefbcb2583e4e111e75f49d5da188c51",
+      "entries": [
+        {
+          "document_id": "email_extra_0408",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0527",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "2b7649cd59f5c7211f7704b54fe91a82e563b0a85688957cac286a060cbdfc44",
+      "entries": [
+        {
+          "document_id": "email_extra_0409",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0530",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "c7b3658b63cecee3f91803a2005216e4e61a0a2b025aa5f576b4687aa725fe9c",
+      "entries": [
+        {
+          "document_id": "email_extra_0415",
+          "label": "email",
+          "split": "validation"
+        },
+        {
+          "document_id": "email_extra_0541",
+          "label": "email",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f6c5b410483fb7ab868c5b588790ebc93d81d3d6370891f1c225feb4068775f9",
+      "entries": [
+        {
+          "document_id": "email_extra_0416",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0441",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5246e56d6483b3a52c99655bd8b2157c3b5474da0d28e0f4a3f97998ee0df872",
+      "entries": [
+        {
+          "document_id": "email_extra_0417",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0490",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3a5b49ee5647da2ac22b1fd81550825b7e6adff8b884fa6aab83a81c881dcb6d",
+      "entries": [
+        {
+          "document_id": "email_extra_0429",
+          "label": "email",
+          "split": "test"
+        },
+        {
+          "document_id": "email_extra_0501",
+          "label": "email",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "dcb7a78cf77bdeabf7878369cdbff44af0da8942f94d602f62d66c0bbe9c4788",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0001",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0544",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "2b0b13a0c4bf2abe4fc6ae7084b11c47f5c54c80f6e5b93af2d0b093b2e72af4",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0003",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0523",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "cbf6e099592b4b3b4bda57949ca4c897092c01e7276a7bcf340dfea097913702",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0007",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0546",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "27a6c85373c059a7c099ea2e17e651edaca497d3cf02f9ca26a9cb5b09eb014c",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0010",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0549",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "dab3ab2db16bb509c00cf32b0253242d5f55a831f9533786b5a4576f75a6a2ae",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0020",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0537",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "0867b262be4e3882a6225657f2879aca65578aa05e1753b7cc691b78a166b1d4",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0034",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0502",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e5a4ecbb74e97d6a0df88a16b8de6170489fdad679b7147346e41fb4d4e5c111",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0041",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0472",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4e2a7e4327d7af12123ca253927f6cc8bc7a08cd30621030d6e1ca1cd8348b32",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0043",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0448",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e9fe6fb7861a1dde8358dea65e3139f4659e1d00e529bd1c12fb59cb23eebd10",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0044",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0486",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "501e502eb18c517cc234203fa3643a67782d727ae699a6db1982e73536f504fd",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0050",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0471",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7b8c6ac33d3245eb2171de3db2dc69e74b3ec6ad9416c299254a4572616fbe62",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0064",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0479",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5cb2ca91d08cea5465c191c4bb671efe893e96ba09de515ed1f9ee0d989134f2",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0065",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0534",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1354760e56c30c3d6f99cfa058c123c5d0cf62eec878a28e7e05434ecb7573d2",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0071",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0520",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "2f15dcc7c185543cbffc8c85c0eeedfe8e2013c865bf71398bb1189407b548aa",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0075",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0477",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "48002900b211996bc3ddb6d616c22dcb496d8cadaccaba7a06bf1e1556a60476",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0084",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0467",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b1fd3dc31a8234fd4bc4c0ea31c9f95c5e0565fb811e3bfcd2e5f572a04e570c",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0088",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0449",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "d7798d7fb66d42ad16e05ed0eeb4ff3fe91ec8cf5885e87c2f60ffe1438bac23",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0090",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0476",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5848ba8a01c14b9cc91174328de5163b920c266db9cd2ed2cbf75fcad0728f10",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0091",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0538",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "0fbfe5dfa3fc00f0649e00313821b00a6cc4c52fff4c5a01f4be217932571166",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0096",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0518",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a99b4218befd3cbf65558eb69cf7020944a63a7368403182ebf86c9b403e985b",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0099",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0457",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "92dde676d55e93bef8dba4e6c8d282ce45a515240a3c695c164dd8c57b85c4a2",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0101",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0514",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "0d4982f2c0426113a31453b7bd8efc15a2ade5a66b248485911253dab9e41777",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0103",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0519",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "20c9e295400c63a63540462ca9cf296be6023538d31c03a7db51a1c64ce18fc3",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0109",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0550",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "9b3b04fcb1df21ef3a12f8be42ebe02a5461d6b4b47fe7ea176519c8a6b2b754",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0111",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0461",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "56aefe481e934fd81220a415be3920f8cc4a360cbf548e34651cb3141f9465a4",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0117",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0531",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4087f8a469892f248fcdb5b1b11ab8d8758ceb37d44b87ca0ea8ef60a8a66147",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0125",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0498",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "64aee9202f8c4a8a52721afc3da914604215be54614263119ebce30e1989237a",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0129",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0511",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f6f0d6e95f0cdd1dc1951d6a503ab85b368efb27e9bbbb8121e7c8d42473267a",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0133",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0494",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b772512480324000395fb099fe3b4a2a88e4f0e5cede18a017eb563324c58570",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0139",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0503",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "43cf2ba1fb1e2a696b3d449da5ccd1b7ee08f77939f0706b078c0dc75b83e4da",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0140",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0469",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "616412ba94c3da3172f3f80ab770a665f6de36479551c59310fb0b74656ec65a",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0146",
+          "label": "scientific",
+          "split": "test"
+        },
+        {
+          "document_id": "scientific_extra_0458",
+          "label": "scientific",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b1d6a22345ff074861830ed0700e3e5bf300c4310a694cb307828acd320d8fca",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0148",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0442",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a165f5dc431302bceea73284f3b7485b9d91ada4f91f61baad746755b753473c",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0150",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0541",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "69a5f6f64785f08273df9b8495dda66f0e87d5f0a919af1cb7d680be7925266a",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0162",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0455",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e5f565fd915a8292bad0d960645f3f21414ea89cfec84ea6ddc729827df23f7b",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0163",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0525",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "78761c6503a591b8f4b75e526363f50083e4a5b88ae9f7173f8a90274e31e0fe",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0175",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0505",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a50cb0ecbdda646f35aa9449401ad44fd5126512c3fd6ac6e0bc08a08bbb515c",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0176",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0481",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "183672f2e9faeb1dbac9e78e62c8840279858da6f1ffb572b87b782231f42c0f",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0180",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0547",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1a8bf0c19e44bc59f4d85caa4620dc1b1e6983aff4a7cffdec190c99f6a37559",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0181",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0441",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4d8baa426a54820203bc249eb68f63319b5c5101e54cbd444a249152a48baa9b",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0183",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0510",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1e10415a1987f4f53d649cb15d14053c36994c09b1a5de68afe2f7bd427f2d69",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0188",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0465",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "dd2d232752c936ae582366da75c86eb27b6a8775c3c72de0a814a16c4d9a89b9",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0198",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0497",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "51a91d86825931e9f34426c7892debccdca82d98006c17f4444686f487fcbfe4",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0201",
+          "label": "scientific",
+          "split": "test"
+        },
+        {
+          "document_id": "scientific_extra_0493",
+          "label": "scientific",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4eb5a52cc48a7ae391dc13b222283ede9f4429714934513c95ffca1d6a844ef6",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0209",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0464",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7e1b0c209d140c781542012faf5c9679dad5bd56d8ea1a95e8cb72879a77a7b7",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0211",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0445",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1536a901fb8a65e07b2293a0e7b928cf05e7a511abcddcc37bf84f092901883f",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0340",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0468",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a0fd6673e34294788bdb0a3c0effa9bad8c94b3d73ded35d3f81c498277bb635",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0002",
+          "label": "invoice",
+          "split": "validation"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0001",
+          "label": "invoice",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "cc10def10fb8d2671f06f999cb229c88c57aa9347b0037b34511178681f84afa",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0002",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0014",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "0d6232d5b517c038679ee2c38f57f939ccde02050ac3622ac5ff507e395cee7f",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0004",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0001",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a735e1f55eb4e51dc74e758383658ba7b921561513fa3570bd49f6cd7dbeaf6a",
+      "entries": [
+        {
+          "document_id": "contract_hr_0001",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0020",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "53feea20eb6737937aa5b28ef55f238028ecf294f6a2d2b9116ac331412ca2d1",
+      "entries": [
+        {
+          "document_id": "contract_hr_0002",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0001",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "70488b6542adc167a42a3bfa4558099e750b3bb65f3c21a349eab4e0cffec395",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0003",
+          "label": "email",
+          "split": "validation"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0001",
+          "label": "email",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "accd1fcf9a0a9235461d7683ca10e7da52b7bdf6b6bd84955eaaeb826f810707",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0002",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0001",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "addcfd9fd298a9c0cf5314fde9e503a5196fff3b1dc03f87c795333b985b381e",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0005",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0004",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "84cacef7f74cbd20ccd971f0dcefa5408ed4ccadfd808c9efc379c0900da21fe",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0006",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0026",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "87dee9e0dfa0ca9942616af22c5fadb26cd5311752e63d34dcc57886b336cd63",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0010",
+          "label": "invoice",
+          "split": "validation"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0028",
+          "label": "invoice",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4299cba8709197304e95ae2894d8f57f4a946fb2badaac32a30e7e1bdf61f20a",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0012",
+          "label": "invoice",
+          "split": "validation"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0015",
+          "label": "invoice",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "fa2b78e409b7d30cf26d2bba3d6937dec54aa2abc9e28730c85f580a9d084064",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0035",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0003",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3d4fc3a23315cc94fa5f16a3624048b75ecd81ac0b2bd3819549c166c5b7a6d1",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0063",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0011",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "49c6f7ca9831922c93ad0f73c6c4b0d6c8f45e08f4d2708a1dea7e83eb7c7e2e",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0065",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0021",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ee25b449d0387aa985a7294a3e3ffaa3422386626aff9da79193275fb5358d32",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0088",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0009",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1af6590a45195256c93cd1051e2a0f1558a5d82fdfc6dcfcf6f24c5566df9775",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0089",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0008",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "d61c810d578007ae50543656d03c41a3c851b19ecdc02b24a849c7e5f80eaf9a",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0092",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0017",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "083e995ddcdd2b55cadd538988babacca36a15a3c35decc455dd88308c59c33d",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0109",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0014",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "75b50679e32443bf26194cbe931fa1ba39d408117686b61af123ff522dd5dd6f",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0115",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0027",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "9a9a6d4344e2a85d4f2927b2bb0d59ba1734ff625563c2e55abed21a71f93555",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0118",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0002",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "15d1bc7fa36a247c7e1c6a8511b0ea6921105bd4fe60976c0191cace8d32e09d",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0137",
+          "label": "invoice",
+          "split": "test"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0022",
+          "label": "invoice",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e5d80f83694bcd4446674d6a08d47410a7ba9d22e0023483901d6e95a563b29b",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0139",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0010",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "76bbaa7069fd9ca3b246647721573e55a21e37b81af2934522662b804efecb3a",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0144",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0020",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "83e8b4c4c4beb07bd858702c5d76fb1520dcef5c3bb1333654e1bc7ca0c0abe6",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0150",
+          "label": "invoice",
+          "split": "validation"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0016",
+          "label": "invoice",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "9a84206cf8e7c49bb8bfaba6a714857e90b7f0e2001c9dd24b7d2d95d9086ace",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0154",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0023",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ca7f45d478c5a38a07d78fd22ff15e17217a56eae3d38d1dc890715a8591b6d6",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0155",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0029",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "637b6c99500626a2aa93119288e1544055dd1b161d53c2350c887880be4da9d0",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0164",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0005",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5dd183a2634a34c4d2a62c1065cdaaf6ce06a6c041b47d416d0f363dcf1f31dc",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0014",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0015",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "8c81b83da812b661726fef8072e4e188918f32b0c60bfc274c66a1896b237cc3",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0017",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0002",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "481deba1f02d98f587c600d3b9374b05405d6249ad7e141e85042804566d113a",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0019",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0016",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "caaca4257532787ba37313fae52d31fac413550c757e4d4f48d99f579284ece7",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0035",
+          "label": "cv",
+          "split": "validation"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0027",
+          "label": "cv",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e6cc0d62a1371a47180df2581fde3e98412d03e93c310b413fb1388d90a07d6a",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0038",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0005",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f586f3bb7b60bc251ae79de22cd525ee758fc8339b2b84a8e46546e0f6b92965",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0048",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0023",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "77da278dbbedd58e840c84fcc577dc382c6fcb92536f07c9f58924f07dd7fe66",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0062",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0021",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "27c62a5f9f20199af53c2c309116396cbaf4e6db09ecb1f34723589246df1732",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0080",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0022",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "70fdbe49e548e72e3c7b27fb9489b4f6b8ef4c44ffb6a9ebe40a475e2cc3f4ef",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0088",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0004",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "050a939dc080a45ab77e0b4b545648e602750ab787e6b8908a57a105bc5f8c59",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0106",
+          "label": "cv",
+          "split": "validation"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0011",
+          "label": "cv",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5cc65235e42c2693a526327024ebf13ee32831824d64892620a438994ea56c8f",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0111",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0017",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e72d5797d7965124627c3bb168c954d4799cc2b6f5b1043294c6f132f5f6429b",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0114",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0010",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "2e8f7cf63e70ce8b67a42ee35ddb2bd6395a75127c5acf321301624f61d78d73",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0131",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0029",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5afc2ea42bde9a205aefc259826fa9f228ea0e120e0d9ed9a7950c55a4e6cfc1",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0158",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0028",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "70c8b093e9268a00542707121ac75d31717b3e771152264fc3752cc7c78b7a25",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0159",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0003",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "01878a3e47f57a8817908dcbb8e156b72bc23d9f37d10a59c3a9c0b665774f5e",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0161",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0026",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "77403dbe5a093825dbccf10a3084ff7cdc6497c37b308f865f13ec99e2326e04",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0166",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0020",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3956765d0356948a341a3e8198f726e976518659987733fee7d6c81e02c45cad",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0168",
+          "label": "cv",
+          "split": "validation"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0009",
+          "label": "cv",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "795d57a2357dfc93beaeb6695fa4b8f71f8d9bf3cad0abc3651f22b530f4fda0",
+      "entries": [
+        {
+          "document_id": "contract_hr_0035",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0028",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ec8807d2e30a7438bab537480d9d19f2acdea42689b055ce8c2a4df0f94ad8d0",
+      "entries": [
+        {
+          "document_id": "contract_hr_0046",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0023",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "aa0a2280c17d29c49448e4044df6fe6dfdf9baa06b8106466b15bb0f98530c65",
+      "entries": [
+        {
+          "document_id": "contract_hr_0062",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0027",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1be70932f927ea12201e17aa67975db513a9ce9777efcdcd9939312bd71ef54b",
+      "entries": [
+        {
+          "document_id": "contract_hr_0069",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0029",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "dda51335c1e2c1cc98dc6416050e66007e959fad79393a5603c9185dded046fb",
+      "entries": [
+        {
+          "document_id": "contract_hr_0075",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0021",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e7386e6869c2c2abba8af776da24c77e0f59454196754548b43451b4ce497a13",
+      "entries": [
+        {
+          "document_id": "contract_hr_0079",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0009",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "acf043e2dab2e37049a7a0df8349028fde8e71aac1bd368fea0a61c6a44e9f0a",
+      "entries": [
+        {
+          "document_id": "contract_hr_0081",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0008",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3b538bfcba37f7361a432e456889a50c5045255bd742ddb4f9054d73597c6b56",
+      "entries": [
+        {
+          "document_id": "contract_hr_0088",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0026",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "378e4c005d9481f273609d8c52ce0195ea40d330a063a8bf56079994ce8ead5a",
+      "entries": [
+        {
+          "document_id": "contract_hr_0099",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0002",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "33bbf32da909af0e18245e9704336f12fcceb7f79f7c0ac47fbde752ac0a7f3d",
+      "entries": [
+        {
+          "document_id": "contract_hr_0108",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0005",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "fdd60f7c84d931e3b7023a23a3d057f335f1cc805688d8670ee2a7bdc03c652d",
+      "entries": [
+        {
+          "document_id": "contract_hr_0120",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0010",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ae2f726e5efc84746f56b5cdb2b4874d6219e120389553a6e0cf5394725c8ab4",
+      "entries": [
+        {
+          "document_id": "contract_hr_0122",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0014",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4dc430f1ca1424738878ad8ed8e6c20c378765ddcc751477ec086b8569528ffc",
+      "entries": [
+        {
+          "document_id": "contract_hr_0128",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0016",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "8b7e4e97bca845f7dea037979bb06da97114df30d07a297b88ebdfe230497047",
+      "entries": [
+        {
+          "document_id": "contract_hr_0132",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0015",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "297b14a5ca037a695f4e6edd4331249c3245ed268a088f4bd9966a672f6b310f",
+      "entries": [
+        {
+          "document_id": "contract_hr_0154",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0017",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "6f948e031842500801d8f175577c39e168a43bedee0488adb2bda911dcf670e4",
+      "entries": [
+        {
+          "document_id": "contract_hr_0172",
+          "label": "contract",
+          "split": "test"
+        },
+        {
+          "document_id": "contract_hr_aug_0004",
+          "label": "contract",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "31f02a0d60a27314bbb2847bb0930bddbed80cb2a7cdcb992857e756aa09d18f",
+      "entries": [
+        {
+          "document_id": "contract_hr_0173",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0003",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a48dd75513347cca51ffdbe22a5ad1f4f7284375ff273e4fc7f8b660580b84ae",
+      "entries": [
+        {
+          "document_id": "contract_hr_0177",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0011",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "2e820c8fbc874dc79133d874db50cf4e7cf6a5ddf09c90617867ec530f380adc",
+      "entries": [
+        {
+          "document_id": "contract_hr_0185",
+          "label": "contract",
+          "split": "test"
+        },
+        {
+          "document_id": "contract_hr_aug_0022",
+          "label": "contract",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b32f23472bfa468fcead39fe8f5685123769e939ede3b30bdf3302abc2aca643",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0010",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0022",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4c031fa06aba96e7f74825a68fa49472cf4239eb123b2dffa943bada8c831ed0",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0027",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0004",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3e648560863d6b57358d0eb30e5e6daa29e0acb11565ea72474179ed709a0f81",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0065",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0028",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "879c4e0494c7dc5e3108b5f7665da306f7f20c2640753800590d855bebc66757",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0070",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0008",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a3c43ab02cdb44bc4aa2824f23ab0b7f56a59841ff2b1f0be0425ebc15d95de7",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0081",
+          "label": "email",
+          "split": "validation"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0027",
+          "label": "email",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "c92a1f80277d14860ad63f58fae7a3048bdc27d1f35a5036e6b134df97dbebc0",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0098",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0002",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "d5c4c385e30d10117b05b0f149a716cf237b069e577ab98f751a22a4b41d0b56",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0102",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0023",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "d99c440ee4bf7686d40642a304582c2ce6d69f12e494feac1f8ce14d510c5720",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0104",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0016",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a0d65c6c8e70b2130f751014cb025a85cbaed789b3235e3bb1f8e9bf32e8cf1e",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0106",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0017",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "c124c75606888ba3bf4111028b73f0b94d5e8531ad70ef66bf8f4ba2cb971b0e",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0115",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0005",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "439ff6a4933e84aecc1deb6ffd290ab6dc7e15cc32a7f40400b3c235913aa589",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0116",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0021",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ee7897b3a24b4175e4b5021f62c6690b32188f4d9ba867545c9326691958559f",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0122",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0011",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "bbb24ef3829ff3aa988633a7d9b642897b284f5d18d7651a322a1699f5a60a06",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0134",
+          "label": "email",
+          "split": "test"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0014",
+          "label": "email",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "94ff5fac38dc4b40258c919ba37fd5007a3c61130e67f64996bb06294d0aad76",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0144",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0003",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "6baa44d0483608d78b48db8bd35998b0c2ccd5ae73a45d3f529f808713aebcc1",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0145",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0015",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b2573db9dc4c35f356ac21e40b9bdc10a2b45e9d5aab7d76a738d1aa7845fbef",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0147",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0010",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4e1b0f24f3e3d90d313e26454c1c036f9b3a6d1c3c7db50090d675582b6b8c8d",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0149",
+          "label": "email",
+          "split": "test"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0009",
+          "label": "email",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "d0b4b6752d2a9a1e45c08a027da27cc472641bb4e150924d5b4cc84e74d073f5",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0155",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0029",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3dba2ccea9536a773dbade696076a2edf8f00ef56a492fde997290fed3ac6d30",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0159",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0026",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3f8864d517a7cb05fb2ae36bed6dc88d6a76c93b0e2062ea0f875103fbed1bcc",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0170",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0020",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a708f33e1e02a4516259fd825205c78dbdd2ad78eb963c930599cad35277658e",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0019",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0016",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "14d93e558265bfb2ae49df221cf3f576518b7ab1364cb7af5848738d5696a063",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0020",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0009",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "163ed1dbf02d387163180da8a4ccace3ed6bc4972386d91b9181a143474574e2",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0021",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0028",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "c70db1cf6c6be8abb540e73186ceb326cd16306cfbcde37a01ddb67447287f07",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0076",
+          "label": "scientific",
+          "split": "test"
+        },
+        {
+          "document_id": "scientific_hr_aug_0010",
+          "label": "scientific",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "757498e2c0265ce29ca7011bc60103e924d5a395cfcd33d9236e97957f24b041",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0085",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0029",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3f29d93867f2072099bfd168de4be0c5b98fbc729b7db6245cb09d31eb05dd28",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0095",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0026",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "d85f2b0dbd456a4600052a1e6ddab8325bfab1e3793239a742e8f59e1a006836",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0100",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_hr_aug_0005",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "19e9e03d8d8eddb30cdf5d8f60a650e03892149ac54c892752b8059c49177f7e",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0102",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_hr_aug_0022",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "50d5d93f50ca8570c67bce07b6af07cfdd9e8367f566027f3d30d94470342ec5",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0104",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_hr_aug_0023",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "35074fae1c75f66735e331442262cecacd740b8562991a80fa98eaff6c90525b",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0108",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0015",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "24440dbb5781dfe311f8b2f3c0060039d16159cb08e1a381da95e63b5c69b8ac",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0109",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0027",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7fd0157d68555bfc685bc71a690ca73d50a4a8c11fb5d0c2e689e9b268f633c3",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0118",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0002",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "692b0b785c5c9fda17234cb6d18a0a90a570b918c0fcffba466baca010668944",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0119",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0017",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3f849393c0fff8094db2c78882625aac58a76e4552fd62522b5e329366f7d854",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0127",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_hr_aug_0008",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7d127bb83fd7fd4597a77a387a5f71e8748805a2c936d991fd88e15898bfb1e6",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0136",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0020",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "56fb617c4751a4d4ae031687fdaf090bd9426afb6d6b1e630dca112735b0ec87",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0144",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_hr_aug_0003",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4d47360e66e9020e8484c1c525aad5ae2f20e28fa6625a417b67d5f9827f2253",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0151",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0004",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e74913ba56f736c7002526e6ea1cd51b30d57d7a6947e19339fdac3fe8a6a0be",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0152",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0014",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4693b7a059ce86fea0f01c8c8d98a13db6a6dcc9366a2e16d9e6c87ca0bede32",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0157",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0021",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "c0722cce0a991b4625acb03d88457d7074bcf818e550711c74002d9f7b586c50",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0158",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0011",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    }
+  ],
+  "text_digits_removed": [
+    {
+      "sha256": "b7a26bdf24d11089ac4b608359937feba62bee3f122d6e7c14f5dcc0db331d6f",
+      "entries": [
+        {
+          "document_id": "contract_0001",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0092",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "80763229af7689ae22fbfa6f3f119ab641bfc1e6f40cfc7f76843c3df55c16d7",
+      "entries": [
+        {
+          "document_id": "contract_0008",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_0095",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "10af479e50a8cbfa220738ed154e40375d897a97181e275d13813c5203a5fe20",
+      "entries": [
+        {
+          "document_id": "contract_0009",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0099",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "90bdcee740405bcea8bce66f57176671d5e69127d61771ed4e20581edf858ef7",
+      "entries": [
+        {
+          "document_id": "contract_0010",
+          "label": "contract",
+          "split": "test"
+        },
+        {
+          "document_id": "contract_0100",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "0a28c23b2a34c4f0b5b062dfcdbd32f265baa3eff2b9aa9cdd15378f2d1f4cae",
+      "entries": [
+        {
+          "document_id": "contract_0012",
+          "label": "contract",
+          "split": "test"
+        },
+        {
+          "document_id": "contract_0101",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "08a8c91b83e9cb76f98806bcc7dea516ef2264d7324bb4d72e07cb7cd81be4eb",
+      "entries": [
+        {
+          "document_id": "contract_0015",
+          "label": "contract",
+          "split": "test"
+        },
+        {
+          "document_id": "contract_0105",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "046ddb9aa4c3aa919399fb4a92a9f90a59b968dc1de68514fee6c4740476d54b",
+      "entries": [
+        {
+          "document_id": "contract_0016",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0107",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "64f7866418d19b6daae592c3030bda5ad574dfc9c1b8db64d09e4fffb63ffe90",
+      "entries": [
+        {
+          "document_id": "contract_0018",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0108",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e96ddd2538f64daddadfcccc7a982b028e6a1412dd5394188aa1428107e080c0",
+      "entries": [
+        {
+          "document_id": "contract_0025",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_0118",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "c604757a7c008228828ad9069c5b002e547a86d67be12258753337f332132ac6",
+      "entries": [
+        {
+          "document_id": "contract_0028",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0122",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7891a16989660d1533051857337369120d2d02dedb5df9741c1d4d1c55aca64f",
+      "entries": [
+        {
+          "document_id": "contract_0030",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0126",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "6f5e07acad230430b292579a974182aca7546bd6c1735f9a399480657b40b106",
+      "entries": [
+        {
+          "document_id": "contract_0032",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0127",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ecdd11a526a69f8d3948073ce6bab3e16e1314d95ccc8d9d3f16b03eb970b0b9",
+      "entries": [
+        {
+          "document_id": "contract_0035",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0129",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "bdcc76c728f60b48d15a5c46621be8e21d20e2a932a7695638be58896ceaeaf0",
+      "entries": [
+        {
+          "document_id": "contract_0036",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0130",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f4a589039a2f99f857bc64d17676cf7ebc0df046ea7534fd50e923b4c091a51a",
+      "entries": [
+        {
+          "document_id": "contract_0039",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0134",
+          "label": "contract",
+          "split": "test"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "4e7467b0fdee49caf67833a1e7e4c56935a7ea85d47c4ec33fca2b64d8b5fd55",
+      "entries": [
+        {
+          "document_id": "contract_0048",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0145",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "c6de96e89dd5e629f337c6648e4ed7aecc1dae1aa2f4c1ad147ece6b5565283b",
+      "entries": [
+        {
+          "document_id": "contract_0054",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0155",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5081935b2ac6f99912ae8e9df0bd74a8db22e56f5b04df95c1e3080cea1cc32e",
+      "entries": [
+        {
+          "document_id": "contract_0059",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0158",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7563b5693e8c69f6ba9f7c571361ccb63ed865d99c2f934d0319789528a5bd60",
+      "entries": [
+        {
+          "document_id": "contract_0062",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0167",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "cf1895abca956e91bc44edd683167f8c55e1cecc64bac9dda4fc394fbbb7bb86",
+      "entries": [
+        {
+          "document_id": "contract_0064",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_0171",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "cda4b3b06c87b20bc60b5a72d142623823d26e9bd7601bcbaf410a4481ad0ae1",
+      "entries": [
+        {
+          "document_id": "contract_0066",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0173",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "9af99f8305d0002b639e22e0d7b4ed3a0a62f726da8f2c8eaec6a5513f9596a9",
+      "entries": [
+        {
+          "document_id": "contract_0067",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0174",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3ec81515fefa107278dc9aa9eda70c95053bd70a2085dcb5e1f33ba41185e4d0",
+      "entries": [
+        {
+          "document_id": "contract_0070",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0178",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "86447afe1b0199cf63e95d4026a3949a19ace6055a675782b80254fc57da3928",
+      "entries": [
+        {
+          "document_id": "contract_0079",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_0184",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "95a34b9c50040dc35073245ee649070e9d7f15ab997bf59a81b309f9b3657920",
+      "entries": [
+        {
+          "document_id": "contract_0083",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0190",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "1a090c20bb4fd0ab84d08c590dc6a762f944c7bbbf92f0d24d6d93c022775c3b",
+      "entries": [
+        {
+          "document_id": "contract_0084",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0195",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "008f280aba10401f4d4174278ccd09876dbc4b5a9b63e88f1ca42644b935acc6",
+      "entries": [
+        {
+          "document_id": "contract_0087",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0199",
+          "label": "contract",
+          "split": "test"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "57fb009be4af33555b53ced1ccaf3a05c49074ff0ea228892de1877731f493c6",
+      "entries": [
+        {
+          "document_id": "contract_0091",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_0200",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "012e2e349f1dda35766c857e5c5ca57dc4f08b520fdc8241b9185048e2e8743a",
+      "entries": [
+        {
+          "document_id": "email_0013",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_0014",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "c01a112a49e6c45c203045035970307076ac5b8a96ac2d9214615569590b1000",
+      "entries": [
+        {
+          "document_id": "email_0042",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_0058",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "fe43f3a9507a8cd659fcc0fd29a0822fb00a6d8183d2c289d343a772993af72f",
+      "entries": [
+        {
+          "document_id": "email_0095",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_0106",
+          "label": "email",
+          "split": "validation"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "sha256": "4c1ed2bd851bc72a203ea72d2a584b6f1f993bef9aeb26db089a10744d8fae8a",
+      "entries": [
+        {
+          "document_id": "email_0170",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_0171",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4f48b694996460da2c25f5206225866e3b460bcb1a0bb874665a20e0745405b9",
+      "entries": [
+        {
+          "document_id": "invoice_extra_0315",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_extra_0483",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "85670543319d6d287ad531ab638c3307038a1add94dffba174c65c8563f0d783",
+      "entries": [
+        {
+          "document_id": "email_extra_0049",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0497",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "fe2b20bbb7cdccb523203cbc22ff4778cea04b77a0b612035ce01ded4ad191e2",
+      "entries": [
+        {
+          "document_id": "email_extra_0317",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0476",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1bb7e346cec0e9194146fc2c000c6bd86e2ffa4676a649a98bd3b8c3ac5a87d2",
+      "entries": [
+        {
+          "document_id": "email_extra_0329",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0494",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "0c396003b9d12ea24bcdbf265700a7b9bedd858133f83e19cce75b21664a7dd5",
+      "entries": [
+        {
+          "document_id": "email_extra_0334",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0336",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0528",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e8154b9998552485e4644d29d14e2586c15138aad4268b4fe653c9f1cfa1d881",
+      "entries": [
+        {
+          "document_id": "email_extra_0339",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0525",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "2bea3399d063c5217837b0571a28334e47992e672c023e93bd93a6264dff5a37",
+      "entries": [
+        {
+          "document_id": "email_extra_0340",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0479",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "0510011351a65be1eca70374b7291d17163039c5afde6a24a58dc84cea810c04",
+      "entries": [
+        {
+          "document_id": "email_extra_0349",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0543",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "005e7b3dc2476c26e822128515548698120f26fbeff2f11759acd25c1418f87f",
+      "entries": [
+        {
+          "document_id": "email_extra_0350",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0442",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "c969293336f9fb13c22fd2eeb34ed21334919f5f75967bfbde7a8629e8ded591",
+      "entries": [
+        {
+          "document_id": "email_extra_0354",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0483",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ab919fe464bfe251c04625889f335aa4c03db059c2d3a1d92ed70783f185f8f5",
+      "entries": [
+        {
+          "document_id": "email_extra_0355",
+          "label": "email",
+          "split": "test"
+        },
+        {
+          "document_id": "email_extra_0517",
+          "label": "email",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b2e961edf657463c435a3cf12a771c9268b5e3a137d926899aaebe33ec56b548",
+      "entries": [
+        {
+          "document_id": "email_extra_0369",
+          "label": "email",
+          "split": "validation"
+        },
+        {
+          "document_id": "email_extra_0444",
+          "label": "email",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "c8a347c7c54db5d6d059e6ba9ca5726f02ca38aff4c29320692140c168979bed",
+      "entries": [
+        {
+          "document_id": "email_extra_0371",
+          "label": "email",
+          "split": "test"
+        },
+        {
+          "document_id": "email_extra_0467",
+          "label": "email",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e839ebdcf514136e19a1f42859bc441eabdc9987edbbb441c48b6650d338d6f4",
+      "entries": [
+        {
+          "document_id": "email_extra_0372",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0507",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "896c05b509b7fa6ae46bafb96f3e8c3be20742971ae753dba41e5c2e33cf8cd0",
+      "entries": [
+        {
+          "document_id": "email_extra_0379",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0506",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b61dbad763957338145168a93f4f261cbc95c6edef3b3ad2aece9027f4f00160",
+      "entries": [
+        {
+          "document_id": "email_extra_0380",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0540",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "52fba42bc692861d7fc9dc7f8a8c4a3ae2eb21184e00b2932ecb72bb533eb292",
+      "entries": [
+        {
+          "document_id": "email_extra_0389",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0502",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e3950fd59752866b76615dbd65afa5dc0796b28eb667bc20ff8f4d6a2fccc89c",
+      "entries": [
+        {
+          "document_id": "email_extra_0392",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0520",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1dbd91ed9626f2779ea4e0f76cd22f71430ef50878459d6df2ebd1e5c2f8e01a",
+      "entries": [
+        {
+          "document_id": "email_extra_0397",
+          "label": "email",
+          "split": "validation"
+        },
+        {
+          "document_id": "email_extra_0464",
+          "label": "email",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "d36bd5ebd3f960479e837f8ae4deb590564ffb4985425f44eff0a66d592011ee",
+      "entries": [
+        {
+          "document_id": "email_extra_0399",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0534",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "087066bd4e00c9e8b60705c3c795b403df6983002c6fd01c07fd994f5fe42038",
+      "entries": [
+        {
+          "document_id": "email_extra_0403",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0546",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "9cafcf130cc58e5241134076580d34f54aa2f3960628995db93b9dd3b917fae0",
+      "entries": [
+        {
+          "document_id": "email_extra_0406",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0447",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "810300e6500c2cc531c226c1fa9cb15bdefbcb2583e4e111e75f49d5da188c51",
+      "entries": [
+        {
+          "document_id": "email_extra_0408",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0527",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "197de0d69a0ad89df5770ec201f81e0f35a6386187d74dd7d4f952810d3c388b",
+      "entries": [
+        {
+          "document_id": "email_extra_0409",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0530",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "8a991d1e92a78fe17e902e3b2fc3c0877e71c547fb4973ddb9b932f19811ab05",
+      "entries": [
+        {
+          "document_id": "email_extra_0415",
+          "label": "email",
+          "split": "validation"
+        },
+        {
+          "document_id": "email_extra_0541",
+          "label": "email",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f6c5b410483fb7ab868c5b588790ebc93d81d3d6370891f1c225feb4068775f9",
+      "entries": [
+        {
+          "document_id": "email_extra_0416",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0441",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "011986b850d7be6a634c947ebbd5a6c0f9e9a6e67464ce73febed89a30707983",
+      "entries": [
+        {
+          "document_id": "email_extra_0417",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_extra_0490",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "d22c4bcea369eb84ad16dbe973542babfa246333d2988db4f840b006fe4b233a",
+      "entries": [
+        {
+          "document_id": "email_extra_0429",
+          "label": "email",
+          "split": "test"
+        },
+        {
+          "document_id": "email_extra_0501",
+          "label": "email",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "9abb54d04c8cfd23db2c7b9fdb993552e07bf70bfec39639f7419850dca85b68",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0001",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0544",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1eade5c0b73561b63acf991d8cea2fc0bfab82e151dbcd064a4c8025e91526f1",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0003",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0523",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f5bce3a1f680ebcb986320c718ff826473662a09029c6d39bcc15ba6e26d4330",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0007",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0546",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "8a9cee6a6dce8ba4a1c88ebd1bb4b0640510c28c1eae20ca8bebe95272cc0c3b",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0010",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0549",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5b0991164873cf740e941051f1e972e7a20f07f7dd29c4e47bad2d13929471af",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0020",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0537",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "0d7ee856312178344415144c326d7cba6bd6f3197b3b9814a5a20a0121008e2e",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0034",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0502",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b102c11b1e37255f71c2c8c200b8d6f7cd16cf349bbe05be9635f4a0bdce388e",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0041",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0472",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "373dbed0822ef5f2ce8863d91ef4ece545fd3939d45d1822d8cbf806d2b6f33b",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0043",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0448",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "8247be69a6fc7542d6b97929ff51a3fc7e98a071e75e5972b0d0bc63b594033b",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0044",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0486",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "6428b3adaef4ae3d09cccc07eee1ddc9b92365b9b20e58f12669105e87d58f51",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0050",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0471",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a2b14b378ae34af4562a1c3e288e7c0e22e583518881f1e0aea5f9a2630dd17f",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0064",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0479",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "385982ce6b72fcabdd65257b7f31da8fddfda280c146ce55c29bb10172d8bf09",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0065",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0534",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e340582b4858c5d1a2a9108b87209a33295e616c4a86b8d0268ebfe611bfa3ba",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0071",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0520",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "94b64773beebd6d98999d45bb1cfb094c841ba727cb9b18c3762162a3caea6c7",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0075",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0477",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3f6c9f30e3adf9864b1d18da1a7da02650c2357a0214104c7b860d6502903d3d",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0084",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0467",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5d33122037146d9c53c53794a5083750538bbcf6b95483e798fd6008c064a13d",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0088",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0449",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "63ca8ab292c03e453d0aae04d2468fd9dc19cb97eb33f2281ce10a1355399122",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0090",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0476",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "84b882443e2f10bb19deee84d24ec2a7923a04ff968b655ec2e0b95403d92908",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0091",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0538",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "04240f2d01edbaa215a7a617246b92f6f289de38fb26842f132ac126c6949310",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0096",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0518",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "eda46da31c948935755cfd11bb1e8026bcf5375078d49474484d8feb4df960fd",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0099",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0457",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "92dde676d55e93bef8dba4e6c8d282ce45a515240a3c695c164dd8c57b85c4a2",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0101",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0514",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7b11e4ed690e4acb24a8801fdc89de9b1ca5fd06b2018d291b7b40b2858bfe55",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0103",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0519",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "20c9e295400c63a63540462ca9cf296be6023538d31c03a7db51a1c64ce18fc3",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0109",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0550",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7bc5b94e0d3d0304b742c66cfc9b837a0b864b6829ab40375bab07ab7b8dfe53",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0111",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0461",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "562034c7b8991a64b29ae19fcbde4f8f7839ce1b94a8ecb6ab4307dec3e126c5",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0117",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0531",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4087f8a469892f248fcdb5b1b11ab8d8758ceb37d44b87ca0ea8ef60a8a66147",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0125",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0498",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1b32b6e7d0ddd28c36bd0906618d9500ab30774eb84009c388f6ee059c2b9db3",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0129",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0511",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f3d6a888f5264974a1b15b1276828208e87ec117369e9d50204d3852f13677d4",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0133",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0494",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b772512480324000395fb099fe3b4a2a88e4f0e5cede18a017eb563324c58570",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0139",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0503",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "43cf2ba1fb1e2a696b3d449da5ccd1b7ee08f77939f0706b078c0dc75b83e4da",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0140",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0469",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ba23cdf697336abfe37325fe5a1d3f6f5893f7f6c56ede43ee07d323bcd87b2d",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0146",
+          "label": "scientific",
+          "split": "test"
+        },
+        {
+          "document_id": "scientific_extra_0458",
+          "label": "scientific",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "8cbd55e03c3d69893b6c329aeba6862208a13d8dee6683d92658ba1b44da7adc",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0148",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0442",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5c2b7da2deecb547be69878579243bad4ad86615583a24d1895c7300028246d0",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0150",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0541",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a81e19f229fb16a43a3d5c15b36864f35fc8d7705d2b8a0d78bca95d3ed6fb0f",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0162",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0455",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "435fed30d84bb956eb3ed644de3154c1c5e19c77c3bd0077f01237c8cac85c62",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0163",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0525",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4ddf776634d5df727014c7f7e999ff275944910369b2a42bc954c02dd4b27bcf",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0175",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0505",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a262330fb311b13254c271683e06e4c9c7ace6a84776c3406d6a5af16aaa3436",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0176",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0481",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "183672f2e9faeb1dbac9e78e62c8840279858da6f1ffb572b87b782231f42c0f",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0180",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0547",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1a8bf0c19e44bc59f4d85caa4620dc1b1e6983aff4a7cffdec190c99f6a37559",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0181",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0441",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "42b6aff3161f0a7a325c8edf6a133f7cf0bbf8e2a3056aadf527423f95649a99",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0183",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_extra_0510",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5ace0f731691646b63005badbcf77fb4ee1326eab754475476dc97f911b9a1ef",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0188",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0465",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "6f8794c424e19001f13916c2dd2b59a0b5b1aeae7c54485080d9293b2fb0f618",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0198",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0497",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3b7f1a678381af14033880642efbf26050fc72cd69e64fc95f88fae61c861108",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0201",
+          "label": "scientific",
+          "split": "test"
+        },
+        {
+          "document_id": "scientific_extra_0493",
+          "label": "scientific",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4eb5a52cc48a7ae391dc13b222283ede9f4429714934513c95ffca1d6a844ef6",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0209",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0464",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7e1b0c209d140c781542012faf5c9679dad5bd56d8ea1a95e8cb72879a77a7b7",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0211",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0445",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "69ef7a163f80a7905655296cd8c0e63607c571b3afef901ed804718b63f43579",
+      "entries": [
+        {
+          "document_id": "scientific_extra_0340",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_extra_0468",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "635dc7a421d7105500ef716d88d7cdf1f802362ff5d24f8c585d0418faa7dcba",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0002",
+          "label": "invoice",
+          "split": "validation"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0001",
+          "label": "invoice",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "65edca8c7696cdecbc3ced863599574079bdb152c99fc7bfd95141934a3acd98",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0002",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0014",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "0ab550840c41c80ac778f0722007a9509b9368e19f731ff8b30e2120551fe04b",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0004",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0001",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "d08852958d2b8fbd49374bca0eb539e425b3cdfead8dc443598abbf0cff3e441",
+      "entries": [
+        {
+          "document_id": "contract_hr_0001",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0020",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "9233a119cf92f3218e29fab7be51d2c968a1b967b04e9d7b6ad0a1450d49a3a9",
+      "entries": [
+        {
+          "document_id": "contract_hr_0002",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0001",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ef98b3b84cd8f8dcb638048ee08e4ad7d268317ae9782d3d4ed779d8c9b30105",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0003",
+          "label": "email",
+          "split": "validation"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0001",
+          "label": "email",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "596067398af516fde1ec9b807947d3bc0ed8573646284d81f2e3d3025c1eec66",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0002",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0001",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b0709680a961f3755286015b9f2920da3389f679ef86854ea2b2a9cd8df5f55e",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0005",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0004",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "90bbf9a1f3f366c74ce57c1190e2d4870c9379c56f18d494b8bdd0d4e753cbd5",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0006",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0026",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7c31027899368b5a92e746a63ce2c38ace8fafede7fbc5c990f1018108c13c4e",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0010",
+          "label": "invoice",
+          "split": "validation"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0028",
+          "label": "invoice",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "bb15a354a6aad38c5a4abd6b5411bd886a42530aa55e2612058e0ecd192e9426",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0012",
+          "label": "invoice",
+          "split": "validation"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0015",
+          "label": "invoice",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "46008f28bb5b08229a1f9f5e5c4a73d41cd8b0aa736ca85d377e0bfe9d7047ef",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0035",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0003",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "81f1900e506945442f68075d93ea2c76d2597d94e87619ee392894724330bfd8",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0063",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0011",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "396f81f8e59ce903efb61c9c1cb1e2bc53de4b6d638c9d16c3e905e7dae71701",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0065",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0021",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "8e48716c815cd6a98cf76d405df0475e041ce7b4cab064b864fedbe045a6de4a",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0088",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0009",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1160dd09aa83d90d6d76dc9685f96530eaaea1abb10c3633ee6c404926087973",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0089",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0008",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "2751dab78cb39cf22241b4e6f5c041e1fce4908e8c323e0117cc618612e99c82",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0092",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0017",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "2309d12d9e5061451d9c6e99cd2b906080754ef499b56b80d7312ebb5fffecea",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0109",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0014",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f50a4abc187fed1c8a4f73cec6ed108abc61647e1c65ee89286a7016722cff57",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0115",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0027",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5f32ea27ce17d7aff85da52bc6c11a30f8872300e32fd08e14792a75da5da117",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0118",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0002",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "41fb03958c069c6c8400e4f808278b6e57cca8a7b06319798af1dee13c9eec5e",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0137",
+          "label": "invoice",
+          "split": "test"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0022",
+          "label": "invoice",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "9295a6fc5eb2bc7f3f238d7507d74b600a408774ec0d98ec20fa8ad918c838d7",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0139",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0010",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "66235c7fac1d63255925ee8d5e69f762f9239d7bc7b556a08d21b4f165213649",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0144",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0020",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "612cda5047b8351f03f994de73b878b9f984053c902f1a9cbdab4009bc5adbf0",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0150",
+          "label": "invoice",
+          "split": "validation"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0016",
+          "label": "invoice",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "6ac5cc34a96c6e84280196c17ba27b884e16caed2f2a689c352341d23284a279",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0154",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0023",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "52430e3db8ee568c2a0eda3bde9422bf9c48c133884ce59f27f424675aa972a1",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0155",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0029",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "cdbc561134de7b1545fb46ef5b7dfa2de009acd729e1f6c8cd9b9503590120ce",
+      "entries": [
+        {
+          "document_id": "invoice_hr_synthetic_0164",
+          "label": "invoice",
+          "split": "train"
+        },
+        {
+          "document_id": "invoice_hr_synthetic_aug_0005",
+          "label": "invoice",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "c665a50c6665dd154ff378891ce44eea83559e446ca9559d59547b7b78545c07",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0014",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0015",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f689befc5f4aef37d08ae91f3e0696b8130aaa83caa30736f13611e88f06bdf6",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0017",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0002",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "7290fd89344ca7a82bc5b4736fbebc2805999da2d155bd89a1bd5a25542b0aaa",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0019",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0016",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "dbbf0d1fce6b0b836dab783272010ec526f7d6dbc9867be2f31f209bd125a094",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0035",
+          "label": "cv",
+          "split": "validation"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0027",
+          "label": "cv",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "15fc73946fd80a1cde74968e37e09dd0f00c0d6bdfdc16cce901611c31b60c55",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0038",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0005",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4947f66e3f004346885ec141e442d51335980cc778c00c22cae0b0a86e267bb0",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0048",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0023",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "868f628d6814f32457fc7191a179bb3e5ec3205e504f6d5a2766b0f3930b6dfe",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0062",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0021",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "16441a802fa10b1d537d1ddcac53daec8dea51995ccbaa624b68085188ac5a5f",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0080",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0022",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4e0553246163be078475ccf3723874163f7429323d156f1213a7420f0b6a9715",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0088",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0004",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "aad4a770f56c5da168e7a5f66803be74d79f6fe7033539df8cf4089d594060e3",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0106",
+          "label": "cv",
+          "split": "validation"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0011",
+          "label": "cv",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "da9de92c8e323d9d0aca7c2a7e32a873e6e06c8b5e693e088760728666752550",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0111",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0017",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b6e619bf8cb18c55466638fbfc1f61a75aa0997e8bcac63c4541c4ec8afdc0d9",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0114",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0010",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "73028756433cb10f6b497c486eb20032b49c974d2b1b92059e9cbbdccdde6f64",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0131",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0029",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "33c56b4bc1983d900f9954364e5d774bdfa792665551ec04355a5cc84da19063",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0158",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0028",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f3255d784f847fd861b31322fe7cfe7a10f5d2345136b2ee36683e8caaf2a0eb",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0159",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0003",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "95cd145562c84e06c088670f68539f2971f7d0adf1be5f7c8c6bbc58df205cdc",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0161",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0026",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1cf653170296d5559cea2e48928575c8ec44df9ce420777cc122afbe7baa46d2",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0166",
+          "label": "cv",
+          "split": "train"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0020",
+          "label": "cv",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "2e159c9cdfb46b1fdf039e0f33d87351211f45b67795ded74f2cd7e7364c7ecf",
+      "entries": [
+        {
+          "document_id": "cv_hr_synthetic_0168",
+          "label": "cv",
+          "split": "validation"
+        },
+        {
+          "document_id": "cv_hr_synthetic_aug_0009",
+          "label": "cv",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "c6987ac6f278da70aeba1c45490027cc06198d4a8ffe6807f0439f31008c18de",
+      "entries": [
+        {
+          "document_id": "contract_hr_0035",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0028",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e512a5850bf31a7582ee9a4da21140da44d89e373f8f548873f6a3cf182f88a5",
+      "entries": [
+        {
+          "document_id": "contract_hr_0046",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0023",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "8bdcd87d176c37cd18def0b45a9fed69b9a59682306e0048624113bdb3ec56a6",
+      "entries": [
+        {
+          "document_id": "contract_hr_0062",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0027",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "90b289a7e4fc8b716d9ceb157986decec2ed01c9aea1806a316d5747d3b20164",
+      "entries": [
+        {
+          "document_id": "contract_hr_0069",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0029",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "9708a4eea43c9cb64d4d26a01f9c10ab11d430e713addb7f7e0e414f2df54a9b",
+      "entries": [
+        {
+          "document_id": "contract_hr_0075",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0021",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1eab0f220e2aff79b34aa3ab9f7b1481f553bbe137be7a6c7284a57fe2d33c7c",
+      "entries": [
+        {
+          "document_id": "contract_hr_0079",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0009",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "156a8940c0fa8e15fc9716bbb7cb952ecabce48887b6a342da30554b3fb662cc",
+      "entries": [
+        {
+          "document_id": "contract_hr_0081",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0008",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3d21cf8bebaae6781011807cf091a77a98528e37d9fc4a324c7375edc5d3ed2c",
+      "entries": [
+        {
+          "document_id": "contract_hr_0088",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0026",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1e8838b6980a455a4e85c0299983aa1b956b4ecd57a883c9a965a7506a6d0d3d",
+      "entries": [
+        {
+          "document_id": "contract_hr_0099",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0002",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b2f7f884fe92c83a0e824475559f6eed5bb66a7eb3c07a2d4559e463763e077a",
+      "entries": [
+        {
+          "document_id": "contract_hr_0108",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0005",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "040c118d11e050af669597e980809990d377a5d57062186350dde4c129cff91b",
+      "entries": [
+        {
+          "document_id": "contract_hr_0120",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0010",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "832761239e08ab874d273de02de229467dfd20e1ccd4694e98e39e35c1659838",
+      "entries": [
+        {
+          "document_id": "contract_hr_0122",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0014",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "d2d110dbca6eae0f050d892181bb4b977c9d668ff09b11366344d1425734f683",
+      "entries": [
+        {
+          "document_id": "contract_hr_0128",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0016",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a6aa1d9220e91a3a900d9a8be917599b3b8317733e24c068f76ed92efbdfaeb4",
+      "entries": [
+        {
+          "document_id": "contract_hr_0132",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0015",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3b06350ecde8411d516300b34d0f46459569cc71f2fcb9c4829be7e05ef0732e",
+      "entries": [
+        {
+          "document_id": "contract_hr_0154",
+          "label": "contract",
+          "split": "train"
+        },
+        {
+          "document_id": "contract_hr_aug_0017",
+          "label": "contract",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "417b2c132883fdc00be46877aa15385091a554d5fb7cec108d262c81a681ef75",
+      "entries": [
+        {
+          "document_id": "contract_hr_0172",
+          "label": "contract",
+          "split": "test"
+        },
+        {
+          "document_id": "contract_hr_aug_0004",
+          "label": "contract",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a3d1a009eba783faba0b887fbb8fa01ac679a8ebe0c1274f1f00c7b549ec8c20",
+      "entries": [
+        {
+          "document_id": "contract_hr_0173",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0003",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "46f3b912f6fd25dd58345ac55e90f80fa3c78e2efabb7e386f6c8908a451fcda",
+      "entries": [
+        {
+          "document_id": "contract_hr_0177",
+          "label": "contract",
+          "split": "validation"
+        },
+        {
+          "document_id": "contract_hr_aug_0011",
+          "label": "contract",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ccb31815d2cfdf1216730cf64949b82bff55d72c6b204bdc28e56343c4fa0c92",
+      "entries": [
+        {
+          "document_id": "contract_hr_0185",
+          "label": "contract",
+          "split": "test"
+        },
+        {
+          "document_id": "contract_hr_aug_0022",
+          "label": "contract",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "52220e82c5b8bfbea6ab03cd8fec0ef97d5e653051c38da38e2d742c48a4963e",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0010",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0022",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3f14a8530e81d9da79f75022c303229d66941f36c071a19c0f33b6b416bf8a5c",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0027",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0004",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3891c39d58d3dd01b7764787fa2b3abe405553fd0badd43bf5b2c253dd300152",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0065",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0028",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "76960be959067ab792a2d30546b88057d516bda97cbf277d858bdc88b073eda3",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0070",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0008",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f05b1f9c757b004ac48f5950749b896bb2f02ac2ac80c51542ac6bcd1aa75450",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0081",
+          "label": "email",
+          "split": "validation"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0027",
+          "label": "email",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "73126010774b0ad981fbb3afb02c5a94f8acf36e5dad550dd4f5e61585475da2",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0098",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0002",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e5b5171e70f721405c4ee3ebc03d912c069c04cd0b7a4988b81af319c0200d22",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0102",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0023",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "9a61b20decde8de8f407ca96620e558c32edeca29a185aff3190e2e5c33509ab",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0104",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0016",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ab66e51c4b9f4dd4971637b1ad9f1c4e067449210bb22258fe877011732fa993",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0106",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0017",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "06ad83942f9bea206be64d5963d0e6737cc4ec679a0184d8417926167f3f3995",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0115",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0005",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "ed4a301771176abc75697b8c3635a8155103988b23352dc5cbcc23104dbf4db1",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0116",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0021",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "f94f7ff415251c1b7c9f5d79eafeed8e29abf46e2dc210bdb40ca4fa7a03bbc3",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0122",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0011",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "23817549290cd4a05023bb65b362332a98532451067fbc1194b74d25bacd019c",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0134",
+          "label": "email",
+          "split": "test"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0014",
+          "label": "email",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1ad752e73d897811eff78888f96f008938de4b1c0a1bd35f2227c9755a1ecf50",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0144",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0003",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "0b4ce28d5f2cfbb59f7847e74f0f43722ed6b4b8d7cc1248d3cb297e01f61a57",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0145",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0015",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "5668f68c878c370d383bfa4e9c5491928b13592cdfea8af7f1bcf8745401e7a9",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0147",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0010",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "847a0ba983dca7e0a593bc1272febf97b816c7fb521f11f53e35a7603cb98345",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0149",
+          "label": "email",
+          "split": "test"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0009",
+          "label": "email",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "49d41cc5659c1441a19d144933119e7e11d8ade182e25f327fa9a04e3c091940",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0155",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0029",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "849df4c90e7ec13be49c17825c1966ced5de3109861e5afca037bcc3b1b232e8",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0159",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0026",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "044e57569182739e66357b593cd4637172dc3d8bb572cc5c936da2e935bc076c",
+      "entries": [
+        {
+          "document_id": "email_hr_gmail_like_0170",
+          "label": "email",
+          "split": "train"
+        },
+        {
+          "document_id": "email_hr_gmail_like_aug_0020",
+          "label": "email",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "64663838f7c60d6542d06daffefb611ac819f9531e7f440eeb8003c5598bca6c",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0019",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0016",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "b3b616fa0a8ffdb1cac1e839b01c731de5d1027afb0ab228e859a81e8ae2fc88",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0020",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0009",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e633ada8be89938b1bc5c701bc4c80616a2b168c5beafc4e419153917b470311",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0021",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0028",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "3fa2460b25b9d5cc95154f1bec2a6a73a5e27eec94e0cc3d2e53bef69fb7bf57",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0076",
+          "label": "scientific",
+          "split": "test"
+        },
+        {
+          "document_id": "scientific_hr_aug_0010",
+          "label": "scientific",
+          "split": "test"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "776581ab4088f79f243217580562fd794dd9899e26fb5579253934ced8ad26d7",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0085",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0029",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "806e059c3faab2068cf10a9db11c42c88c58d66fb0b48a270cf7e766724d14bd",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0095",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0026",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "1911b16fbac39a45a09def012438c516e91103f4de18b7aba3a58bc1aef5cb9e",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0100",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_hr_aug_0005",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "a2002613f0742d55b35cde5646f5ad9f441dddf5991368a8819b4bdd170d4e64",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0102",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_hr_aug_0022",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "03f54c906d5872a0f7fdff1008a34b5617f9495d50cd04a3b63b296caca795f3",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0104",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_hr_aug_0023",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "44cc0e335aed9505a620f41b8557e86e3ecc831ecf10c9a4919797a225669136",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0108",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0015",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "627036201f89e7a15d22b138d983aeff5c7762c6b05421d704226640a34ec3d7",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0109",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0027",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e7dc11f0948d652cfd775edfe9c12c3cd13ad1fd2146c6bacf4067bfff33e8dc",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0118",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0002",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "c9c7e79265bb26fed14f7bd2bde585aefdabb562756f289ebd711203b9dc6b74",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0119",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0017",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "df2681a5a872466efbe836e2a338f32de2029b3f34afb92cb35e04c2af2c67c3",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0127",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_hr_aug_0008",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "8e50bfdf1a7ab3ac3953599a1cf240eb7243c057b122f01f776dc385f8f3aca8",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0136",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0020",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "be7ced7508f7578efe3b4ab9b99e63e5891a2217046114a6e9e911e85351edce",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0144",
+          "label": "scientific",
+          "split": "validation"
+        },
+        {
+          "document_id": "scientific_hr_aug_0003",
+          "label": "scientific",
+          "split": "validation"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "e2893afaf7c0e3d7eb2363251db33c851d4be1bf75da177f5169b3bfeeff5b07",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0151",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0004",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "2fcc3247b3f731de8e211e712e5495938de75ca69b4e9c20662e5dfd09a403cf",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0152",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0014",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "26ccf6803b11b26f8d12de5773620f61e7d0a40cd22c6e75452e04d440218ba9",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0157",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0021",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "sha256": "4129f90a979fd3c5d489749c15a53289fa6069712f2c0ceb9b8d14c5b8176b26",
+      "entries": [
+        {
+          "document_id": "scientific_hr_0158",
+          "label": "scientific",
+          "split": "train"
+        },
+        {
+          "document_id": "scientific_hr_aug_0011",
+          "label": "scientific",
+          "split": "train"
+        }
+      ],
+      "cross_split": false
+    }
+  ]
+}

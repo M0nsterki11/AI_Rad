@@ -1,0 +1,222 @@
+{
+  "manifest_sha256": "de66909f232402152779f6f00f66fb8bec172e85076a75a9c89d5351571c146a",
+  "counts": {
+    "invoice": {
+      "train": 715,
+      "validation": 137,
+      "test": 92
+    },
+    "cv": {
+      "train": 734,
+      "validation": 142,
+      "test": 96
+    },
+    "contract": {
+      "train": 742,
+      "validation": 142,
+      "test": 96
+    },
+    "email": {
+      "train": 739,
+      "validation": 142,
+      "test": 96
+    },
+    "scientific": {
+      "train": 736,
+      "validation": 142,
+      "test": 95
+    }
+  },
+  "artifacts": {
+    "resnet_page": {
+      "documents": 4846,
+      "counts": {
+        "train": 8286,
+        "validation": 1547,
+        "test": 1093
+      },
+      "sha256": "578426858c0e88a528f540843554086875f7e7dba8b48014070027b3ee67aa81"
+    },
+    "layout_page": {
+      "documents": 4846,
+      "counts": {
+        "train": 8274,
+        "validation": 1546,
+        "test": 1091
+      },
+      "sha256": "578426858c0e88a528f540843554086875f7e7dba8b48014070027b3ee67aa81"
+    },
+    "chunk": {
+      "documents": 4846,
+      "counts": {
+        "train": 10510,
+        "validation": 1928,
+        "test": 1329
+      },
+      "sha256": "7609f9f1147bab15d4f630aa5f139b899c6c5ba857ac66a0785935e28c261cfc"
+    }
+  },
+  "legacy_disagreements": 1931,
+  "source_counts": {
+    "rvl_cdip_invoice": 225,
+    "cord_receipts": 133,
+    "sroie_receipts": 158,
+    "raw_pdf_resumes": 276,
+    "rvl_cdip_resume": 274,
+    "cuad_remaining_contracts": 231,
+    "contract_nli_text": 158,
+    "sec_material_contracts": 161,
+    "rvl_cdip_email": 230,
+    "rvl_filtered_email": 176,
+    "aeslc_webmail_render": 143,
+    "arxiv_live_pdfs": 267,
+    "rvl_scientific_documents": 281,
+    "hr_synthetic_invoice": 200,
+    "hr_synthetic_cv": 200,
+    "hrvatska_javna_nabava": 200,
+    "hr_synthetic_gmail_like": 200,
+    "hr_synthetic_scientific": 200,
+    "manual_second_training": 121,
+    "manual_extra_training": 12
+  },
+  "source_language_counts": {
+    "unknown": 2846,
+    "hr": 1000
+  },
+  "source_synthetic_counts": {
+    "False": 3046,
+    "True": 800
+  },
+  "source_augmented_counts": {
+    "False": 3158,
+    "True": 688
+  },
+  "source_missing_ids": 1000,
+  "duplicate_summary": {
+    "raw_file": {
+      "groups": 0,
+      "cross_split_groups": 0
+    },
+    "page_file": {
+      "groups": 3,
+      "cross_split_groups": 1
+    },
+    "text_normalized": {
+      "groups": 208,
+      "cross_split_groups": 14
+    },
+    "text_digits_removed": {
+      "groups": 210,
+      "cross_split_groups": 15
+    }
+  },
+  "external_exact_raw_overlap": [
+    {
+      "id": "contract_01_ojp_personal_services",
+      "matches": []
+    },
+    {
+      "id": "contract_02_okc_professional_services",
+      "matches": []
+    },
+    {
+      "id": "contract_03_rpvca_technical_services",
+      "matches": []
+    },
+    {
+      "id": "contract_04_lincoln_services",
+      "matches": []
+    },
+    {
+      "id": "contract_05_certna_audit_agreement",
+      "matches": []
+    },
+    {
+      "id": "cv_01_brianna_robinson",
+      "matches": []
+    },
+    {
+      "id": "cv_02_uiowa_sample",
+      "matches": []
+    },
+    {
+      "id": "cv_03_illinois_samples",
+      "matches": []
+    },
+    {
+      "id": "cv_04_stanford_examples",
+      "matches": []
+    },
+    {
+      "id": "cv_05_ucdavis_samples",
+      "matches": []
+    },
+    {
+      "id": "email_01_project_update",
+      "matches": []
+    },
+    {
+      "id": "email_02_meeting_reschedule",
+      "matches": []
+    },
+    {
+      "id": "email_03_support_response",
+      "matches": []
+    },
+    {
+      "id": "email_04_hr_onboarding",
+      "matches": []
+    },
+    {
+      "id": "email_05_delivery_confirmation",
+      "matches": []
+    },
+    {
+      "id": "invoice_01_microsoft_contoso",
+      "matches": []
+    },
+    {
+      "id": "invoice_02_morgan_state",
+      "matches": []
+    },
+    {
+      "id": "invoice_03_sliced_invoices",
+      "matches": []
+    },
+    {
+      "id": "invoice_04_ups_commercial",
+      "matches": []
+    },
+    {
+      "id": "invoice_05_harvest_template",
+      "matches": []
+    },
+    {
+      "id": "scientific_01_machine_learning_deep_learning",
+      "matches": []
+    },
+    {
+      "id": "scientific_02_ml_in_artificial_intelligence",
+      "matches": []
+    },
+    {
+      "id": "scientific_03_mlops_overview",
+      "matches": []
+    },
+    {
+      "id": "scientific_04_informed_machine_learning",
+      "matches": []
+    },
+    {
+      "id": "scientific_05_application_driven_ml",
+      "matches": []
+    }
+  ],
+  "raw_manifest_hash_mismatches": [],
+  "read_errors": [],
+  "keyword_counts_not_verified_representation": {
+    "gmail": 90,
+    "outlook": 39,
+    "europass": 26
+  }
+}

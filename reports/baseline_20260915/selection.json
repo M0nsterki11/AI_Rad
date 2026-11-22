@@ -1,0 +1,882 @@
+{
+  "seed": 20260915,
+  "per_class": 20,
+  "selection_before_predictions": true,
+  "documents": [
+    {
+      "dataset": "internal_test",
+      "id": "invoice_hr_synthetic_0136",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_hr_synthetic_0136.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_hr_synthetic_0003",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_hr_synthetic_0003.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_hr_synthetic_0169",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_hr_synthetic_0169.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_0132",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\images\\invoice_0132.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_extra_0116",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_extra_0116.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_extra_0226",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_extra_0226.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_0030",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\images\\invoice_0030.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_extra_0337",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_extra_0337.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_extra_0206",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_extra_0206.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_0159",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\images\\invoice_0159.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_extra_0532",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_extra_0532.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_extra_0376",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_extra_0376.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_hr_synthetic_aug_0025",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_hr_synthetic_aug_0025.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_extra_0013",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_extra_0013.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_0067",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\images\\invoice_0067.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_0089",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\images\\invoice_0089.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_0133",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\images\\invoice_0133.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_0190",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\images\\invoice_0190.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_extra_0090",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_extra_0090.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "invoice_extra_0181",
+      "label": "invoice",
+      "raw_path": "data\\raw\\invoice\\invoice_extra_0181.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0550",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0550.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_0008",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\pdfs\\cv_0008_digital.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0088",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0088.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_hr_synthetic_0175",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_hr_synthetic_0175.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0321",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0321.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0263",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0263.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_hr_synthetic_0156",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_hr_synthetic_0156.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_0190",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\pdfs\\cv_0190_testing.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0302",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0302.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_0137",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\pdfs\\cv_0137_banking.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0217",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0217.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0103",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0103.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0033",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0033.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0115",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0115.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0443",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0443.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0058",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0058.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_0148",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\pdfs\\cv_0148_consult.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_0129",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\pdfs\\cv_0129_data_science_resumes.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0112",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0112.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "cv_extra_0269",
+      "label": "cv",
+      "raw_path": "data\\raw\\cv\\cv_extra_0269.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0001",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0001.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0147",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0147.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_0199",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\text\\contract_0195.txt",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0031",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0031.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_0012",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\pdf\\contract_0022.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0168",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0168.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_0183",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\text\\contract_0165.txt",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0063",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0063.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_hr_aug_0022",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_hr_aug_0022.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0467",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0467.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0537",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0537.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_hr_0064",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_hr_0064.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_0055",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\pdf\\contract_0113.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0460",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0460.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0471",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0471.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0099",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0099.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0034",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0034.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0397",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0397.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0051",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0051.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "contract_extra_0383",
+      "label": "contract",
+      "raw_path": "data\\raw\\contract\\contract_extra_0383.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_extra_0325",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_extra_0325.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_hr_gmail_like_aug_0014",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_hr_gmail_like_aug_0014.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_extra_0364",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_extra_0364.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_extra_0225",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_extra_0225.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_0060",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\text\\email_0060.txt",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_extra_0262",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_extra_0262.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_extra_0345",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_extra_0345.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_hr_gmail_like_0123",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_hr_gmail_like_0123.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_0092",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\text\\email_0092.txt",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_0178",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\text\\email_0178.txt",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_extra_0547",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_extra_0547.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_extra_0084",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_extra_0084.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_0127",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\text\\email_0127.txt",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_extra_0072",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_extra_0072.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_hr_gmail_like_0146",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_hr_gmail_like_0146.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_extra_0315",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_extra_0315.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_0077",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\text\\email_0077.txt",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_extra_0033",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_extra_0033.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_extra_0411",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_extra_0411.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "email_hr_gmail_like_0044",
+      "label": "email",
+      "raw_path": "data\\raw\\email\\email_hr_gmail_like_0044.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0110",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0110.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_hr_0093",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_hr_0093.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_hr_0034",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_hr_0034.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0536",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0536.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0146",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0146.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0513",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0513.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_hr_0076",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_hr_0076.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0347",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0347.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0429",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0429.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0308",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0308.png",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0002",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0002.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_hr_0018",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_hr_0018.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0053",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0053.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0201",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0201.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_0188",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\text\\scientific_0173.txt",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_hr_0025",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_hr_0025.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0504",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0504.jpg",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0170",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0170.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_0093",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\pdf\\scientific_0181.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "internal_test",
+      "id": "scientific_extra_0112",
+      "label": "scientific",
+      "raw_path": "data\\raw\\scientific\\scientific_extra_0112.pdf",
+      "label_source": "multipage_manifest"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "contract_01_ojp_personal_services",
+      "label": "contract",
+      "raw_path": "data\\external_test\\raw\\contract\\contract_01_ojp_personal_services.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "contract_02_okc_professional_services",
+      "label": "contract",
+      "raw_path": "data\\external_test\\raw\\contract\\contract_02_okc_professional_services.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "contract_03_rpvca_technical_services",
+      "label": "contract",
+      "raw_path": "data\\external_test\\raw\\contract\\contract_03_rpvca_technical_services.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "contract_04_lincoln_services",
+      "label": "contract",
+      "raw_path": "data\\external_test\\raw\\contract\\contract_04_lincoln_services.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "contract_05_certna_audit_agreement",
+      "label": "contract",
+      "raw_path": "data\\external_test\\raw\\contract\\contract_05_certna_audit_agreement.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "cv_01_brianna_robinson",
+      "label": "cv",
+      "raw_path": "data\\external_test\\raw\\cv\\cv_01_brianna_robinson.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "cv_02_uiowa_sample",
+      "label": "cv",
+      "raw_path": "data\\external_test\\raw\\cv\\cv_02_uiowa_sample.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "cv_03_illinois_samples",
+      "label": "cv",
+      "raw_path": "data\\external_test\\raw\\cv\\cv_03_illinois_samples.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "cv_04_stanford_examples",
+      "label": "cv",
+      "raw_path": "data\\external_test\\raw\\cv\\cv_04_stanford_examples.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "cv_05_ucdavis_samples",
+      "label": "cv",
+      "raw_path": "data\\external_test\\raw\\cv\\cv_05_ucdavis_samples.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "email_01_project_update",
+      "label": "email",
+      "raw_path": "data\\external_test\\raw\\email\\email_01_project_update.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "email_02_meeting_reschedule",
+      "label": "email",
+      "raw_path": "data\\external_test\\raw\\email\\email_02_meeting_reschedule.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "email_03_support_response",
+      "label": "email",
+      "raw_path": "data\\external_test\\raw\\email\\email_03_support_response.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "email_04_hr_onboarding",
+      "label": "email",
+      "raw_path": "data\\external_test\\raw\\email\\email_04_hr_onboarding.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "email_05_delivery_confirmation",
+      "label": "email",
+      "raw_path": "data\\external_test\\raw\\email\\email_05_delivery_confirmation.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "invoice_01_microsoft_contoso",
+      "label": "invoice",
+      "raw_path": "data\\external_test\\raw\\invoice\\invoice_01_microsoft_contoso.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "invoice_02_morgan_state",
+      "label": "invoice",
+      "raw_path": "data\\external_test\\raw\\invoice\\invoice_02_morgan_state.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "invoice_03_sliced_invoices",
+      "label": "invoice",
+      "raw_path": "data\\external_test\\raw\\invoice\\invoice_03_sliced_invoices.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "invoice_04_ups_commercial",
+      "label": "invoice",
+      "raw_path": "data\\external_test\\raw\\invoice\\invoice_04_ups_commercial.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "invoice_05_harvest_template",
+      "label": "invoice",
+      "raw_path": "data\\external_test\\raw\\invoice\\invoice_05_harvest_template.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "scientific_01_machine_learning_deep_learning",
+      "label": "scientific",
+      "raw_path": "data\\external_test\\raw\\scientific\\scientific\\scientific_01_machine_learning_deep_learning.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "scientific_02_ml_in_artificial_intelligence",
+      "label": "scientific",
+      "raw_path": "data\\external_test\\raw\\scientific\\scientific\\scientific_02_ml_in_artificial_intelligence.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "scientific_03_mlops_overview",
+      "label": "scientific",
+      "raw_path": "data\\external_test\\raw\\scientific\\scientific\\scientific_03_mlops_overview.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "scientific_04_informed_machine_learning",
+      "label": "scientific",
+      "raw_path": "data\\external_test\\raw\\scientific\\scientific\\scientific_04_informed_machine_learning.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    },
+    {
+      "dataset": "external_existing",
+      "id": "scientific_05_application_driven_ml",
+      "label": "scientific",
+      "raw_path": "data\\external_test\\raw\\scientific\\scientific\\scientific_05_application_driven_ml.pdf",
+      "label_source": "folder_not_independently_adjudicated"
+    }
+  ]
+}

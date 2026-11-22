@@ -1,0 +1,82 @@
+{
+  "rotated_pdf_boxes": [
+    {
+      "rotation": 0,
+      "actual": [
+        90,
+        117,
+        339,
+        172
+      ],
+      "expected": [
+        90,
+        117,
+        339,
+        172
+      ],
+      "correct": true
+    },
+    {
+      "rotation": 90,
+      "actual": [
+        1028,
+        90,
+        1083,
+        339
+      ],
+      "expected": [
+        1028,
+        90,
+        1083,
+        339
+      ],
+      "correct": true
+    },
+    {
+      "rotation": 180,
+      "actual": [
+        461,
+        1028,
+        710,
+        1083
+      ],
+      "expected": [
+        461,
+        1028,
+        710,
+        1083
+      ],
+      "correct": true
+    },
+    {
+      "rotation": 270,
+      "actual": [
+        117,
+        461,
+        172,
+        710
+      ],
+      "expected": [
+        117,
+        461,
+        172,
+        710
+      ],
+      "correct": true
+    }
+  ],
+  "cache": {
+    "unchanged_reuses_object": true,
+    "updated_reloads_object": true,
+    "loader_calls": 2
+  },
+  "xlm_roberta_incomplete_fallback": {
+    "availability": true,
+    "selected_complete_legacy": true
+  },
+  "layoutlmv3_incomplete_fallback": {
+    "availability": true,
+    "selected_complete_legacy": true
+  },
+  "resnet_download_aggregation_preserved": true
+}

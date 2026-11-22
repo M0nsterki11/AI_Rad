@@ -28,7 +28,14 @@ SUPPORTED_EXTENSIONS = {".pdf", ".png", ".jpg", ".jpeg"}
 
 
 def active_model_path():
-    return MULTIPAGE_MODEL_PATH if MULTIPAGE_MODEL_PATH.is_file() else LEGACY_MODEL_PATH
+    try:
+        from .model_downloader import is_local_model_complete
+    except ImportError:
+        from model_downloader import is_local_model_complete
+    for path in (MULTIPAGE_MODEL_PATH, LEGACY_MODEL_PATH):
+        if is_local_model_complete("resnet50", path.parent):
+            return path
+    return LEGACY_MODEL_PATH
 
 
 def load_label_mapping(model_path=None):

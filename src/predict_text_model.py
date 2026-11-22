@@ -59,7 +59,14 @@ SUPPORTED_EXTENSIONS = {".pdf", ".png", ".jpg", ".jpeg", ".txt", ".html", ".htm"
 
 
 def active_model_dir():
-    return MULTIPAGE_MODEL_DIR if (MULTIPAGE_MODEL_DIR / "config.json").is_file() else LEGACY_MODEL_DIR
+    try:
+        from .model_downloader import is_local_model_complete
+    except ImportError:
+        from model_downloader import is_local_model_complete
+    for path in (MULTIPAGE_MODEL_DIR, LEGACY_MODEL_DIR):
+        if is_local_model_complete("xlm_roberta", path):
+            return path
+    return LEGACY_MODEL_DIR
 
 
 def load_label_mapping_from_model_config(model_dir=None):

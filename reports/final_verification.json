@@ -1,0 +1,559 @@
+{
+  "code": {
+    "utc": "2026-09-15T14:57:53.517936+00:00",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "commit": "d1bcf62b4997d9ceb5ee2c4675155ff297ad43e1",
+    "branch": "diagnostika/modeli-20260915",
+    "code_sha256": {
+      "app.py": "0d4b027aa7b7c802a401a4c9b582d663b14112bf82bfaa150e6173ee61d0ac59",
+      "src\\dataset_expansion.py": "482d57218bd0b12c1a2396544d1e4920d0aa6a9bfcc81f1b3204dd5955a8c938",
+      "src\\document_adapter.py": "abc978a7592f5d17421477057d1f824d46905329ff5c2ad1b04af057ad15aca3",
+      "src\\document_conversion.py": "24349cd0639b7523bc2231c2e1d48987c28e751bc3e451b3d3cc85bb5889f1ad",
+      "src\\evaluate.py": "b3fef4b4a3e6ae2662a32a824f287241290fe493fc4362e22af3154729c9fbce",
+      "src\\evaluate_external_test.py": "e490e10db1161049227dec4691b02a89a6e60d9f0bd8a1c0438954e7b64c0a78",
+      "src\\model_downloader.py": "7d19971af06fa8ce2d431f99dfe91575c1f7a159a7c986bef7486545c6457bd9",
+      "src\\model_runtime.py": "26b3b80d1bdf574f316169e86b6cc145fbe99843744bb1c16c1edf2f46247561",
+      "src\\multipage.py": "590c889e2940c7fa1569c3ffcbde129b1dd3c9a77991a742a9f1e13f4b366301",
+      "src\\multipage_manifest.py": "b602f0e527ccd7d05e9026de49159f9552ad4cb1e92ae1a8f9360fe8d051632f",
+      "src\\multipage_preprocess.py": "7fa977cb76abc6e14e6bcd360e78fbaaa039b1e8554c6d2544512d429f9b00d3",
+      "src\\multipage_training.py": "29d99c4ddfb406c3f4fd3ec1a228b57f3f78e9bf16c749f1dc76e56b5760c529",
+      "src\\predict_layoutlm.py": "9a627056d321a031f0386979594ee727c08c0528d27cbbe51b72afae808ef9d1",
+      "src\\predict_resnet.py": "d2986a00bd96524421cea3c933f002ae5d1278a501e91b126433fe73ba98cf5b",
+      "src\\predict_text_model.py": "43e20bea204fcb9118249c03b2f9f4b51aba85f7ff76dbe10801c72b7f3a0afe",
+      "src\\preprocess.py": "c04c37b4547418cae779ff89c94ac421fe1993ad694a498e6c5a9625f5bf4698",
+      "src\\train_layoutlm.py": "699a5ee98415cc4fa227f61e896ba3f3b05c1c3f14bca110362018b1c1b7bed9",
+      "src\\train_resnet.py": "3aab5c1069e6b463e129db271270d61e8159bab3fcec36cc6260067ad748c549",
+      "src\\train_text_model.py": "06a8b706b8e63817f81f8dd985e0bfc5a8d85077842e0d1b614116ab0295a557",
+      "scripts\\diagnose_models.py": "2e10362d150e6d08433185616f66f99867f9a3b7c885d89c2b9f4733e773a11b"
+    }
+  },
+  "serial_preparation_matches": [
+    {
+      "id": "invoice_hr_synthetic_0136",
+      "identical": true
+    },
+    {
+      "id": "invoice_hr_synthetic_0003",
+      "identical": true
+    },
+    {
+      "id": "invoice_hr_synthetic_0169",
+      "identical": true
+    },
+    {
+      "id": "invoice_0132",
+      "identical": true
+    },
+    {
+      "id": "invoice_extra_0116",
+      "identical": true
+    },
+    {
+      "id": "invoice_extra_0226",
+      "identical": true
+    },
+    {
+      "id": "invoice_0030",
+      "identical": true
+    },
+    {
+      "id": "invoice_extra_0337",
+      "identical": true
+    },
+    {
+      "id": "invoice_extra_0206",
+      "identical": true
+    },
+    {
+      "id": "invoice_0159",
+      "identical": true
+    },
+    {
+      "id": "invoice_extra_0532",
+      "identical": true
+    },
+    {
+      "id": "invoice_extra_0376",
+      "identical": true
+    },
+    {
+      "id": "invoice_hr_synthetic_aug_0025",
+      "identical": true
+    },
+    {
+      "id": "invoice_extra_0013",
+      "identical": true
+    },
+    {
+      "id": "invoice_0067",
+      "identical": true
+    },
+    {
+      "id": "invoice_0089",
+      "identical": true
+    },
+    {
+      "id": "invoice_0133",
+      "identical": true
+    },
+    {
+      "id": "invoice_0190",
+      "identical": true
+    },
+    {
+      "id": "invoice_extra_0090",
+      "identical": true
+    },
+    {
+      "id": "invoice_extra_0181",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0550",
+      "identical": true
+    },
+    {
+      "id": "cv_0008",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0088",
+      "identical": true
+    },
+    {
+      "id": "cv_hr_synthetic_0175",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0321",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0263",
+      "identical": true
+    },
+    {
+      "id": "cv_hr_synthetic_0156",
+      "identical": true
+    },
+    {
+      "id": "cv_0190",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0302",
+      "identical": true
+    },
+    {
+      "id": "cv_0137",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0217",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0103",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0033",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0115",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0443",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0058",
+      "identical": true
+    },
+    {
+      "id": "cv_0148",
+      "identical": true
+    },
+    {
+      "id": "cv_0129",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0112",
+      "identical": true
+    },
+    {
+      "id": "cv_extra_0269",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0001",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0147",
+      "identical": true
+    },
+    {
+      "id": "contract_0199",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0031",
+      "identical": true
+    },
+    {
+      "id": "contract_0012",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0168",
+      "identical": true
+    },
+    {
+      "id": "contract_0183",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0063",
+      "identical": true
+    },
+    {
+      "id": "contract_hr_aug_0022",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0467",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0537",
+      "identical": true
+    },
+    {
+      "id": "contract_hr_0064",
+      "identical": true
+    },
+    {
+      "id": "contract_0055",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0460",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0471",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0099",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0034",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0397",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0051",
+      "identical": true
+    },
+    {
+      "id": "contract_extra_0383",
+      "identical": true
+    },
+    {
+      "id": "email_extra_0325",
+      "identical": true
+    },
+    {
+      "id": "email_hr_gmail_like_aug_0014",
+      "identical": true
+    },
+    {
+      "id": "email_extra_0364",
+      "identical": true
+    },
+    {
+      "id": "email_extra_0225",
+      "identical": true
+    },
+    {
+      "id": "email_0060",
+      "identical": true
+    },
+    {
+      "id": "email_extra_0262",
+      "identical": true
+    },
+    {
+      "id": "email_extra_0345",
+      "identical": true
+    },
+    {
+      "id": "email_hr_gmail_like_0123",
+      "identical": true
+    },
+    {
+      "id": "email_0092",
+      "identical": true
+    },
+    {
+      "id": "email_0178",
+      "identical": true
+    },
+    {
+      "id": "email_extra_0547",
+      "identical": true
+    },
+    {
+      "id": "email_extra_0084",
+      "identical": true
+    },
+    {
+      "id": "email_0127",
+      "identical": true
+    },
+    {
+      "id": "email_extra_0072",
+      "identical": true
+    },
+    {
+      "id": "email_hr_gmail_like_0146",
+      "identical": true
+    },
+    {
+      "id": "email_extra_0315",
+      "identical": true
+    },
+    {
+      "id": "email_0077",
+      "identical": true
+    },
+    {
+      "id": "email_extra_0033",
+      "identical": true
+    },
+    {
+      "id": "email_extra_0411",
+      "identical": true
+    },
+    {
+      "id": "email_hr_gmail_like_0044",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0110",
+      "identical": true
+    },
+    {
+      "id": "scientific_hr_0093",
+      "identical": true
+    },
+    {
+      "id": "scientific_hr_0034",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0536",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0146",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0513",
+      "identical": true
+    },
+    {
+      "id": "scientific_hr_0076",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0347",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0429",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0308",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0002",
+      "identical": true
+    },
+    {
+      "id": "scientific_hr_0018",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0053",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0201",
+      "identical": true
+    },
+    {
+      "id": "scientific_0188",
+      "identical": true
+    },
+    {
+      "id": "scientific_hr_0025",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0504",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0170",
+      "identical": true
+    },
+    {
+      "id": "scientific_0093",
+      "identical": true
+    },
+    {
+      "id": "scientific_extra_0112",
+      "identical": true
+    },
+    {
+      "id": "contract_01_ojp_personal_services",
+      "identical": true
+    },
+    {
+      "id": "contract_02_okc_professional_services",
+      "identical": true
+    },
+    {
+      "id": "contract_03_rpvca_technical_services",
+      "identical": true
+    },
+    {
+      "id": "contract_04_lincoln_services",
+      "identical": true
+    },
+    {
+      "id": "contract_05_certna_audit_agreement",
+      "identical": true
+    },
+    {
+      "id": "cv_01_brianna_robinson",
+      "identical": true
+    },
+    {
+      "id": "cv_02_uiowa_sample",
+      "identical": true
+    },
+    {
+      "id": "cv_03_illinois_samples",
+      "identical": true
+    },
+    {
+      "id": "cv_04_stanford_examples",
+      "identical": true
+    },
+    {
+      "id": "cv_05_ucdavis_samples",
+      "identical": true
+    },
+    {
+      "id": "email_01_project_update",
+      "identical": true
+    },
+    {
+      "id": "email_02_meeting_reschedule",
+      "identical": true
+    },
+    {
+      "id": "email_03_support_response",
+      "identical": true
+    },
+    {
+      "id": "email_04_hr_onboarding",
+      "identical": true
+    },
+    {
+      "id": "email_05_delivery_confirmation",
+      "identical": true
+    },
+    {
+      "id": "invoice_01_microsoft_contoso",
+      "identical": true
+    },
+    {
+      "id": "invoice_02_morgan_state",
+      "identical": true
+    },
+    {
+      "id": "invoice_03_sliced_invoices",
+      "identical": true
+    },
+    {
+      "id": "invoice_04_ups_commercial",
+      "identical": true
+    },
+    {
+      "id": "invoice_05_harvest_template",
+      "identical": true
+    },
+    {
+      "id": "scientific_01_machine_learning_deep_learning",
+      "identical": true
+    },
+    {
+      "id": "scientific_02_ml_in_artificial_intelligence",
+      "identical": true
+    },
+    {
+      "id": "scientific_03_mlops_overview",
+      "identical": true
+    },
+    {
+      "id": "scientific_04_informed_machine_learning",
+      "identical": true
+    },
+    {
+      "id": "scientific_05_application_driven_ml",
+      "identical": true
+    }
+  ],
+  "unchanged_manifests": {
+    "document_manifest.csv": true,
+    "page_manifest.csv": true,
+    "chunk_manifest.jsonl": true
+  },
+  "models": {
+    "resnet50": {
+      "weights_unchanged": true,
+      "historical_test_rows": 475,
+      "historical_test_ids_match_current": true,
+      "historical_test_label_mismatches": 0
+    },
+    "xlm_roberta": {
+      "weights_unchanged": true,
+      "historical_test_rows": 475,
+      "historical_test_ids_match_current": true,
+      "historical_test_label_mismatches": 0
+    },
+    "layoutlmv3": {
+      "weights_unchanged": true,
+      "historical_test_rows": 475,
+      "historical_test_ids_match_current": true,
+      "historical_test_label_mismatches": 0
+    }
+  },
+  "missing_report_links": [],
+  "future_experiment_directory_exists": false
+}

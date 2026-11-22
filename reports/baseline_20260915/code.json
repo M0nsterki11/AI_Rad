@@ -1,0 +1,27 @@
+{
+  "utc": "2026-09-15T14:02:56.072886+00:00",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "commit": "d1bcf62b4997d9ceb5ee2c4675155ff297ad43e1",
+  "branch": "diagnostika/modeli-20260915",
+  "code_sha256": {
+    "app.py": "1eb08a8583dd7ac5de0010fd7222431b5b2c7d3794a8d74a429a42937065735e",
+    "src\\dataset_expansion.py": "482d57218bd0b12c1a2396544d1e4920d0aa6a9bfcc81f1b3204dd5955a8c938",
+    "src\\document_adapter.py": "abc978a7592f5d17421477057d1f824d46905329ff5c2ad1b04af057ad15aca3",
+    "src\\document_conversion.py": "24349cd0639b7523bc2231c2e1d48987c28e751bc3e451b3d3cc85bb5889f1ad",
+    "src\\evaluate.py": "b3fef4b4a3e6ae2662a32a824f287241290fe493fc4362e22af3154729c9fbce",
+    "src\\evaluate_external_test.py": "e490e10db1161049227dec4691b02a89a6e60d9f0bd8a1c0438954e7b64c0a78",
+    "src\\model_downloader.py": "7dab3ea37a0d3fe1a14e8df7f38592a5cacf5c05b971021a65f8b9449d24cf0a",
+    "src\\multipage.py": "590c889e2940c7fa1569c3ffcbde129b1dd3c9a77991a742a9f1e13f4b366301",
+    "src\\multipage_manifest.py": "b602f0e527ccd7d05e9026de49159f9552ad4cb1e92ae1a8f9360fe8d051632f",
+    "src\\multipage_preprocess.py": "8264e9b952d763b68ada33de7c2f351b170d790a2b7bbd790bd8021f65b47ce8",
+    "src\\multipage_training.py": "29d99c4ddfb406c3f4fd3ec1a228b57f3f78e9bf16c749f1dc76e56b5760c529",
+    "src\\predict_layoutlm.py": "aaea0d0cf9dfaa239e1da5114f106ba2ab251690703f70e5f4bcbb3062bdeab5",
+    "src\\predict_resnet.py": "315558b531b50454c5ac37f87b2641555fcd54879d5d77abc12db6cfba32c09b",
+    "src\\predict_text_model.py": "469e6f80b7b3849d917bdc2e4bc1c9268bdf311f534378c143be3b959f31fbb2",
+    "src\\preprocess.py": "c04c37b4547418cae779ff89c94ac421fe1993ad694a498e6c5a9625f5bf4698",
+    "src\\train_layoutlm.py": "699a5ee98415cc4fa227f61e896ba3f3b05c1c3f14bca110362018b1c1b7bed9",
+    "src\\train_resnet.py": "3aab5c1069e6b463e129db271270d61e8159bab3fcec36cc6260067ad748c549",
+    "src\\train_text_model.py": "06a8b706b8e63817f81f8dd985e0bfc5a8d85077842e0d1b614116ab0295a557",
+    "scripts\\diagnose_models.py": "d36b6502db7b45144161506b4abc9f8dc1754841167bcacab86e8f50001f56cb"
+  }
+}

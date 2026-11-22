@@ -1,0 +1,1214 @@
+[
+  {
+    "document_id": "cv_0009",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0015",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0016",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0023",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0028",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0030",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0031",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_0032",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0035",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_0037",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0042",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0043",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0044",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0046",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0058",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0062",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0066",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0068",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0070",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0072",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail",
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_0075",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0076",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0079",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0080",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_0084",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0086",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0092",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0093",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0097",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0103",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0106",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0113",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0120",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0125",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0129",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0136",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0143",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0148",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail",
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_0151",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0153",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "gmail",
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_0167",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0168",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0177",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0178",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0186",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0188",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_0191",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "contract_0086",
+    "label": "contract",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "contract_0198",
+    "label": "contract",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "email_0062",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "email_0073",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "email_0117",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "scientific_0200",
+    "label": "scientific",
+    "split": "validation",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "invoice_extra_0325",
+    "label": "invoice",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0001",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0012",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0015",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0016",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0019",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0023",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0031",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0037",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0049",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0052",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0058",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0061",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0065",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0078",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0090",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0091",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0096",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0097",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0098",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0102",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0104",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0105",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0106",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0113",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0115",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0117",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0124",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0129",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0140",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0143",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0167",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0172",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0176",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0182",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0209",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0215",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "contract_extra_0057",
+    "label": "contract",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "contract_extra_0087",
+    "label": "contract",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "contract_extra_0158",
+    "label": "contract",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "contract_extra_0324",
+    "label": "contract",
+    "split": "validation",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "contract_extra_0391",
+    "label": "contract",
+    "split": "validation",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "contract_extra_0414",
+    "label": "contract",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "contract_extra_0435",
+    "label": "contract",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "email_extra_0404",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "scientific_extra_0029",
+    "label": "scientific",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0441",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0467",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0481",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0488",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0512",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0517",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "cv_extra_0533",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0016",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0022",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0030",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0033",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0040",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0043",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0046",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0053",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0068",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0071",
+    "label": "cv",
+    "split": "test",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0074",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0079",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0085",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0110",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0118",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0130",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0131",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0134",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0135",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0144",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0147",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0150",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0152",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0164",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_0165",
+    "label": "cv",
+    "split": "validation",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "cv_hr_synthetic_aug_0029",
+    "label": "cv",
+    "split": "train",
+    "flags": [
+      "europass"
+    ]
+  },
+  {
+    "document_id": "second_train_email_02dcec839d5a",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_c7456eb7ad76",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_de1efb6616a8",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_e643e1efae66",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_13de887e2ed5",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_3c308e1b3498",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_0f35f2aeebc0",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_b374088fba0d",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_dc0d760037fa",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_cb9b11e3838e",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_1a015196ab13",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_037de2fc3167",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_5dadc37774e3",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_email_fcf848de0bb3",
+    "label": "email",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_invoice_b0294a0b55fe",
+    "label": "invoice",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  },
+  {
+    "document_id": "second_train_scientific_873479b128bd",
+    "label": "scientific",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "second_train_scientific_f72adc471b8c",
+    "label": "scientific",
+    "split": "train",
+    "flags": [
+      "gmail",
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "second_train_scientific_cfde852d2d36",
+    "label": "scientific",
+    "split": "train",
+    "flags": [
+      "outlook"
+    ]
+  },
+  {
+    "document_id": "second_train_scientific_d55e6315b683",
+    "label": "scientific",
+    "split": "train",
+    "flags": [
+      "gmail"
+    ]
+  }
+]

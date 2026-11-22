@@ -1,0 +1,137 @@
+[
+  {
+    "sha256": "70ba5eba81fc61b0aea6595409abea324e51a8a1e74b54aecff3a96ff9e32de7",
+    "entries": [
+      {
+        "document_id": "contract_0061",
+        "page_index": "15",
+        "label": "contract",
+        "split": "validation"
+      },
+      {
+        "document_id": "contract_0088",
+        "page_index": "3",
+        "label": "contract",
+        "split": "train"
+      },
+      {
+        "document_id": "cv_extra_0120",
+        "page_index": "2",
+        "label": "cv",
+        "split": "train"
+      },
+      {
+        "document_id": "cv_extra_0157",
+        "page_index": "2",
+        "label": "cv",
+        "split": "train"
+      }
+    ],
+    "cross_split": true,
+    "constant_color_page": true,
+    "extrema": [
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255
+      ]
+    ]
+  },
+  {
+    "sha256": "262bfb72601edb99eaa365d70f64528bedb1ab540e1dc6a387bc2350676dd94d",
+    "entries": [
+      {
+        "document_id": "cv_extra_0141",
+        "page_index": "7",
+        "label": "cv",
+        "split": "train"
+      },
+      {
+        "document_id": "scientific_extra_0159",
+        "page_index": "1",
+        "label": "scientific",
+        "split": "train"
+      },
+      {
+        "document_id": "scientific_extra_0159",
+        "page_index": "3",
+        "label": "scientific",
+        "split": "train"
+      },
+      {
+        "document_id": "second_train_scientific_2818da634c9e",
+        "page_index": "1",
+        "label": "scientific",
+        "split": "train"
+      },
+      {
+        "document_id": "second_train_scientific_027261b34011",
+        "page_index": "1",
+        "label": "scientific",
+        "split": "train"
+      },
+      {
+        "document_id": "second_train_scientific_027261b34011",
+        "page_index": "3",
+        "label": "scientific",
+        "split": "train"
+      }
+    ],
+    "cross_split": false,
+    "constant_color_page": true,
+    "extrema": [
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255
+      ],
+      [
+        255,
+        255
+      ]
+    ]
+  },
+  {
+    "sha256": "82428d4b41c75240f9488c001839c793a7f07cc994ab742379b626af44153cd9",
+    "entries": [
+      {
+        "document_id": "second_train_contract_547c7240a52d",
+        "page_index": "35",
+        "label": "contract",
+        "split": "train"
+      },
+      {
+        "document_id": "second_train_contract_ebc1ab6cd127",
+        "page_index": "0",
+        "label": "contract",
+        "split": "train"
+      }
+    ],
+    "cross_split": false,
+    "constant_color_page": false,
+    "extrema": [
+      [
+        33,
+        255
+      ],
+      [
+        30,
+        255
+      ],
+      [
+        30,
+        255
+      ]
+    ]
+  }
+]
